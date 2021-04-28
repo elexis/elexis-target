@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<project default="buildTargetPlatform" basedir=".">
+	<target name="buildTargetPlatform" unless="skipTargetDefinition">
+		<pde.provisionTargetDefinition
+			targetFile="../elexis.target"
+			destinationDirectory="../target/${target-name}/eclipse-p2"
+			clearDestination="true" />
+	</target>
+	<!--  https://stackoverflow.com/questions/37720054/eclipse-pde-headless-build-fails-with-failed-to-create-task-or-type-eclipse-gen -->
+</project>

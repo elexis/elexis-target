@@ -1,0 +1,139 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>info.elexis</groupId>
+	<artifactId>target</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<target-name>2021-03-java11</target-name>
+		<platform-version-name>2021-03</platform-version-name>
+		<tycho-version>2.3.0</tycho-version>
+		<tycho-extras-version>2.3.0</tycho-extras-version>
+		<p2-maven-plugin-version>1.6.0</p2-maven-plugin-version>
+		<maven-resources-version>3.2.0</maven-resources-version>
+		<targetPlatform.repository.p2>https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT</targetPlatform.repository.p2>
+		<targetPlatform.application.name>org.eclipse.cbi.targetplatform.tpd.converter</targetPlatform.application.name>
+		<targetPlatform.application.args>elexis.tpd</targetPlatform.application.args>
+		<targetPlatform.application.feature>org.eclipse.cbi.targetplatform-feature</targetPlatform.application.feature>
+	</properties>
+
+	<build>
+		<plugins>
+
+			<!-- (1) Build p2 repository containing this.artifacts -->
+			<!-- https://github.com/reficio/p2-maven-plugin -->
+			<plugin>
+				<groupId>org.reficio</groupId>
+				<artifactId>p2-maven-plugin</artifactId>
+				<version>${p2-maven-plugin-version}</version>
+				<configuration>
+					<artifacts>
+						<artifact>
+							<id>org.postgresql:postgresql:42.2.19.jre7</id>
+						</artifact>
+						<artifact>
+							<id>com.h2database:h2:1.4.200</id>
+						</artifact>
+						<artifact>
+							<id>mysql:mysql-connector-java:8.0.23</id>
+						</artifact>
+						<artifact>
+							<id>org.apache.commons:commons-lang3:3.12.0</id>
+						</artifact>
+					</artifacts>
+					<destinationDirectory>${project.basedir}/target/${target-name}/maven-p2</destinationDirectory>
+					<additionalArgs>-artifactRepository file:${project.basedir}/target/${target-name}/maven-p2 -metadataRepository file:${project.basedir}/target/${target-name}/maven-p2</additionalArgs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build-maven-p2-repository</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+
+			<!-- (2) Build p2 repository from elexis.target -->
+			<!-- https://wiki.eclipse.org/Tycho/Additional_Tools -->
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-eclipserun-plugin</artifactId>
+				<version>${tycho-extras-version}</version>
+				<configuration>
+					<repositories>
+						<repository>
+							<id>${platform-version-name}</id>
+							<layout>p2</layout>
+							<url>https://download.eclipse.org/releases/${platform-version-name}</url>
+						</repository>
+						<repository>
+							<id>targetplatform</id>
+							<layout>p2</layout>
+							<url>${targetPlatform.repository.p2}</url>
+						</repository>
+					</repositories>
+					<appArgLine>-consoleLog -application org.eclipse.ant.core.antRunner -buildfile ant/target-to-p2.xml -Dtarget-name=${target-name}</appArgLine>
+					<!-- Set dependencies to launch the application -->
+					<dependencies>
+						<dependency>
+							<artifactId>${targetPlatform.application.feature}</artifactId>
+							<type>eclipse-feature</type>
+						</dependency>
+						<dependency>
+							<artifactId>org.apache.ant</artifactId>
+							<type>eclipse-plugin</type>
+						</dependency>
+						<dependency>
+							<artifactId>org.eclipse.equinox.p2.sdk</artifactId>
+							<type>eclipse-feature</type>
+						</dependency>
+					</dependencies>
+				</configuration>
+				<executions>
+					<execution>
+						<id>build-eclipse-p2-repository</id>
+						<goals>
+							<goal>eclipse-run</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- (3) Copy files from template/ to target repo and replace variables -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven-resources-version}</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<outputDirectory>${project.basedir}/target/${target-name}</outputDirectory>
+					<resources>
+						<resource>
+							<directory>${project.basedir}/template</directory>
+							<filtering>true</filtering>
+						</resource>
+					</resources>
+				</configuration>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+</project>

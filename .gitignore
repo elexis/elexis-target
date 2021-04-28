@@ -1,0 +1,3 @@
+target/
+!maven_libs/README.md
+maven_libs/*

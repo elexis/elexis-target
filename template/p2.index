@@ -1,0 +1,4 @@
+# https://wiki.eclipse.org/Equinox/p2/p2_index
+version=1
+metadata.repository.factory.order = compositeContent.xml,\!
+artifact.repository.factory.order = compositeArtifacts.xml,\!

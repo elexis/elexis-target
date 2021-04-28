@@ -1,0 +1,19 @@
+target "combined" with source allEnvironments
+
+// Eclipse 4.19
+location "https://download.eclipse.org/releases/2021-03/" {
+	org.eclipse.equinox.sdk.feature.group
+	org.eclipse.platform.feature.group
+	org.eclipse.e4.rcp.feature.group
+}
+
+// R20210223232630 	Tue, 23 Feb 2021 -- 23:26 (UTC) 	2021-03
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20210223232630/repository/" {
+
+}
+
+// ADDITIONAL LIBRARIES
+location "https://dl.maketechnology.io/chromium-swt-ee/medelexis/p2" {
+//	com.make.chromium.cef.feature.feature.group lazy
+//	org.eclipse.swt.chromium.feature.feature.group lazy
+}

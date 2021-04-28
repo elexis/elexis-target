@@ -3,4 +3,5 @@ stages:
 
 build:
   stage: build
-  script: build.sh
+  script:
+    - mvn clean verify

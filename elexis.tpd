@@ -1,19 +1,54 @@
-target "combined" with source allEnvironments
+target "Elexis" with source allEnvironments
+
+// Java 11
+// http://ftp.halifax.rwth-aachen.de/eclipse/justj/jres/11/updates/release/latest
+// https://download.eclipse.org/justj/jres/11/updates/release/latest
+// session context was:(profile=TARGET_DEFINITION:file:/Users/marco/git/elexis-target/elexis.target, phase=org.eclipse.equinox.internal.p2.engine.phases.Install, operand=null --> org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64 11.0.2.v20200815-0835, action=org.eclipse.equinox.internal.p2.touchpoint.eclipse.actions.SetJvmAction).
+// Could not acquire the framework manipulator service.
+// location "http://ftp.halifax.rwth-aachen.de/eclipse/justj/jres/11/updates/release/latest" {
+//	org.eclipse.justj.openjdk.hotspot.jre.full.feature.group	
+//}
 
 // Eclipse 4.19
-location "https://download.eclipse.org/releases/2021-03/" {
-	org.eclipse.equinox.sdk.feature.group
+// http://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/
+// https://download.eclipse.org/releases/2021-03/
+location "http://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/" {
+	// Specifies the expectation of the installation environment
+	// https://p2-dev.eclipse.narkive.com/SzdeAveT/p2-director-third-party-package-bombs-on-javax-crypto-package-dependency
+	a.jre.javase [11.0.0,12.0.0) 
+
+	// Eclipse base
 	org.eclipse.platform.feature.group
-	org.eclipse.e4.rcp.feature.group
+	org.eclipse.e4.rcp.feature.group 
+	
+	org.eclipse.nebula.widgets.nattable.core
+	org.eclipse.nebula.widgets.nattable.extension.glazedlists
+}
+
+// keep this version in sync with ch.elexis.core.jpa.entities pom.xml static weaving version
+location "http://ftp.halifax.rwth-aachen.de/eclipse/rt/eclipselink/updates" {
+	jakarta.persistence
+	org.eclipse.persistence.jpa.feature.group [2.7.7,2.8.0)
+}
+
+location "https://download.eclipse.org/nebula/releases/2.4.3/" {
+	org.eclipse.nebula.cwt.feature.feature.group
+	org.eclipse.nebula.widgets.cdatetime.feature.feature.group
+	org.eclipse.nebula.widgets.tablecombo.feature.feature.group
 }
 
 // R20210223232630 	Tue, 23 Feb 2021 -- 23:26 (UTC) 	2021-03
 location "https://download.eclipse.org/tools/orbit/downloads/drops/R20210223232630/repository/" {
-
+	// logging
+	org.slf4j.api [1.7.30.v20200204-2150,1.7.30.v20200204-2150]
+	ch.qos.logback.classic [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
+	ch.qos.logback.core [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
+	ch.qos.logback.slf4j [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
+	
 }
 
 // ADDITIONAL LIBRARIES
-location "https://dl.maketechnology.io/chromium-swt-ee/medelexis/p2" {
+//location "https://dl.maketechnology.io/chromium-swt-ee/medelexis/p2" {
 //	com.make.chromium.cef.feature.feature.group lazy
 //	org.eclipse.swt.chromium.feature.feature.group lazy
-}
+//}

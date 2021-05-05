@@ -19,16 +19,44 @@ location "http://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/" {
 
 	// Eclipse base
 	org.eclipse.platform.feature.group
-	org.eclipse.e4.rcp.feature.group 
+	org.eclipse.e4.rcp.feature.group
+	org.eclipse.emf.common.feature.group
+	org.eclipse.emf.ecore.feature.group
+	org.eclipse.emf.databinding.feature.group
+	org.eclipse.ecf.core.feature.group
+	org.eclipse.ecf.core.ssl.feature.feature.group
+	org.eclipse.ecf.filetransfer.feature.feature.group
+	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
+	org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group
 	
+	// Jakarta XML Binding (JAXB)
+	// http://blog.vogella.com/2021/03/08/eclipse-rcp-java-11-jaxb/
+	// TODO Variant 2: jakarta.xml.bind-api fragment
+	javax.activation [1.2.2,2.0.0)
+	com.sun.xml.bind [2.3.3,3.0.0)
+	jakarta.xml.bind [2.3.3,3.0.0)
+	
+	// Nebula
 	org.eclipse.nebula.widgets.nattable.core
 	org.eclipse.nebula.widgets.nattable.extension.glazedlists
+
+	// Testing and IDE integration
+	org.junit
+	org.hamcrest.core
+	org.hamcrest.library
+	org.eclipse.jdt.junit.runtime
+	org.eclipse.jdt.junit4.runtime
+	org.eclipse.pde.junit.runtime
 }
 
+// persistence
 // keep this version in sync with ch.elexis.core.jpa.entities pom.xml static weaving version
 location "http://ftp.halifax.rwth-aachen.de/eclipse/rt/eclipselink/updates" {
 	jakarta.persistence
 	org.eclipse.persistence.jpa.feature.group [2.7.7,2.8.0)
+}
+location "http://download.elexis.info/elexis/target/gemini.jpa/" {
+	org.eclipse.gemini.jpa.feature.feature.group
 }
 
 location "https://download.eclipse.org/nebula/releases/2.4.3/" {
@@ -45,6 +73,14 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202102232326
 	ch.qos.logback.core [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
 	ch.qos.logback.slf4j [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
 	
+	// Accessing, manipulating, and outputting XML data from Java code
+	org.jdom [1.1.1,2.0.0)
+	// Google Core Libraries for Java
+	com.google.guava [30.1.0,30.2.0)
+	// Apache POI - Java API To Access Microsoft Format Files
+	org.apache.poi [4.1.1,4.2.0)
+	org.apache.poi.ooxml [4.1.1,4.2.0)
+	org.apache.poi.ooxml.schemas [4.1.1,4.2.0)
 }
 
 // ADDITIONAL LIBRARIES

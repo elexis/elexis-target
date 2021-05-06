@@ -14,6 +14,7 @@
 		<tycho-extras-version>2.3.0</tycho-extras-version>
 		<p2-maven-plugin-version>1.6.0</p2-maven-plugin-version>
 		<maven-resources-version>3.2.0</maven-resources-version>
+		<jersey.version>2.34</jersey.version>
 		<!-- <targetPlatform.repository.p2>https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT</targetPlatform.repository.p2> 
 			<targetPlatform.application.name>org.eclipse.cbi.targetplatform.tpd.converter</targetPlatform.application.name> 
 			<targetPlatform.application.args>elexis.tpd</targetPlatform.application.args> 
@@ -48,6 +49,7 @@
 						</artifact>
 						<artifact>
 							<id>com.opencsv:opencsv:3.10</id>
+							<transitive>false</transitive>
 						</artifact>
 					</artifacts>
 					<destinationDirectory>${project.basedir}/target/${target-name}/maven-p2</destinationDirectory>
@@ -61,6 +63,11 @@
 							<license>Apache</license>
 							<generateSourceFeature>true</generateSourceFeature>
 							<artifacts>
+								<artifact>
+									<id>commons-collections:commons-collections:3.2.2</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
 								<artifact>
 									<id>commons-beanutils:commons-beanutils:1.9.4</id>
 									<transitive>false</transitive>
@@ -91,13 +98,19 @@
 						<feature>
 							<id>info.elexis.target.jaxwsrs.core</id>
 							<version>${project.version}</version>
-							<label>JAXWSRS Core Libraries</label>
+							<label>Jakarta WS RS and Jersey Core/Client Libraries</label>
 							<providerName>${project.groupId}</providerName>
 							<generateSourceFeature>true</generateSourceFeature>
+							<!--  https://eclipse-ee4j.github.io/jersey/download.html -->
+							<!--  JAX-RS 2.1 / Jersey 2.26+ -->
+							<!--  https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/modules-and-dependencies.html -->
 							<artifacts>
 								<artifact>
-									<id>jakarta.ws.rs:jakarta.ws.rs-api:2.1.6</id>
-									<transitive>false</transitive>
+									<id>org.glassfish.jersey.core:jersey-client:${jersey.version}</id>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.glassfish.jersey.media:jersey-media-multipart:${jersey.version}</id>
 									<source>true</source>
 								</artifact>
 							</artifacts>

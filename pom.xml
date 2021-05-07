@@ -51,6 +51,9 @@
 							<id>com.opencsv:opencsv:3.10</id>
 							<transitive>false</transitive>
 						</artifact>
+						<artifact>
+							<id>org.bouncycastle:bcprov-jdk15on:1.68</id>
+						</artifact>
 					</artifacts>
 					<destinationDirectory>${project.basedir}/target/${target-name}/maven-p2</destinationDirectory>
 					<additionalArgs>-artifactRepository file:${project.basedir}/target/${target-name}/maven-p2 -metadataRepository file:${project.basedir}/target/${target-name}/maven-p2</additionalArgs>
@@ -107,6 +110,10 @@
 							<artifacts>
 								<artifact>
 									<id>org.glassfish.jersey.core:jersey-client:${jersey.version}</id>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.glassfish.jersey.inject:jersey-hk2:${jersey.version}</id>
 									<source>true</source>
 								</artifact>
 								<artifact>

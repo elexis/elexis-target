@@ -43,6 +43,7 @@
 						</artifact>
 						<artifact>
 							<id>com.google.code.gson:gson:2.8.6</id>
+							<source>true</source>
 						</artifact>
 						<artifact>
 							<id>org.beanshell:bsh:2.0b4</id>
@@ -53,6 +54,14 @@
 						</artifact>
 						<artifact>
 							<id>org.bouncycastle:bcprov-jdk15on:1.68</id>
+						</artifact>
+						<artifact>
+							<id>jakarta.mail:jakarta.mail-api:1.6.7</id>
+						</artifact>
+						<artifact>
+							<id>com.healthmarketscience.jackcess:jackcess:4.0.0</id>
+							<source>true</source>
+							<transitive>false</transitive>
 						</artifact>
 					</artifacts>
 					<destinationDirectory>${project.basedir}/target/${target-name}/maven-p2</destinationDirectory>
@@ -67,7 +76,18 @@
 							<generateSourceFeature>true</generateSourceFeature>
 							<artifacts>
 								<artifact>
+									<id>org.apache.commons:commons-jexl:2.1.1</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
 									<id>commons-collections:commons-collections:3.2.2</id>
+									<transitive>false</transitive>
+									<source>true</source>
+									<!--  TODO remove in favour of collections 4 ? -->
+								</artifact>
+								<artifact>
+									<id>org.apache.commons:commons-collections4:4.4</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>

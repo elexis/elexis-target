@@ -94,11 +94,12 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202102232326
 	org.apache.poi [4.1.1,4.2.0)
 	org.apache.poi.ooxml [4.1.1,4.2.0)
 	org.apache.poi.ooxml.schemas [4.1.1,4.2.0)
-
+	// Testing
+	org.mockito [2.23.0,3.0.0)
 }
 
 // ADDITIONAL LIBRARIES
-//location "https://dl.maketechnology.io/chromium-swt-ee/medelexis/p2" {
-//	com.make.chromium.cef.feature.feature.group lazy
-//	org.eclipse.swt.chromium.feature.feature.group lazy
-//}
+location "https://dl.maketechnology.io/chromium-swt-ee/medelexis/p2" {
+	com.make.chromium.cef.feature.feature.group lazy
+	org.eclipse.swt.chromium.feature.feature.group lazy
+}

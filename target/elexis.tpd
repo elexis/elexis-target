@@ -1,0 +1,157 @@
+target "Elexis" with source allEnvironments
+
+// Eclipse 4.19
+// http://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/
+// https://download.eclipse.org/releases/2021-03/
+location "https://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/" {
+	// Specifies the expectation of the installation environment
+	// https://p2-dev.eclipse.narkive.com/SzdeAveT/p2-director-third-party-package-bombs-on-javax-crypto-package-dependency
+	a.jre.javase [11.0.0,12.0.0)
+	// Eclipse base
+	org.eclipse.platform.feature.group
+	org.eclipse.equinox.executable.feature.group
+	org.eclipse.e4.rcp.feature.group
+	org.eclipse.emf.common.feature.group
+	org.eclipse.emf.ecore.feature.group
+	org.eclipse.emf.databinding.feature.group
+	org.eclipse.emf.edit.feature.group
+	org.eclipse.emf.common.ui.feature.group
+	org.eclipse.emf.edit.ui.feature.group
+	org.eclipse.ecf.core.feature.feature.group
+	org.eclipse.ecf.core.ssl.feature.feature.group
+	org.eclipse.ecf.filetransfer.feature.feature.group
+	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
+	org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group
+	org.eclipse.mylyn.wikitext_feature.feature.group
+	// dependencies for mylyn wikitext
+	com.google.guava [21.0.0.v20170206-1425,21.0.0.v20170206-1425]
+	org.jsoup
+	// Jakarta XML Binding (JAXB)
+	// http://blog.vogella.com/2021/03/08/eclipse-rcp-java-11-jaxb/
+	// TODO Variant 2: jakarta.xml.bind-api fragment
+	javax.activation [1.2.2,2.0.0) // requirement of JAXB
+	// jakarta.xml.bind [2.3.3,3.0.0) // JAXB-API -> do not use!!
+	com.sun.xml.bind [2.3.3,3.0.0) // JAXB-Implementation
+	// bound for removal
+	javax.xml [1.3.4,2.0.0) // https://bugs.eclipse.org/bugs/show_bug.cgi?id=571532 // bites with jdk java.xml
+	// Nebula
+	org.eclipse.nebula.widgets.nattable.core
+	org.eclipse.nebula.widgets.nattable.extension.glazedlists
+	ca.odell.glazedlists
+	// Testing and IDE integration
+	org.junit
+	org.hamcrest.core
+	org.hamcrest.library
+	org.eclipse.jdt.junit.runtime
+	org.eclipse.jdt.junit4.runtime
+	org.eclipse.pde.junit.runtime
+}
+
+// Jetty p2 repo
+location "https://download.eclipse.org/jetty/updates/jetty-bundles-9.x/9.4.37.v20210219/" {
+	// additional jetty bundles for server
+	org.eclipse.jetty.deploy
+	org.eclipse.jetty.webapp
+	org.eclipse.jetty.xml
+	org.eclipse.jetty.osgi.boot
+	org.eclipse.jetty.osgi.httpservice
+	org.eclipse.jetty.servlets
+}
+
+// persistence
+// keep this version in sync with ch.elexis.core.jpa.entities pom.xml static weaving version
+location "https://ftp.halifax.rwth-aachen.de/eclipse/rt/eclipselink/updates" {
+	jakarta.persistence
+	org.eclipse.persistence.jpa.feature.group [2.7.7,2.8.0)
+	org.eclipse.persistence.extension [2.7.7,2.8.0)
+}
+
+location "https://download.elexis.info/elexis/target/gemini.jpa/" {
+	org.eclipse.gemini.jpa.feature.feature.group
+}
+
+location "https://download.elexis.info/elexis/target/osgi-jax-rs-connector/" {
+	com.eclipsesource.jaxrs.consumer
+	com.eclipsesource.jaxrs.publisher
+	com.eclipsesource.jaxrs.provider.gson
+	com.eclipsesource.jaxrs.provider.swagger.feature.feature.group
+}
+
+location "https://download.eclipse.org/nebula/releases/2.4.3/" {
+	org.eclipse.nebula.cwt.feature.feature.group
+	org.eclipse.nebula.widgets.cdatetime.feature.feature.group
+	org.eclipse.nebula.widgets.tablecombo.feature.feature.group
+}
+
+// R20210223232630 	Tue, 23 Feb 2021 -- 23:26 (UTC) 	2021-03
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20210223232630/repository/" {
+	// logging
+	org.slf4j.api [1.7.30.v20200204-2150,1.7.30.v20200204-2150]
+	// http://www.slf4j.org/legacy.html
+	org.slf4j.jcl [1.7.2,1.7.3)
+	org.slf4j.jul [1.7.2,1.7.3)
+	org.slf4j.log4j [1.7.2,1.7.3)
+	ch.qos.logback.classic [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
+	ch.qos.logback.core [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
+	ch.qos.logback.slf4j [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
+	// persistence - contains org.osgi.service.[jndi|jdbc] req for gemini.jpa
+	osgi.enterprise
+	// for org.apache.commons-dbcp
+	javax.transaction [1.1.1,1.2.0)
+	// Accessing, manipulating, and outputting XML data from Java code
+	org.jdom [1.1.1,2.0.0)
+	// Apache POI - Java API To Access Microsoft Format Files
+	org.apache.poi [4.1.1,4.2.0)
+	org.apache.poi.ooxml [4.1.1,4.2.0)
+	org.apache.poi.ooxml.schemas [4.1.1,4.2.0)
+	//
+	javax.xml.ws [2.1.0.v200902101523,2.1.0.v200902101523]
+	// Testing
+	org.mockito [2.23.0,3.0.0)
+}
+
+// Chromium Browser - is this allowed??
+location "https://download.medelexis.ch/p2/chromium-swt-ee/" {
+	com.equo.chromium.feature.feature.group
+	com.equo.chromium.cef.feature.feature.group
+}
+
+// i18n
+location "https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.0/2021-03/" {
+	org.eclipse.swt.nl_de
+	org.eclipse.swt.nl_fr
+	org.eclipse.swt.nl_it
+	org.eclipse.ui.workbench.nl_de
+	org.eclipse.ui.workbench.nl_fr
+	org.eclipse.ui.workbench.nl_it
+	org.eclipse.e4.ui.swt.gtk.nl_de
+	org.eclipse.e4.ui.swt.gtk.nl_fr
+	org.eclipse.e4.ui.swt.gtk.nl_it
+	org.eclipse.e4.ui.workbench.renderers.swt.nl_de
+	org.eclipse.e4.ui.workbench.renderers.swt.nl_fr
+	org.eclipse.e4.ui.workbench.renderers.swt.nl_it
+	org.eclipse.jface.nl_de
+	org.eclipse.jface.nl_fr
+	org.eclipse.jface.nl_it
+	org.eclipse.ui.browser.nl_de
+	org.eclipse.ui.browser.nl_fr
+	org.eclipse.ui.browser.nl_it
+	org.eclipse.ui.views.nl_de
+	org.eclipse.ui.views.nl_fr
+	org.eclipse.ui.views.nl_it
+	org.eclipse.equinox.p2.ui.nl_de
+	org.eclipse.equinox.p2.ui.nl_fr
+	org.eclipse.equinox.p2.ui.nl_it
+	org.eclipse.ui.nl_de
+	org.eclipse.ui.nl_fr
+	org.eclipse.ui.nl_it
+	org.eclipse.platform.nl_de
+	org.eclipse.platform.nl_fr
+	org.eclipse.platform.nl_it
+	org.eclipse.jdt.ui.nl_de
+	org.eclipse.jdt.ui.nl_fr
+	org.eclipse.jdt.ui.nl_it
+	org.eclipse.e4.ui.workbench.swt.nl_de
+	org.eclipse.e4.ui.workbench.swt.nl_fr
+	org.eclipse.e4.ui.workbench.swt.nl_it
+}

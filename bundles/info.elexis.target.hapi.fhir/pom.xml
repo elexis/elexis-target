@@ -1,0 +1,176 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>info.elexis.target</groupId>
+	<artifactId>hapi.fhir</artifactId>
+	<version>4.1.0</version>
+
+	<properties>
+		<hapi.fhir.version>4.1.0</hapi.fhir.version>
+		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+	</properties>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<archive>
+						<index>false</index>
+						<manifest>
+							<addClasspath>false</addClasspath>
+						</manifest>
+						<manifestEntries>
+							<Built-By>MEDEVIT</Built-By>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>4.2.1</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}.v${maven.build.timestamp}</Bundle-Version>
+						<Bundle-Vendor>MEDEVIT</Bundle-Vendor>
+						<_exportcontents>
+							ca.uhn.fhir.*,
+							org.hl7.fhir.*
+						</_exportcontents>
+						<!--  https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-base/4.1.0 -->
+						<Import-Package>
+							!ca.uhn.fhir.*,
+							!org.hl7.fhir.*,
+							!org.apache.jena.*, <!--  optional -->
+							!org.thymeleaf.*, <!--  optional -->
+							!org.springframework.*, <!--  optional -->
+							!com.helger.*, <!--  optional -->
+							!com.google.appengine.api,  <!--  ? -->
+							!com.google.apphosting.api,  <!--  ? -->
+							!com.github.*, <!--  ? -->
+							!org.commonmark.*, <!--  ? -->
+							!com.ctc.wstx.stax, <!--  ? -->
+							!org.apache.commons.compress.*, <!--  ? -->
+							!org.codehaus.stax2.io, <!--  ? -->
+							!org.oclc.purl.dsdl.svrl, <!--  ? -->
+							!org.stringtemplate.v4, <!--  ? -->
+							!net.sf.saxon, <!--  ? -->
+							!org.hamcrest, <!--  ? -->
+							!org.hamcrest.core, <!--  ? -->
+							*
+						</Import-Package>
+						<Bundle-RequiredExecutionEnvironment>JavaSE-11</Bundle-RequiredExecutionEnvironment>
+						<Embed-Dependency>*;scope=compile|runtime;inline=true</Embed-Dependency>
+						<Embed-Directory>dependencies</Embed-Directory>
+						<Embed-StripGroup>true</Embed-StripGroup>
+						<Embed-Transitive>true</Embed-Transitive>
+					</instructions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>osgi-bundle</id>
+						<phase>package</phase>
+						<goals>
+							<goal>bundle</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.4</version>
+				<configuration>
+				<finalName>shaded-DO-NOT-USE</finalName>
+					<createSourcesJar>true</createSourcesJar>
+					<transformers>
+						<transformer
+							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<manifestEntries>
+								<Bundle-SymbolicName>${project.groupId}.${project.artifactId}.source</Bundle-SymbolicName>
+								<Eclipse-SourceBundle>${project.groupId}.${project.artifactId};version="${project.version}"</Eclipse-SourceBundle>
+								<Export-Package></Export-Package>
+								<Import-Package></Import-Package>
+								<Bundle-ClassPath></Bundle-ClassPath>
+								<Embedded-Artifacts></Embedded-Artifacts>
+								<Embed-Directory></Embed-Directory>
+								<Ignore-Package></Ignore-Package>
+								<Embed-Dependency></Embed-Dependency>
+							</manifestEntries>
+						</transformer>
+					</transformers>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+<!-- 		<finalName>${project.artifactId}_${project.version}.v${maven.build.timestamp}</finalName> -->
+	</build>
+	
+	<dependencies>
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-server</artifactId>
+			<version>${hapi.fhir.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-client</artifactId>
+			<version>${hapi.fhir.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-structures-dstu3</artifactId>
+			<version>${hapi.fhir.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-structures-r4</artifactId>
+			<version>${hapi.fhir.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.9</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.28</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.6</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+</project>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<artifacts size='1'>
+  <artifact classifier='osgi.bundle' id='org.osgi.framework.system.packages.extra' version='1.0.0.20190124-1239'>
+    <properties size='5'>
+      <property name='artifact.size' value='1805'/>
+      <property name='download.size' value='1805'/>
+      <property name='maven-groupId' value='ch.elexis.core'/>
+      <property name='maven-artifactId' value='org.osgi.framework.system.packages.extra'/>
+      <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+    </properties>
+  </artifact>
+</artifacts>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?compositeArtifactRepository version='1.0.0'?>
+<repository name='Elexis Target Repository (${target-name})'
+	type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository'
+	version='1.0.0'>
+	<properties size='0'>
+	</properties>
+	<children size='4'>
+		<child location='elexis-p2' />
+		<child location='eclipse-p2' />
+		<child location='maven-p2' />
+		<child location='../justj.11' />
+	</children>
+</repository>

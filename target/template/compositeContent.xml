@@ -6,8 +6,10 @@
 	<properties size='1'>
 		<property name='p2.atomic.composite.loading' value='true' />
 	</properties>
-	<children size='2'>
+	<children size='4'>
+		<child location='elexis-p2' />
 		<child location='eclipse-p2' />
 		<child location='maven-p2' />
+		<child location='../justj.11' />
 	</children>
 </repository>

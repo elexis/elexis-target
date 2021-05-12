@@ -5,8 +5,10 @@
 	version='1.0.0'>
 	<properties size='0'>
 	</properties>
-	<children size='2'>
+	<children size='4'>
+		<child location='elexis-p2' />
 		<child location='eclipse-p2' />
 		<child location='maven-p2' />
+		<child location='../justj.11' />
 	</children>
 </repository>

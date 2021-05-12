@@ -1,0 +1,83 @@
+target "Elexis IDE 2021-03" with source allEnvironments
+
+location "https://download.elexis.info/elexis/target/2021-03-java11/" {
+	
+	// justj.11
+	org.eclipse.justj.openjdk.hotspot.jre.full.feature.group
+	
+	// eclipse base
+	org.eclipse.platform.feature.group
+	org.eclipse.e4.rcp.feature.group
+	org.eclipse.emf.common.feature.group
+	org.eclipse.emf.common.ui.feature.group
+	org.eclipse.emf.ecore.feature.group
+	org.eclipse.emf.databinding.feature.group
+	org.eclipse.emf.edit.feature.group
+	org.eclipse.emf.edit.ui.feature.group
+	org.eclipse.ecf.core.feature.feature.group
+	org.eclipse.ecf.core.ssl.feature.feature.group
+	org.eclipse.ecf.filetransfer.feature.feature.group
+	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
+	org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group
+	
+	// logging
+	org.slf4j.api
+	ch.qos.logback.classic
+	ch.qos.logback.core
+	ch.qos.logback.slf4j
+	
+	// JAXB
+	javax.activation
+	com.sun.xml.bind
+	jakarta.xml.bind
+	javax.xml
+	
+	// persistence
+	com.h2database
+	com.mysql.cj
+	org.postgresql.jdbc
+	org.eclipse.persistence.jpa.feature.group
+	org.eclipse.gemini.jpa.feature.feature.group
+	osgi.enterprise
+	javax.transaction
+	
+	com.eclipsesource.jaxrs.consumer
+	bcprov
+	
+	// hapi
+	info.elexis.target.hapi.fhir
+	
+	org.jdom
+	com.google.gson
+	com.google.guava
+	org.apache.poi
+	org.apache.poi.ooxml
+	org.apache.poi.ooxml.schemas
+	org.beanshell.bsh
+	com.opencsv
+	jakarta.mail-api
+	com.healthmarketscience.jackcess
+	
+	info.elexis.target.commons.feature.group
+	info.elexis.target.jaxwsrs.core.feature.group
+	
+	// Nebula
+	org.eclipse.nebula.cwt.feature.feature.group
+	org.eclipse.nebula.widgets.cdatetime.feature.feature.group
+	org.eclipse.nebula.widgets.tablecombo.feature.feature.group
+	org.eclipse.nebula.widgets.nattable.core
+	org.eclipse.nebula.widgets.nattable.extension.glazedlists
+	ca.odell.glazedlists
+	
+	// Chromium
+	com.make.chromium.cef.feature.feature.group
+	org.eclipse.swt.chromium.feature.feature.group
+
+	// Testing and IDE integration
+	org.junit
+	org.hamcrest.core
+	org.hamcrest.library
+	org.eclipse.jdt.junit.runtime
+	org.eclipse.jdt.junit4.runtime
+	org.eclipse.pde.junit.runtime
+}

@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>info.elexis</groupId>
+	<groupId>info.elexis.target</groupId>
 	<artifactId>target</artifactId>
 	<version>21.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -15,10 +15,6 @@
 		<p2-maven-plugin-version>1.6.0</p2-maven-plugin-version>
 		<maven-resources-version>3.2.0</maven-resources-version>
 		<jersey.version>2.34</jersey.version>
-		<!-- <targetPlatform.repository.p2>https://download.eclipse.org/cbi/tpd/3.0.0-SNAPSHOT</targetPlatform.repository.p2> 
-			<targetPlatform.application.name>org.eclipse.cbi.targetplatform.tpd.converter</targetPlatform.application.name> 
-			<targetPlatform.application.args>elexis.tpd</targetPlatform.application.args> 
-			<targetPlatform.application.feature>org.eclipse.cbi.targetplatform-feature</targetPlatform.application.feature> -->
 	</properties>
 
 	<build>
@@ -31,6 +27,7 @@
 				<artifactId>p2-maven-plugin</artifactId>
 				<version>${p2-maven-plugin-version}</version>
 				<configuration>
+				
 					<artifacts>
 						<artifact>
 							<id>org.postgresql:postgresql:42.2.19.jre7</id>
@@ -96,23 +93,32 @@
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
+								<!--  required to use from eclipse-p2 in version 1.14
+									  due to org.apache.httpcomponents.httpclient
 								<artifact>
 									<id>commons-codec:commons-codec:1.15</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
+								-->
 								<artifact>
 									<id>org.apache.commons:commons-lang3:3.12.0</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.apache.commons:commons-dbcp2:2.8.0</id>
+									<!-- required by org.apache.poi -->
+									<id>org.apache.commons:commons-math3:3.6.1</id>
+									<source>true</source>
+								</artifact>
+								<artifact>
+								<!-- dbcp2 and pool2 with javax.transaction.xa problem -->
+									<id>commons-dbcp:commons-dbcp:1.4</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.apache.commons:commons-pool2:2.9.0</id>
+									<id>commons-pool:commons-pool:1.6</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>

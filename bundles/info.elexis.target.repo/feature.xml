@@ -22,7 +22,28 @@
    </requires>
 
    <plugin
-         id="jakarta.xml.bind-api"
+         id="info.elexis.target.jaxws.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="info.elexis.target.hapi.fhir"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ag.ion.bion.workbench.office.editor.activation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ag.ion.bion.workbench.office.editor.activation.nl1"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -30,7 +51,66 @@
          unpack="false"/>
 
    <plugin
-         id="info.elexis.target.hapi.fhir"
+         id="ag.ion.bion.workbench.office.editor.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ag.ion.bion.workbench.office.editor.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ag.ion.bion.workbench.office.editor.ui.nl1"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="ag.ion.noa"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ag.ion.noa4e.search"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ag.ion.noa4e.search.nl1"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="ag.ion.noa4e.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="ag.ion.noa4e.ui.nl1"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="info.elexis.target.ehealth.connector.ch"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -1,10 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Bind jakarta.xml to com.sun.xml.bindv2
-Bundle-SymbolicName: jakarta.xml.bind-api
+Bundle-Name: Bind com.sun.xml.bind.v2 to jakarta.xml.bind
+Bundle-SymbolicName: jakarta.xml.bind-api;singleton:=true
 Bundle-Version: 2.3.3.qualifier
 Bundle-Vendor: elexis.info
-Fragment-Host: jakarta.xml.bind;bundle-version="2.3.3"
-Automatic-Module-Name: jakarta.xml.bind.api
+Fragment-Host: jaxb-api;bundle-version="2.3.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Import-Package: com.sun.xml.bind.v2;version="2.3.3"
+Import-Package: com.sun.xml.bind.v2;version="2.3.4"

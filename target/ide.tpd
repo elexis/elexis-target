@@ -19,6 +19,7 @@ location "https://download.elexis.info/elexis/target/2021-03-java11/" {
 	org.eclipse.ecf.filetransfer.feature.feature.group
 	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
 	org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group
+	org.eclipse.mylyn.wikitext_feature.feature.group
 	
 	// logging
 	org.slf4j.api
@@ -28,9 +29,13 @@ location "https://download.elexis.info/elexis/target/2021-03-java11/" {
 	
 	// JAXB
 	javax.activation
-	com.sun.xml.bind
-	jakarta.xml.bind
-	javax.xml
+//	com.sun.xml.bind
+//	jakarta.xml.bind
+	jaxb-api // javax.xml.bind:jaxb-api:2.3.1
+//	com.sun.xml.bind.jaxb-impl
+//	org.glassfish.jaxb.runtime
+	com.sun.xml.bind.jaxb-osgi
+	// javax.xml // -> bites with JDK java.xml
 	
 	// persistence
 	com.h2database
@@ -40,16 +45,26 @@ location "https://download.elexis.info/elexis/target/2021-03-java11/" {
 	org.eclipse.gemini.jpa.feature.feature.group
 	osgi.enterprise
 	javax.transaction
+	jakarta.persistence
 	
 	com.eclipsesource.jaxrs.consumer
+	com.eclipsesource.jaxrs.publisher
+	com.eclipsesource.jaxrs.provider.gson
+	com.eclipsesource.jaxrs.provider.swagger.feature.feature.group
 	bcprov
 	
 	// hapi
-	info.elexis.target.hapi.fhir
+	info.elexis.target.hapi.fhir lazy
+	// jaxws
+	info.elexis.target.jaxws.core lazy
+	// ehealth connector
+	info.elexis.target.ehealth.connector.ch lazy
+
 	
 	org.jdom
 	com.google.gson
 	com.google.guava
+	org.jsoup
 	org.apache.poi
 	org.apache.poi.ooxml
 	org.apache.poi.ooxml.schemas
@@ -57,9 +72,23 @@ location "https://download.elexis.info/elexis/target/2021-03-java11/" {
 	com.opencsv
 	jakarta.mail-api
 	com.healthmarketscience.jackcess
+	com.google.zxing.core
+	com.google.zxing.javase
+	com.lowagie.itext
+	org.jfree.jcommon
+	org.jfree.chart
+	xerces.Impl
 	
-	info.elexis.target.commons.feature.group
-	info.elexis.target.jaxwsrs.core.feature.group
+	info.elexis.target.commons.feature.group lazy
+	// jax ws-rs
+	info.elexis.target.jaxwsrs.core.feature.group lazy
+	// shiro
+	info.elexis.target.apache.shiro.feature.group lazy
+	
+	// ch.medelexis.openoffice
+	ag.ion.bion.workbench.office.editor.core
+	ag.ion.noa
+	ag.ion.noa4e.ui
 	
 	// Nebula
 	org.eclipse.nebula.cwt.feature.feature.group
@@ -72,6 +101,14 @@ location "https://download.elexis.info/elexis/target/2021-03-java11/" {
 	// Chromium
 	com.make.chromium.cef.feature.feature.group
 	org.eclipse.swt.chromium.feature.feature.group
+	
+	// additional jetty bundles for server
+	org.eclipse.jetty.deploy
+	org.eclipse.jetty.webapp
+	org.eclipse.jetty.xml
+	org.eclipse.jetty.osgi.boot
+	org.eclipse.jetty.osgi.httpservice
+	org.eclipse.jetty.servlets
 
 	// Testing and IDE integration
 	org.junit

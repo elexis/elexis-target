@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Elexis IDE 2021-03" sequenceNumber="1625657788">
+<target name="Elexis IDE 2021-03" sequenceNumber="1625725911">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="11.0.2.v20200815-0835"/>
@@ -85,6 +85,42 @@
       <unit id="org.eclipse.jdt.junit.runtime" version="3.5.500.v20210112-0706"/>
       <unit id="org.eclipse.jdt.junit4.runtime" version="1.1.1500.v20210112-1623"/>
       <unit id="org.eclipse.pde.junit.runtime" version="3.5.1000.v20210110-1048"/>
+      <unit id="org.eclipse.swt.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.swt.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.swt.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.workbench.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.workbench.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.workbench.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.swt.gtk.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.swt.gtk.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.swt.gtk.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.workbench.renderers.swt.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.workbench.renderers.swt.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.workbench.renderers.swt.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.jface.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.jface.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.jface.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.browser.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.browser.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.browser.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.views.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.views.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.views.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.equinox.p2.ui.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.equinox.p2.ui.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.equinox.p2.ui.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.ui.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.platform.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.platform.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.platform.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.jdt.ui.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.jdt.ui.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.jdt.ui.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.workbench.swt.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.workbench.swt.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.workbench.swt.nl_it" version="4.19.0.v20210630075054"/>
       <repository location="https://download.elexis.info/elexis/target/2021-03-java11/"/>
     </location>
   </locations>

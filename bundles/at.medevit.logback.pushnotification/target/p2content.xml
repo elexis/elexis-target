@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<units size='1'>
+  <unit id='at.medevit.logback.pushnotification' version='1.0.0.202107071142' singleton='false' generation='2'>
+    <update id='at.medevit.logback.pushnotification' range='[0.0.0,1.0.0.202107071142)' severity='0'/>
+    <properties size='5'>
+      <property name='org.eclipse.equinox.p2.name' value='Logback Push Notifications Appender (Prowl and NMA)'/>
+      <property name='org.eclipse.equinox.p2.provider' value='medevit.at'/>
+      <property name='maven-groupId' value='info.elexis.server'/>
+      <property name='maven-artifactId' value='at.medevit.logback.pushnotification'/>
+      <property name='maven-version' value='1.0.0-SNAPSHOT'/>
+    </properties>
+    <provides size='6'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='at.medevit.logback.pushnotification' version='1.0.0.202107071142'/>
+      <provided namespace='osgi.bundle' name='at.medevit.logback.pushnotification' version='1.0.0.202107071142'/>
+      <provided namespace='java.package' name='at.medevit.logback.pushnotification' version='0.0.0'/>
+      <provided namespace='osgi.identity' name='at.medevit.logback.pushnotification' version='1.0.0.202107071142'>
+        <properties size='1'>
+          <property name='type' value='osgi.fragment'/>
+        </properties>
+      </provided>
+      <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      <provided namespace='osgi.fragment' name='ch.qos.logback.classic' version='1.0.0.202107071142'/>
+    </provides>
+    <requires size='2'>
+      <required namespace='osgi.bundle' name='ch.qos.logback.classic' range='1.0.7'/>
+      <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'>
+        <description>
+          at.medevit.logback.pushnotification
+        </description>
+      </requiredProperties>
+    </requires>
+    <artifacts size='1'>
+      <artifact classifier='osgi.bundle' id='at.medevit.logback.pushnotification' version='1.0.0.202107071142'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='1'>
+        <instruction key='manifest'>
+          Bundle-SymbolicName: at.medevit.logback.pushnotification&#xA;Bundle-Version: 1.0.0.202107071142&#xA;Fragment-Host: ch.qos.logback.classic;bundle-version=&quot;1.0.7&quot;&#xA;
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+</units>

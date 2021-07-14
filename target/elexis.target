@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Elexis" sequenceNumber="1625656855">
+<target name="Elexis" sequenceNumber="1625723366">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="a.jre.javase" version="11.0.0"/>
@@ -119,6 +119,15 @@
       <unit id="org.eclipse.ui.nl_de" version="4.19.0.v20210630075054"/>
       <unit id="org.eclipse.ui.nl_fr" version="4.19.0.v20210630075054"/>
       <unit id="org.eclipse.ui.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.platform.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.platform.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.platform.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.jdt.ui.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.jdt.ui.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.jdt.ui.nl_it" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.workbench.swt.nl_de" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.workbench.swt.nl_fr" version="4.19.0.v20210630075054"/>
+      <unit id="org.eclipse.e4.ui.workbench.swt.nl_it" version="4.19.0.v20210630075054"/>
       <repository location="https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.0/2021-03/"/>
     </location>
   </locations>

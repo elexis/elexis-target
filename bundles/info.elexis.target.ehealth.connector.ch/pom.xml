@@ -60,6 +60,15 @@
 							!org.ehealth_connector.*,
 							!org.openhealthtools,
 							!org.openhealthtools.*,
+							org.eclipse.emf.ecore,
+							org.eclipse.emf.ecore.xmi,
+							org.eclipse.emf.ecore.*,
+							org.eclipse.emf.common,
+							org.eclipse.emf.common.*,
+							org.apache.commons.lang3,
+							org.apache.commons.lang3.*,
+							org.slf4j,
+							org.slf4j.*,
 							*;resolution:=optional,
 						</Import-Package>
 						<_exportcontents>
@@ -67,6 +76,7 @@
 							org.ehealth_connector.*,
 							org.openhealthtools,
 							org.openhealthtools.*,
+							!*,
 						</_exportcontents>
 					</instructions>
 
@@ -208,13 +218,33 @@
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.common</artifactId>
-			<version>0.0.0</version>
+			<version>2.16.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<!-- doubles org.eclipse.emf:org.eclipse.emf.common -->
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>common</artifactId>
+			<version>2.9.2.v20131212</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.ecore</artifactId>
-			<version>0.0.0</version>
+			<version>2.23.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf.ecore</groupId>
+			<artifactId>xmi</artifactId>
+			<version>2.9.1.v20131212</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<!-- doubles org.eclipse.emf:org.eclipse.emf.ecore -->
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>ecore</artifactId>
+			<version>2.9.2.v20131212</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -224,15 +254,9 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>ecore</artifactId>
-			<version>0.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-			<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>common</artifactId>
-			<version>2.9.2.v20131212</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.9</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

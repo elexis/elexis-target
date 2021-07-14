@@ -6,8 +6,7 @@ target "Elexis" with source allEnvironments
 location "https://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/" {
 	// Specifies the expectation of the installation environment
 	// https://p2-dev.eclipse.narkive.com/SzdeAveT/p2-director-third-party-package-bombs-on-javax-crypto-package-dependency
-	a.jre.javase [11.0.0,12.0.0) 
-
+	a.jre.javase [11.0.0,12.0.0)
 	// Eclipse base
 	org.eclipse.platform.feature.group
 	org.eclipse.equinox.executable.feature.group
@@ -24,26 +23,21 @@ location "https://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/" {
 	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
 	org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group
 	org.eclipse.mylyn.wikitext_feature.feature.group
-	//dependencies for mylyn wikitext
+	// dependencies for mylyn wikitext
 	com.google.guava [21.0.0.v20170206-1425,21.0.0.v20170206-1425]
 	org.jsoup
-
 	// Jakarta XML Binding (JAXB)
 	// http://blog.vogella.com/2021/03/08/eclipse-rcp-java-11-jaxb/
 	// TODO Variant 2: jakarta.xml.bind-api fragment
 	javax.activation [1.2.2,2.0.0) // requirement of JAXB
 	// jakarta.xml.bind [2.3.3,3.0.0) // JAXB-API -> do not use!!
 	com.sun.xml.bind [2.3.3,3.0.0) // JAXB-Implementation
-
-	
 	// bound for removal
 	javax.xml [1.3.4,2.0.0) // https://bugs.eclipse.org/bugs/show_bug.cgi?id=571532 // bites with jdk java.xml
-	
 	// Nebula
 	org.eclipse.nebula.widgets.nattable.core
 	org.eclipse.nebula.widgets.nattable.extension.glazedlists
 	ca.odell.glazedlists
-
 	// Testing and IDE integration
 	org.junit
 	org.hamcrest.core
@@ -71,6 +65,7 @@ location "https://ftp.halifax.rwth-aachen.de/eclipse/rt/eclipselink/updates" {
 	org.eclipse.persistence.jpa.feature.group [2.7.7,2.8.0)
 	org.eclipse.persistence.extension [2.7.7,2.8.0)
 }
+
 location "https://download.elexis.info/elexis/target/gemini.jpa/" {
 	org.eclipse.gemini.jpa.feature.feature.group
 }
@@ -99,23 +94,18 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202102232326
 	ch.qos.logback.classic [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
 	ch.qos.logback.core [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
 	ch.qos.logback.slf4j [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
-	
 	// persistence - contains org.osgi.service.[jndi|jdbc] req for gemini.jpa
 	osgi.enterprise
-	
 	// for org.apache.commons-dbcp
-	javax.transaction [1.1.1,1.2.0) 
-	
+	javax.transaction [1.1.1,1.2.0)
 	// Accessing, manipulating, and outputting XML data from Java code
 	org.jdom [1.1.1,2.0.0)
 	// Apache POI - Java API To Access Microsoft Format Files
 	org.apache.poi [4.1.1,4.2.0)
 	org.apache.poi.ooxml [4.1.1,4.2.0)
 	org.apache.poi.ooxml.schemas [4.1.1,4.2.0)
-
 	//
 	javax.xml.ws [2.1.0.v200902101523,2.1.0.v200902101523]
-
 	// Testing
 	org.mockito [2.23.0,3.0.0)
 }
@@ -125,7 +115,6 @@ location "https://download.medelexis.ch/p2/chromium-swt-ee/" {
 	com.make.chromium.cef.feature.feature.group
 	org.eclipse.swt.chromium.feature.feature.group
 }
-
 
 // i18n
 location "https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.0/2021-03/" {
@@ -156,4 +145,13 @@ location "https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.0/2021-0
 	org.eclipse.ui.nl_de
 	org.eclipse.ui.nl_fr
 	org.eclipse.ui.nl_it
+	org.eclipse.platform.nl_de
+	org.eclipse.platform.nl_fr
+	org.eclipse.platform.nl_it
+	org.eclipse.jdt.ui.nl_de
+	org.eclipse.jdt.ui.nl_fr
+	org.eclipse.jdt.ui.nl_it
+	org.eclipse.e4.ui.workbench.swt.nl_de
+	org.eclipse.e4.ui.workbench.swt.nl_fr
+	org.eclipse.e4.ui.workbench.swt.nl_it
 }

@@ -1,4 +1,8 @@
- Elexis Development and Production Target 2021-03-java11
+# Elexis Development and Production Target 2021-03-java11
+
+Current: `2021-03-java11`
+
+## Notes / Open Topics
 
 Export target does not work as expected, no entries
 are created for contents in maven_libs
@@ -11,14 +15,28 @@ https://wiki.eclipse.org/Equinox/p2/Ant_Tasks
 
 ## Versioning System
 
-2021-03
+The target versioning system is based upon the Eclipse release used (e.g. `2021-03`) and the java version tested for (e.g. `java11`).
+The current target is `2021-03-java11`.
+
+## Target / P2 site structure
+
+The target is distributed as a [p2](https://www.eclipse.org/equinox/p2/) repository. It is built out of 4 different sources.  Each of these sources is built into a p2 repository, they are together served as a [composite repository](https://wiki.eclipse.org/Equinox/p2/Composite_Repositories_(new). The resulting structure is as follows:
+
+
+	compositeArtifacts.xml	
+	compositeContent.xml
+	p2.index					
+	eclipse-p2/				Contains the Eclipse p2 based artifacts
+	elexis-p2/				Contains the local (i.e. Elexis) artifacts
+	maven-p2/				Contains the Maven based artifacts
+	../justj.11				Contains the Java JRE
 
 ## How to update the target
 
-The target is built out of 4 different sources. Each of these sources is built into a p2 repository.
-All these repositories are then presented as a composite repository.
+Target development is done within the Eclipse IDE. That is, the target is prepared (developed and tested) within
+the local development environment, and finally uploaded to the server for public usage.
 
-### Local artifacts
+### p2 repo: Local artifacts
 
 Located in `bundles` directory. Generate a bundle for each project. In `info.elexis.target.repo` you find
 a temporary target to load and update `feature.xml` against. Now within your IDE export the feature into
@@ -26,19 +44,21 @@ the target directory
 
 TODO `/Users/marco/git/elexis-target/target/target/2021-03-java11/elexis-p2`
 
-### Eclipse P2 based artifacts
+### p2 repo: Eclipse P2 artifacts
 
-
-### Maven based artifacts
-
-
-
-
-
-* Modify tpd
+Sourced via `elexis.tpd` -> `elexis.target` 
+ 
 * Modify pom.xml
 * Generate target file from tpd
 * Run build.sh or commit
+
+### p2 repo: Maven based artifacts
+
+
+
+### Uploading the target 
+
+
 
 ## Target Rules
 
@@ -72,7 +92,7 @@ https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
 ### Maven commands
 
 * `mvn tycho-eclipserun:eclipse-run` Build eclipse target derived p2 site into `target/$target-name/eclipse-p2` (Be sure to run `ant/elexis-target target2p2mirror.xml.launch` to update the required `elexis.target.p2mirror.xml` file)
-* `mvn p2:site` Build maven derived p2 site into `target/$target-name/maven-p2`
+* `mvn p2:site -U` Build maven derived p2 site into `target/$target-name/maven-p2`
 * `mvn resources:copy-resources` Copy files from `template/*` to target p2 site and replace variables
 
 # Questions

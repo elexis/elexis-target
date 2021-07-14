@@ -128,6 +128,15 @@
             <iu id="org.eclipse.ui.nl_de" version="4.19.0.v20210630075054"/>
             <iu id="org.eclipse.ui.nl_fr" version="4.19.0.v20210630075054"/>
             <iu id="org.eclipse.ui.nl_it" version="4.19.0.v20210630075054"/>
+            <iu id="org.eclipse.platform.nl_de" version="4.19.0.v20210630075054"/>
+            <iu id="org.eclipse.platform.nl_fr" version="4.19.0.v20210630075054"/>
+            <iu id="org.eclipse.platform.nl_it" version="4.19.0.v20210630075054"/>
+            <iu id="org.eclipse.jdt.ui.nl_de" version="4.19.0.v20210630075054"/>
+            <iu id="org.eclipse.jdt.ui.nl_fr" version="4.19.0.v20210630075054"/>
+            <iu id="org.eclipse.jdt.ui.nl_it" version="4.19.0.v20210630075054"/>
+            <iu id="org.eclipse.e4.ui.workbench.swt.nl_de" version="4.19.0.v20210630075054"/>
+            <iu id="org.eclipse.e4.ui.workbench.swt.nl_fr" version="4.19.0.v20210630075054"/>
+            <iu id="org.eclipse.e4.ui.workbench.swt.nl_it" version="4.19.0.v20210630075054"/>
         </p2.mirror>
     </target>
 </project>

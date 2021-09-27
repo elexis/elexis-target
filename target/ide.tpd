@@ -1,6 +1,6 @@
-target "Elexis IDE 2021-03" with source allEnvironments
+target "Elexis IDE 2021-06" with source allEnvironments
 
-location "https://download.elexis.info/elexis/target/2021-03-java11/" {
+location "https://download.elexis.info/elexis/target/2021-06-java11/" {
 	
 	// justj.11
 	org.eclipse.justj.openjdk.hotspot.jre.full.feature.group
@@ -47,10 +47,11 @@ location "https://download.elexis.info/elexis/target/2021-03-java11/" {
 	javax.transaction
 	jakarta.persistence
 	
-	com.eclipsesource.jaxrs.consumer
-	com.eclipsesource.jaxrs.publisher
-	com.eclipsesource.jaxrs.provider.gson
-	com.eclipsesource.jaxrs.provider.swagger.feature.feature.group
+//	com.eclipsesource.jaxrs.consumer
+//	com.eclipsesource.jaxrs.publisher
+//	com.eclipsesource.jaxrs.provider.gson
+//	com.eclipsesource.jaxrs.provider.swagger.feature.feature.group
+	
 	bcprov
 	
 	// hapi
@@ -97,6 +98,7 @@ location "https://download.elexis.info/elexis/target/2021-03-java11/" {
 	org.eclipse.nebula.widgets.nattable.core
 	org.eclipse.nebula.widgets.nattable.extension.glazedlists
 	ca.odell.glazedlists
+	org.eclipse.collections
 	
 	// Chromium
 	com.equo.chromium.feature.feature.group

@@ -1,9 +1,9 @@
 target "Elexis" with source allEnvironments
 
-// Eclipse 4.19
-// http://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/
-// https://download.eclipse.org/releases/2021-03/
-location "https://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/" {
+// Eclipse 4.20
+// http://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-06/
+// https://download.eclipse.org/releases/2021-06/
+location "https://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-06/" {
 	// Specifies the expectation of the installation environment
 	// https://p2-dev.eclipse.narkive.com/SzdeAveT/p2-director-third-party-package-bombs-on-javax-crypto-package-dependency
 	a.jre.javase [11.0.0,12.0.0)
@@ -34,10 +34,6 @@ location "https://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/" {
 	com.sun.xml.bind [2.3.3,3.0.0) // JAXB-Implementation
 	// bound for removal
 	javax.xml [1.3.4,2.0.0) // https://bugs.eclipse.org/bugs/show_bug.cgi?id=571532 // bites with jdk java.xml
-	// Nebula
-	org.eclipse.nebula.widgets.nattable.core
-	org.eclipse.nebula.widgets.nattable.extension.glazedlists
-	ca.odell.glazedlists
 	// Testing and IDE integration
 	org.junit
 	org.hamcrest.core
@@ -47,15 +43,11 @@ location "https://ftp.halifax.rwth-aachen.de/eclipse/releases/2021-03/" {
 	org.eclipse.pde.junit.runtime
 }
 
-// Jetty p2 repo
-location "https://download.eclipse.org/jetty/updates/jetty-bundles-9.x/9.4.37.v20210219/" {
-	// additional jetty bundles for server
-	org.eclipse.jetty.deploy
-	org.eclipse.jetty.webapp
-	org.eclipse.jetty.xml
-	org.eclipse.jetty.osgi.boot
-	org.eclipse.jetty.osgi.httpservice
-	org.eclipse.jetty.servlets
+location "https://download.eclipse.org/nattable/releases/2.0.1/repository/" {
+	org.eclipse.nebula.widgets.nattable.core
+	org.eclipse.nebula.widgets.nattable.extension.glazedlists
+	ca.odell.glazedlists
+	org.eclipse.collections
 }
 
 // persistence
@@ -71,22 +63,20 @@ location "https://download.elexis.info/elexis/target/gemini.jpa/" {
 }
 
 location "https://download.elexis.info/elexis/target/osgi-jax-rs-connector/" {
-	com.eclipsesource.jaxrs.consumer
-	com.eclipsesource.jaxrs.publisher
-	com.eclipsesource.jaxrs.provider.gson
-	com.eclipsesource.jaxrs.provider.swagger.feature.feature.group
+	com.eclipsesource.jaxrs.swagger-all
 }
 
-location "https://download.eclipse.org/nebula/releases/2.4.3/" {
+location "https://download.eclipse.org/nebula/releases/2.5.0/" {
 	org.eclipse.nebula.cwt.feature.feature.group
 	org.eclipse.nebula.widgets.cdatetime.feature.feature.group
 	org.eclipse.nebula.widgets.tablecombo.feature.feature.group
 }
 
 // R20210223232630 	Tue, 23 Feb 2021 -- 23:26 (UTC) 	2021-03
-location "https://download.eclipse.org/tools/orbit/downloads/drops/R20210223232630/repository/" {
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20210602031627/repository/" {
 	// logging
 	org.slf4j.api [1.7.30.v20200204-2150,1.7.30.v20200204-2150]
+	
 	// http://www.slf4j.org/legacy.html
 	org.slf4j.jcl [1.7.2,1.7.3)
 	org.slf4j.jul [1.7.2,1.7.3)
@@ -117,7 +107,7 @@ location "https://download.medelexis.ch/p2/chromium-swt-ee/" {
 }
 
 // i18n
-location "https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.0/2021-03/" {
+location "https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.0/2021-06/" {
 	org.eclipse.swt.nl_de
 	org.eclipse.swt.nl_fr
 	org.eclipse.swt.nl_it

@@ -23,6 +23,7 @@ import javax.ws.rs.core.Request;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
+import org.slf4j.LoggerFactory;
 
 
 public class ServletContainerBridge extends HttpServlet implements Runnable {
@@ -55,7 +56,8 @@ public class ServletContainerBridge extends HttpServlet implements Runnable {
           }
           isJerseyReady = true;
         }
-      } catch( ServletException e ) {
+      } catch(  Error | Exception e ) {
+        LoggerFactory.getLogger( getClass() ).error( "ServletContainerBridge run() error", e );
         throw new RuntimeException( e );
       } finally {
         Thread.currentThread().setContextClassLoader( original );

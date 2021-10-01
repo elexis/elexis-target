@@ -60,7 +60,8 @@ location "https://download.elexis.info/elexis/target/2021-06-java11/" {
 	info.elexis.target.jaxws.core lazy
 	// ehealth connector
 	info.elexis.target.ehealth.connector.ch lazy
-
+	// swagger
+	info.elexis.target.swagger.all lazy
 	
 	org.jdom
 	com.google.gson

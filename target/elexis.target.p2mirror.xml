@@ -89,8 +89,8 @@
             <iu id="org.apache.poi.ooxml.schemas" version="4.1.1.v20200922-2105"/>
             <iu id="javax.xml.ws" version="2.1.0.v200902101523"/>
             <iu id="org.mockito" version="2.23.0.v20200310-1642"/>
-            <iu id="com.equo.chromium.feature.feature.group" version="80.0.7.202109030549"/>
-            <iu id="com.equo.chromium.cef.feature.feature.group" version="80.0.5.202108190857"/>
+            <iu id="com.equo.chromium.feature.feature.group" version="80.0.8.202110042012"/>
+            <iu id="com.equo.chromium.cef.feature.feature.group" version="80.0.6.202110042013"/>
             <iu id="org.eclipse.swt.nl_de" version="4.20.0.v20210630020001"/>
             <iu id="org.eclipse.swt.nl_fr" version="4.20.0.v20210630020001"/>
             <iu id="org.eclipse.swt.nl_it" version="4.20.0.v20210630020001"/>

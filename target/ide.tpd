@@ -79,6 +79,8 @@ location "https://download.elexis.info/elexis/target/2021-06-java11/" {
 	com.lowagie.itext
 	org.jfree.jcommon
 	org.jfree.chart
+	org.jfree.chart-swt
+	org.jfree.swtgraphics2d
 	xerces.Impl
 	
 	info.elexis.target.commons.feature.group lazy

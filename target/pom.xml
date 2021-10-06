@@ -102,11 +102,19 @@
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
+							<id>org.jfree:jfreechart:1.0.19</id>
+							<transitive>false</transitive>
+						</artifact>
+						<artifact>
 							<id>org.jfree:jcommon:1.0.24</id>
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
-							<id>org.jfree:jfreechart:1.0.19</id>
+							<id>org.jfree:jfreechart-swt:1.0</id>
+							<transitive>false</transitive>
+						</artifact>
+						<artifact>
+							<id>org.jfree:swtgraphics2d:1.1.0</id>
 							<transitive>false</transitive>
 						</artifact>
 					</artifacts>

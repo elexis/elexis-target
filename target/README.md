@@ -1,6 +1,6 @@
 # Elexis Development and Production Target 2021-06-java11
 
-Current: `2021-06-java11`
+Current: `2021-06-java11` 
 
 ## About the target
 

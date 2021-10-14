@@ -4,14 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.elexis.target</groupId>
 	<artifactId>target</artifactId>
-	<version>21.6.0-SNAPSHOT</version>
+	<version>21.9.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<target-name>2021-06-java11</target-name>
-		<platform-version-name>2021-06</platform-version-name>
-		<tycho-version>2.4.0</tycho-version>
-		<tycho-extras-version>2.4.0</tycho-extras-version>
+		<target-name>2021-09-java11</target-name>
+		<platform-version-name>2021-09</platform-version-name>
+		<tycho-version>2.5.0</tycho-version>
+		<tycho-extras-version>2.5.0</tycho-extras-version>
 		<p2-maven-plugin-version>1.7.0</p2-maven-plugin-version>
 		<maven-resources-version>3.2.0</maven-resources-version>
 		<jetty.version>10.0.6</jetty.version>

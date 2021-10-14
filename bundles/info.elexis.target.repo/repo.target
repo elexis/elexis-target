@@ -6,8 +6,8 @@
 		<location path="${project_loc}/jaxws-core/" type="Directory"/>
 		<location path="${project_loc}/ehealth-connector/" type="Directory"/>
 		<location path="${project_loc}/noa4e/" type="Directory"/>
-		<location path="${project_loc:/elexis-target}/target/2021-06-java11/eclipse-p2/" type="Directory"/>
-		<location path="${project_loc:/elexis-target}/target/2021-06-java11/maven-p2" type="Directory"/>
 		<location path="${project_loc}/swagger/" type="Directory"/>
+		<location path="${project_loc:/elexis-target}/target/2021-09-java11/eclipse-p2/" type="Directory"/>
+		<location path="${project_loc:/elexis-target}/target/2021-09-java11/maven-p2" type="Directory"/>
 	</locations>
 </target>

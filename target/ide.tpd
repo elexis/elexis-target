@@ -1,4 +1,4 @@
-target "Elexis IDE 2021-09" with source allEnvironments
+target "Elexis IDE 2021-09-java11" with source allEnvironments
 
 location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	
@@ -47,10 +47,12 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	javax.transaction
 	jakarta.persistence
 	
-//	com.eclipsesource.jaxrs.consumer
-//	com.eclipsesource.jaxrs.publisher
-//	com.eclipsesource.jaxrs.provider.gson
-//	com.eclipsesource.jaxrs.provider.swagger.feature.feature.group
+	com.eclipsesource.jaxrs.consumer
+	com.eclipsesource.jaxrs.publisher
+	com.eclipsesource.jaxrs.provider.gson
+	com.eclipsesource.jaxrs.provider.multipart
+	com.eclipsesource.jaxrs.provider.security
+	com.eclipsesource.jaxrs.provider.swagger
 	
 	bcprov
 	

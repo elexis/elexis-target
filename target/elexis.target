@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Elexis" sequenceNumber="1634199261">
+<target name="Elexis" sequenceNumber="1634830137">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="a.jre.javase" version="11.0.0"/>
@@ -70,13 +70,14 @@
       <unit id="org.apache.poi" version="4.1.1.v20200604-1524"/>
       <unit id="org.apache.poi.ooxml" version="4.1.1.v20200820-1148"/>
       <unit id="org.apache.poi.ooxml.schemas" version="4.1.1.v20200922-2105"/>
+      <unit id="org.apache.xmlbeans" version="3.1.0.v20200922-1359"/>
       <unit id="javax.xml.ws" version="2.1.0.v200902101523"/>
       <unit id="org.mockito" version="2.23.0.v20200310-1642"/>
       <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20210825222808/repository/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="com.equo.chromium.feature.feature.group" version="80.0.9.202110140605"/>
-      <unit id="com.equo.chromium.cef.feature.feature.group" version="80.0.7.202110140419"/>
+      <unit id="com.equo.chromium.feature.feature.group" version="80.0.10.202110202229"/>
+      <unit id="com.equo.chromium.cef.feature.feature.group" version="80.0.8.202110202117"/>
       <repository location="https://download.medelexis.ch/p2/chromium-swt-ee/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">

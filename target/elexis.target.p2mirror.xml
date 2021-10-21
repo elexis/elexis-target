@@ -87,10 +87,11 @@
             <iu id="org.apache.poi" version="4.1.1.v20200604-1524"/>
             <iu id="org.apache.poi.ooxml" version="4.1.1.v20200820-1148"/>
             <iu id="org.apache.poi.ooxml.schemas" version="4.1.1.v20200922-2105"/>
+            <iu id="org.apache.xmlbeans" version="3.1.0.v20200922-1359"/>
             <iu id="javax.xml.ws" version="2.1.0.v200902101523"/>
             <iu id="org.mockito" version="2.23.0.v20200310-1642"/>
-            <iu id="com.equo.chromium.feature.feature.group" version="80.0.9.202110140605"/>
-            <iu id="com.equo.chromium.cef.feature.feature.group" version="80.0.7.202110140419"/>
+            <iu id="com.equo.chromium.feature.feature.group" version="80.0.10.202110202229"/>
+            <iu id="com.equo.chromium.cef.feature.feature.group" version="80.0.8.202110202117"/>
             <iu id="org.eclipse.swt.nl_de" version="4.21.0.v20210925020001"/>
             <iu id="org.eclipse.swt.nl_fr" version="4.21.0.v20210925020001"/>
             <iu id="org.eclipse.swt.nl_it" version="4.21.0.v20210925020001"/>

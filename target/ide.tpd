@@ -72,6 +72,7 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	org.apache.poi
 	org.apache.poi.ooxml
 	org.apache.poi.ooxml.schemas
+	org.apache.xmlbeans
 	org.beanshell.bsh
 	com.opencsv
 	jakarta.mail-api

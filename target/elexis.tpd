@@ -88,6 +88,7 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202108252228
 	org.apache.poi [4.1.1,4.2.0)
 	org.apache.poi.ooxml [4.1.1,4.2.0)
 	org.apache.poi.ooxml.schemas [4.1.1,4.2.0)
+	org.apache.xmlbeans [3.1.0,3.2.0)
 	//
 	javax.xml.ws [2.1.0.v200902101523,2.1.0.v200902101523]
 	// Testing

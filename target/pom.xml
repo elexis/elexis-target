@@ -167,6 +167,11 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
+									<!-- required by org.apache.poi -->
+									<id>org.apache.commons:commons-compress:1.21</id>
+									<source>true</source>
+								</artifact>
+								<artifact>
 									<!-- dbcp2 and pool2 with javax.transaction.xa problem -->
 									<id>commons-dbcp:commons-dbcp:1.4</id>
 									<transitive>false</transitive>

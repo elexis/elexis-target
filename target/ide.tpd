@@ -91,6 +91,7 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	info.elexis.target.jaxwsrs.core.feature.group lazy
 	// shiro
 	info.elexis.target.apache.shiro.feature.group lazy
+	org.apache.shiro.web lazy // missing in feature, custom
 	
 	// ch.medelexis.openoffice
 	ag.ion.bion.workbench.office.editor.core

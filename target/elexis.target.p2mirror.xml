@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?><project name="Download target platform" default="download.target.platform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <target name="help">
         <echo>
-					Generated with useLatest = false
-					
+					Generated with useLatest =
+					false
+
 					---
-					
+
 					Use followStrict="true" to prevent downloading all
-					requirements not included in the target platform
-					or followStrict="false" to fetch everything
+					requirements not
+					included in the target platform
+					or followStrict="false" to fetch
+					everything
 
 					To run this script:
 
-					/abs/path/to/eclipse -vm /opt/jdk1.6.0/bin/java \
-					-nosplash -data /tmp/workspace -consolelog -application \
-					org.eclipse.ant.core.antRunner -f *.target.p2mirror.xml \
-					-Ddebug=true -DfollowStrict=true -DrepoDir=`pwd`/REPO/
-</echo>
+					/abs/path/to/eclipse -vm
+					/opt/jdk1.6.0/bin/java \
+					-nosplash -data /tmp/workspace -consolelog
+					-application \
+					org.eclipse.ant.core.antRunner -f
+					*.target.p2mirror.xml \
+					-Ddebug=true -DfollowStrict=true
+					-DrepoDir=`pwd`/REPO/
+				</echo>
     </target>
     <target name="init" unless="repoDir">
         <fail>Must set -DrepoDir=/abs/path/to/download/artifacts/</fail>
@@ -38,20 +45,35 @@
             </source>
             <iu id="a.jre.javase" version="11.0.0"/>
             <iu id="org.eclipse.platform.feature.group" version="4.21.0.v20210906-0842"/>
+            <iu id="org.eclipse.platform.source.feature.group" version="4.21.0.v20210906-0842"/>
             <iu id="org.eclipse.equinox.executable.feature.group" version="3.8.1300.v20210828-0802"/>
+           <!-- <iu id="org.eclipse.equinox.executable.source.feature.group" version="3.8.1300.v20210828-0802"/> -->
             <iu id="org.eclipse.e4.rcp.feature.group" version="4.21.0.v20210906-0842"/>
+            <iu id="org.eclipse.e4.rcp.source.feature.group" version="4.21.0.v20210906-0842"/>
             <iu id="org.eclipse.emf.common.feature.group" version="2.23.0.v20210618-0700"/>
+            <iu id="org.eclipse.emf.common.source.feature.group" version="2.23.0.v20210618-0700"/>
             <iu id="org.eclipse.emf.ecore.feature.group" version="2.25.0.v20210816-0937"/>
+            <iu id="org.eclipse.emf.ecore.source.feature.group" version="2.25.0.v20210816-0937"/>
             <iu id="org.eclipse.emf.databinding.feature.group" version="1.7.0.v20190323-1059"/>
+            <iu id="org.eclipse.emf.databinding.source.feature.group" version="1.7.0.v20190323-1059"/>
             <iu id="org.eclipse.emf.edit.feature.group" version="2.16.0.v20190920-0401"/>
+            <iu id="org.eclipse.emf.edit.source.feature.group" version="2.16.0.v20190920-0401"/>
             <iu id="org.eclipse.emf.common.ui.feature.group" version="2.17.0.v20190507-0402"/>
+            <iu id="org.eclipse.emf.common.ui.source.feature.group" version="2.17.0.v20190507-0402"/>
             <iu id="org.eclipse.emf.edit.ui.feature.group" version="2.21.0.v20210506-1232"/>
+            <iu id="org.eclipse.emf.edit.ui.source.feature.group" version="2.21.0.v20210506-1232"/>
             <iu id="org.eclipse.ecf.core.feature.feature.group" version="1.5.702.v20210409-2301"/>
+            <iu id="org.eclipse.ecf.core.feature.source.feature.group" version="1.5.702.v20210409-2301"/>
             <iu id="org.eclipse.ecf.core.ssl.feature.feature.group" version="1.1.501.v20210409-2301"/>
+            <iu id="org.eclipse.ecf.core.ssl.feature.source.feature.group" version="1.1.501.v20210409-2301"/>
             <iu id="org.eclipse.ecf.filetransfer.feature.feature.group" version="3.14.1800.v20210618-0642"/>
+            <iu id="org.eclipse.ecf.filetransfer.feature.source.feature.group" version="3.14.1800.v20210618-0642"/>
             <iu id="org.eclipse.ecf.filetransfer.ssl.feature.feature.group" version="1.1.401.v20210409-2301"/>
+            <iu id="org.eclipse.ecf.filetransfer.ssl.feature.source.feature.group" version="1.1.401.v20210409-2301"/>
             <iu id="org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group" version="1.0.703.v20210512-0614"/>
+            <iu id="org.eclipse.ecf.filetransfer.httpclient45.feature.source.feature.group" version="1.0.703.v20210512-0614"/>
             <iu id="org.eclipse.mylyn.wikitext_feature.feature.group" version="3.0.38.202008172112"/>
+           <!-- <iu id="org.eclipse.mylyn.wikitext_feature.source.feature.group" version="3.0.38.202008172112"/> -->
             <iu id="com.google.guava" version="21.0.0.v20170206-1425"/>
             <iu id="org.jsoup" version="1.8.3.v20181012-1713"/>
             <iu id="javax.activation" version="1.2.2.v20201119-1642"/>
@@ -69,11 +91,16 @@
             <iu id="org.eclipse.collections" version="10.4.0.v20200820-2049"/>
             <iu id="jakarta.persistence" version="2.2.3"/>
             <iu id="org.eclipse.persistence.jpa.feature.group" version="2.7.9.v20210604-2c549e2208"/>
+            <iu id="org.eclipse.persistence.jpa.source.feature.group" version="2.7.9.v20210604-2c549e2208"/>
             <iu id="org.eclipse.persistence.extension" version="2.7.9.v20210604-2c549e2208"/>
             <iu id="org.eclipse.gemini.jpa.feature.feature.group" version="1.2.0.202105280757"/>
+            <!-- <iu id="org.eclipse.gemini.jpa.feature.source.feature.group" version="1.2.0.202105280757"/> -->
             <iu id="org.eclipse.nebula.cwt.feature.feature.group" version="1.1.0.202106201019"/>
+            <!-- <iu id="org.eclipse.nebula.cwt.feature.source.feature.group" version="1.1.0.202106201019"/> -->
             <iu id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="1.5.0.202106201019"/>
+            <!--  <iu id="org.eclipse.nebula.widgets.cdatetime.feature.source.feature.group" version="1.5.0.202106201019"/> -->
             <iu id="org.eclipse.nebula.widgets.tablecombo.feature.feature.group" version="1.2.0.202106201019"/>
+            <!-- <iu id="org.eclipse.nebula.widgets.tablecombo.feature.source.feature.group" version="1.2.0.202106201019"/> -->
             <iu id="org.slf4j.api" version="1.7.30.v20200204-2150"/>
             <iu id="org.slf4j.jcl" version="1.7.2.v20130115-1340"/>
             <iu id="org.slf4j.jul" version="1.7.2.v20121108-1250"/>
@@ -90,8 +117,10 @@
             <iu id="org.apache.xmlbeans" version="3.1.0.v20200922-1359"/>
             <iu id="javax.xml.ws" version="2.1.0.v200902101523"/>
             <iu id="org.mockito" version="2.23.0.v20200310-1642"/>
-            <iu id="com.equo.chromium.feature.feature.group" version="80.0.10.202110202229"/>
-            <iu id="com.equo.chromium.cef.feature.feature.group" version="80.0.8.202110202117"/>
+            <iu id="com.equo.chromium.feature.feature.group" version="80.0.11.202110280411"/>
+            <!-- <iu id="com.equo.chromium.feature.source.feature.group" version="80.0.11.202110280411"/> -->
+            <iu id="com.equo.chromium.cef.feature.feature.group" version="80.0.9.202110280424"/>
+            <!-- <iu id="com.equo.chromium.cef.feature.source.feature.group" version="80.0.9.202110280424"/> -->
             <iu id="org.eclipse.swt.nl_de" version="4.21.0.v20210925020001"/>
             <iu id="org.eclipse.swt.nl_fr" version="4.21.0.v20210925020001"/>
             <iu id="org.eclipse.swt.nl_it" version="4.21.0.v20210925020001"/>

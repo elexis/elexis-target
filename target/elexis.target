@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Elexis" sequenceNumber="1634830137">
+<target name="Elexis" sequenceNumber="1635924350">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="a.jre.javase" version="11.0.0"/>
@@ -76,8 +76,8 @@
       <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20210825222808/repository/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="com.equo.chromium.feature.feature.group" version="80.0.10.202110202229"/>
-      <unit id="com.equo.chromium.cef.feature.feature.group" version="80.0.8.202110202117"/>
+      <unit id="com.equo.chromium.feature.feature.group" version="80.0.11.202110280411"/>
+      <unit id="com.equo.chromium.cef.feature.feature.group" version="80.0.9.202110280424"/>
       <repository location="https://download.medelexis.ch/p2/chromium-swt-ee/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">

@@ -47,12 +47,12 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	javax.transaction
 	jakarta.persistence
 	
-	com.eclipsesource.jaxrs.consumer
-	com.eclipsesource.jaxrs.publisher
-	com.eclipsesource.jaxrs.provider.gson
-	com.eclipsesource.jaxrs.provider.multipart
-	com.eclipsesource.jaxrs.provider.security
-	com.eclipsesource.jaxrs.provider.swagger
+	com.eclipsesource.jaxrs.consumer lazy
+	com.eclipsesource.jaxrs.publisher lazy
+	com.eclipsesource.jaxrs.provider.gson lazy
+	com.eclipsesource.jaxrs.provider.multipart lazy
+	com.eclipsesource.jaxrs.provider.security lazy
+	com.eclipsesource.jaxrs.provider.swagger lazy
 	
 	bcprov
 	
@@ -75,6 +75,7 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	org.apache.xmlbeans
 	org.beanshell.bsh
 	com.opencsv
+	com.google.protobuf
 	jakarta.mail-api
 	com.healthmarketscience.jackcess
 	com.google.zxing.core

@@ -17,10 +17,6 @@
       [Enter License Description here.]
    </license>
 
-   <requires>
-      <import plugin="jakarta.xml.bind" version="2.3.3" match="greaterOrEqual"/>
-   </requires>
-
    <plugin
          id="info.elexis.target.jaxws.core"
          download-size="0"

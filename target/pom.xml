@@ -16,7 +16,9 @@
 		<maven-resources-version>3.2.0</maven-resources-version>
 		<jetty.version>10.0.6</jetty.version>
 		<jersey.version>2.34</jersey.version>
+		<jackson.version>2.13.0</jackson.version>
 		<shiro.version>1.7.1</shiro.version>
+		<keycloak.version>12.0.4</keycloak.version>
 	</properties>
 
 	<build>
@@ -60,7 +62,7 @@
 							<!-- Liquibase problem with 8.0.23 https://github.com/liquibase/liquibase/issues/1639 -->
 						</artifact>
 						<artifact>
-							<id>com.google.code.gson:gson:2.8.6</id>
+							<id>com.google.code.gson:gson:2.8.9</id>
 							<source>true</source>
 						</artifact>
 						<artifact>
@@ -119,10 +121,13 @@
 						</artifact>
 					</artifacts>
 					<featureDefinitions>
+						<!--  =============================================  -->
+						<!-- APACHE COMMONS -->
+						<!--  =============================================  -->
 						<feature>
 							<id>info.elexis.target.commons</id>
 							<version>${project.version}</version>
-							<label>Apache Commons Combined Libraries</label>
+							<label>Bundled Apache Commons Combined Libraries</label>
 							<providerName>${project.groupId}</providerName>
 							<license>Apache</license>
 							<generateSourceFeature>true</generateSourceFeature>
@@ -184,10 +189,13 @@
 								</artifact>
 							</artifacts>
 						</feature>
+						<!--  =============================================  -->
+						<!-- JETTY -->
+						<!--  =============================================  -->
 						<feature>
 							<id>info.elexis.target.jetty.additions</id>
 							<version>${jetty.version}</version>
-							<label>Jetty, additional libraries</label>
+							<label>Bundled Jetty (additional) libraries</label>
 							<providerName>${project.groupId}</providerName>
 							<generateSourceFeature>true</generateSourceFeature>
 							<artifacts>
@@ -278,10 +286,13 @@
 								</artifact>
 							</artifacts>
 						</feature>
+						<!--  =============================================  -->
+						<!-- JAXWSRS -->
+						<!--  =============================================  -->
 						<feature>
 							<id>info.elexis.target.jaxwsrs.core</id>
 							<version>${project.version}</version>
-							<label>Jakarta WS RS and Jersey Libraries</label>
+							<label>Bundled Jakarta WS RS and Jersey Libraries</label>
 							<providerName>${project.groupId}</providerName>
 							<generateSourceFeature>true</generateSourceFeature>
 							<!-- https://eclipse-ee4j.github.io/jersey/download.html -->
@@ -315,10 +326,13 @@
 								</artifact>
 							</artifacts>
 						</feature>
+						<!--  =============================================  -->
+						<!--  SHIRO -->
+						<!--  =============================================  -->
 						<feature>
 							<id>info.elexis.target.apache.shiro</id>
 							<version>${project.version}</version>
-							<label>Apache Shiro Libraries</label>
+							<label>Bundled Apache Shiro Libraries</label>
 							<providerName>${project.groupId}</providerName>
 							<generateSourceFeature>true</generateSourceFeature>
 							<artifacts>
@@ -349,6 +363,95 @@
 								</artifact>
 								<artifact>
 									<id>org.owasp.encoder:encoder:1.2.3</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+							</artifacts>
+						</feature>
+						<!--  =============================================  -->
+						<!--  JACKSON -->
+						<!--  =============================================  -->
+						<feature>
+							<id>info.elexis.target.jackson</id>
+							<version>${project.version}</version>
+							<label>Bundled Jackson Libraries</label>
+							<providerName>${project.groupId}</providerName>
+							<generateSourceFeature>true</generateSourceFeature>
+							<artifacts>
+								<artifact>
+									<id>com.fasterxml.jackson.core:jackson-core:${jackson.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>com.fasterxml.jackson.core:jackson-databind:${jackson.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>com.fasterxml.jackson.core:jackson-annotations:${jackson.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jackson.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.yaml:snakeyaml:1.29</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+							</artifacts>
+						</feature>
+						<!--  =============================================  -->
+						<!-- KEYCLOAK -->
+						<!--  =============================================  -->
+						<feature>
+							<id>info.elexis.target.keycloak</id>
+							<version>${project.version}</version>
+							<label>Bundled Keycloak Java Libraries</label>
+							<providerName>${project.groupId}</providerName>
+							<generateSourceFeature>true</generateSourceFeature>
+							<artifacts>
+								<artifact>
+									<id>org.keycloak:keycloak-servlet-filter-adapter:${keycloak.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.keycloak:keycloak-core:${keycloak.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.keycloak:keycloak-adapter-spi:${keycloak.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.keycloak:keycloak-servlet-adapter-spi:${keycloak.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.keycloak:keycloak-adapter-core:${keycloak.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.keycloak:keycloak-common:${keycloak.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.keycloak:keycloak-authz-client:${keycloak.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.jboss.logging:jboss-logging:3.4.2.Final</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>

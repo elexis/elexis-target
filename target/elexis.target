@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Elexis" sequenceNumber="1635924350">
+<target name="Elexis" sequenceNumber="1639387666">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="a.jre.javase" version="11.0.0"/>
@@ -54,6 +54,7 @@
       <unit id="org.eclipse.nebula.cwt.feature.feature.group" version="1.1.0.202106201019"/>
       <unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="1.5.0.202106201019"/>
       <unit id="org.eclipse.nebula.widgets.tablecombo.feature.feature.group" version="1.2.0.202106201019"/>
+      <unit id="org.eclipse.nebula.widgets.floatingtext.feature.feature.group" version="1.0.0.202106201019"/>
       <repository location="https://download.eclipse.org/nebula/releases/2.5.0/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
@@ -76,8 +77,8 @@
       <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20210825222808/repository/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="com.equo.chromium.feature.feature.group" version="80.0.11.202110280411"/>
-      <unit id="com.equo.chromium.cef.feature.feature.group" version="80.0.9.202110280424"/>
+      <unit id="com.equo.chromium.feature.feature.group" version="80.0.15.202112130135"/>
+      <unit id="com.equo.chromium.cef.feature.feature.group" version="80.0.11.202112130128"/>
       <repository location="https://download.medelexis.ch/p2/chromium-swt-ee/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">

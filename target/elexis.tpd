@@ -64,6 +64,7 @@ location "https://download.eclipse.org/nebula/releases/2.5.0/" {
 	org.eclipse.nebula.cwt.feature.feature.group
 	org.eclipse.nebula.widgets.cdatetime.feature.feature.group
 	org.eclipse.nebula.widgets.tablecombo.feature.feature.group
+	org.eclipse.nebula.widgets.floatingtext.feature.feature.group
 }
 
 // R20210825222808 	Wed, 25 Aug 2021 -- 22:28 (UTC) 	2021-09

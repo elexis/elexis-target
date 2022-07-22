@@ -2,7 +2,7 @@
 <feature
       id="info.elexis.target.repo"
       label="Elexis Target Repo"
-      version="2021.9.0.qualifier"
+      version="2022.6.0.qualifier"
       provider-name="elexis.info">
 
    <description url="http://www.example.com/description">

@@ -8,17 +8,16 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<target-name>2021-09-java11</target-name>
-		<platform-version-name>2021-09</platform-version-name>
-		<tycho-version>2.5.0</tycho-version>
-		<tycho-extras-version>2.5.0</tycho-extras-version>
-		<p2-maven-plugin-version>1.7.0</p2-maven-plugin-version>
+		<target-name>2022-06-java17</target-name>
+		<platform-version-name>2022-06</platform-version-name>
+		<tycho-version>2.7.4</tycho-version>
+		<tycho-extras-version>2.7.4</tycho-extras-version>
+		<p2-maven-plugin-version>2.0.0</p2-maven-plugin-version>
 		<maven-resources-version>3.2.0</maven-resources-version>
-		<jetty.version>10.0.6</jetty.version>
-		<jersey.version>2.34</jersey.version>
-		<jackson.version>2.13.0</jackson.version>
-		<shiro.version>1.7.1</shiro.version>
-		<keycloak.version>12.0.4</keycloak.version>
+		<jetty.version>10.0.9</jetty.version>
+		<jersey.version>2.36</jersey.version>
+		<jackson.version>2.13.3</jackson.version>
+		<keycloak.version>18.0.2</keycloak.version>
 	</properties>
 
 	<build>
@@ -42,7 +41,7 @@
 							<source>true</source>
 						</artifact>
 						<artifact>
-							<id>com.sun.xml.bind:jaxb-osgi:2.3.4</id>
+							<id>com.sun.xml.bind:jaxb-osgi:2.3.6</id>
 							<transitive>false</transitive>
 							<source>true</source>
 						</artifact>
@@ -66,7 +65,7 @@
 							<source>true</source>
 						</artifact>
 						<artifact>
-							<id>org.beanshell:bsh:2.0b4</id>
+							<id>org.apache-extras.beanshell:bsh:2.0b6</id>
 						</artifact>
 						<artifact>
 							<id>com.opencsv:opencsv:3.10</id>
@@ -87,12 +86,13 @@
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
-							<id>org.bouncycastle:bcprov-jdk15on:1.66</id>
-							<!-- https://github.com/AgNO3/jcifs-ng/issues/250 -->
+							<id>org.bouncycastle:bcprov-jdk15on:1.70</id>
+							<!--  TODO https://github.com/AgNO3/jcifs-ng/issues/250 -->
+							<!--  kecloak/jcifs -->
 						</artifact>
 						<artifact>
 							<!-- Xerces2 provides high performance, fully compliant XML parsers -->
-							<id>xerces:xercesImpl:2.12.1</id>
+							<id>xerces:xercesImpl:2.12.2</id>
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
@@ -372,48 +372,6 @@
 							</artifacts>
 						</feature>
 						<!--  =============================================  -->
-						<!--  SHIRO -->
-						<!--  =============================================  -->
-						<feature>
-							<id>info.elexis.target.apache.shiro</id>
-							<version>${project.version}</version>
-							<label>Bundled Apache Shiro Libraries</label>
-							<providerName>${project.groupId}</providerName>
-							<generateSourceFeature>true</generateSourceFeature>
-							<artifacts>
-								<artifact>
-									<id>org.apache.shiro:shiro-lang:${shiro.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.apache.shiro:shiro-cache:${shiro.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.apache.shiro:shiro-event:${shiro.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.apache.shiro:shiro-core:${shiro.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.apache.shiro:shiro-jaxrs:${shiro.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.owasp.encoder:encoder:1.2.3</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-							</artifacts>
-						</feature>
-						<!--  =============================================  -->
 						<!--  JACKSON -->
 						<!--  =============================================  -->
 						<feature>
@@ -496,7 +454,7 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.jboss.logging:jboss-logging:3.4.2.Final</id>
+									<id>org.jboss.logging:jboss-logging:3.4.3.Final</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>

@@ -1,10 +1,10 @@
 target "Elexis" with source allEnvironments
 
-// Eclipse 4.21
-location "https://download.eclipse.org/releases/2021-09/" {
+// Eclipse 4.24
+location "https://download.eclipse.org/releases/2022-06/" {
 	// Specifies the expectation of the installation environment
 	// https://p2-dev.eclipse.narkive.com/SzdeAveT/p2-director-third-party-package-bombs-on-javax-crypto-package-dependency
-	a.jre.javase [11.0.0,12.0.0)
+	a.jre.javase [17.0.0,18.0.0)
 	// Eclipse base
 	org.eclipse.platform.feature.group
 	org.eclipse.equinox.executable.feature.group
@@ -19,10 +19,9 @@ location "https://download.eclipse.org/releases/2021-09/" {
 	org.eclipse.ecf.core.ssl.feature.feature.group
 	org.eclipse.ecf.filetransfer.feature.feature.group
 	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
-	org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group
+	org.eclipse.ecf.filetransfer.httpclient5.feature.feature.group
 	org.eclipse.mylyn.wikitext_feature.feature.group
 	// dependencies for mylyn wikitext
-	com.google.guava [21.0.0.v20170206-1425,21.0.0.v20170206-1425]
 	org.jsoup
 	// Jakarta XML Binding (JAXB)
 	// http://blog.vogella.com/2021/03/08/eclipse-rcp-java-11-jaxb/
@@ -63,38 +62,41 @@ location "https://download.elexis.info/elexis/target/gemini.jpa/" {
 	org.eclipse.gemini.jpa.feature.feature.group
 }
 
-location "https://download.eclipse.org/nebula/releases/2.5.0/" {
+location "https://download.eclipse.org/nebula/releases/2.7.1/" {
 	org.eclipse.nebula.cwt.feature.feature.group
 	org.eclipse.nebula.widgets.cdatetime.feature.feature.group
 	org.eclipse.nebula.widgets.tablecombo.feature.feature.group
 	org.eclipse.nebula.widgets.floatingtext.feature.feature.group
 }
 
-// R20210825222808 	Wed, 25 Aug 2021 -- 22:28 (UTC) 	2021-09
-location "https://download.eclipse.org/tools/orbit/downloads/drops/R20210825222808/repository/" {
+// R20220531185310 	Tue, 31 May 2022 -- 18:53 (UTC) 	2022-06
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/" {
 	// logging
 	org.slf4j.api [1.7.30.v20200204-2150,1.7.30.v20200204-2150]
 	
 	// http://www.slf4j.org/legacy.html
-	org.slf4j.jcl [1.7.2,1.7.3)
-	org.slf4j.jul [1.7.2,1.7.3)
-	org.slf4j.log4j [1.7.2,1.7.3)
+	org.slf4j.apis.jcl
+	org.slf4j.bridge.jul
+	org.slf4j.apis.log4j
+	org.slf4j.binding.log4j12
 	ch.qos.logback.classic [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
 	ch.qos.logback.core [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
 	ch.qos.logback.slf4j [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
 	// persistence - contains org.osgi.service.[jndi|jdbc] req for gemini.jpa
-	osgi.enterprise
+	// TODO osgi.enterprise
 	// for org.apache.commons-dbcp
-	javax.transaction [1.1.1,1.2.0)
+	// TODO javax.transaction [1.1.1,1.2.0)
 	// Accessing, manipulating, and outputting XML data from Java code
-	org.jdom [1.1.1,2.0.0)
+	org.jdom2
 	// Apache POI - Java API To Access Microsoft Format Files
 	org.apache.poi [4.1.1,4.2.0)
 	org.apache.poi.ooxml [4.1.1,4.2.0)
 	org.apache.poi.ooxml.schemas [4.1.1,4.2.0)
 	org.apache.xmlbeans [3.1.0,3.2.0)
+	// dependencies for mylyn wikitext
+	com.google.guava [27.1.0.v20190517-1946,27.1.0.v20190517-1946]
 	//
-	javax.xml.ws [2.1.0.v200902101523,2.1.0.v200902101523]
+	// TODO	javax.xml.ws [2.1.0.v200902101523,2.1.0.v200902101523]
 	// Testing
 	org.mockito [2.23.0,3.0.0)
 }
@@ -106,7 +108,7 @@ location "https://download.medelexis.ch/p2/chromium-swt-ee/" {
 }
 
 // i18n
-location "https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.2/2021-09/" {
+location "https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.2/2021-12/" {
 	org.eclipse.swt.nl_de
 	org.eclipse.swt.nl_fr
 	org.eclipse.swt.nl_it

@@ -52,8 +52,6 @@
 						<_exportcontents>
 							javax.jws,
 							javax.jws.*,
-							javax.xml.ws,
-							javax.xml.ws.*,
 							javax.xml.soap,
 							!*
 						</_exportcontents>
@@ -67,7 +65,9 @@
 							javax.xml.bind.annotation.adapters,
 							javax.xml.bind.util,
 							javax.xml.bind.attachment,
-							javax.xml.bind.helpers
+							javax.xml.bind.helpers,
+							javax.xml.ws,
+							javax.xml.ws.*
 						</Import-Package>
 						<Bundle-RequiredExecutionEnvironment>JavaSE-11</Bundle-RequiredExecutionEnvironment>
 						<Embed-Dependency>*;scope=compile|runtime;inline=true</Embed-Dependency>
@@ -139,7 +139,12 @@
 					<groupId>jakarta.xml.bind</groupId>
 					<artifactId>jakarta.xml.bind-api</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>jakarta.xml.ws</groupId>
+					<artifactId>jakarta.xml.ws-api</artifactId>
+				</exclusion>
 			</exclusions>
+			
 		</dependency>
 		<dependency>
 			<groupId>com.sun.org.apache.xml.internal</groupId>

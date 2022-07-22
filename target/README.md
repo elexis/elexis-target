@@ -28,18 +28,18 @@ the local development environment, and finally uploaded to the server for public
 
 * Update `pom.xml` base values like `target-name` etc to reflect the changes
 
-### p2 repo: Eclipse P2 artifacts
+### p2 repo: Eclipse P2 artifacts (`eclipse-p2`)
 
 * Modify `elexis.tpd`, than use Eclipse to build `elexis.target` out of it
 * Generate `target2p2mirror.xml ` by running `ant/elexis-target target2p2mirror.xml.launch`
 * Run `mvn tycho-eclipserun:eclipse-run` to build eclipse target derived p2 site into `target/$target-name/eclipse-p2` 
 
-### p2 repo: Maven based artifacts
+### p2 repo: Maven based artifacts (`maven-p2`)
 
 * Update the requirements in `pom.xml`
 * Run `mvn p2:site -U` to build maven derived p2 site into `target/$target-name/maven-p2`
 
-#### p2 repo: Local artifacts
+#### p2 repo: Local artifacts (`elexis-p2`)
 
 In order to add local bundles to the target, perform the following steps:
 

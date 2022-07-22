@@ -162,6 +162,11 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
+									<id>org.apache.commons:commons-text:1.9</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
 									<id>org.apache.commons:commons-exec:1.3</id>
 									<transitive>false</transitive>
 									<source>true</source>
@@ -201,6 +206,11 @@
 							<artifacts>
 								<artifact>
 									<id>org.eclipse.jetty:jetty-io:${jetty.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.jetty:jetty-client:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
@@ -270,12 +280,47 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
+									<id>org.eclipse.jetty:jetty-alpn-client:${jetty.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.jetty:jetty-alpn-java-client:${jetty.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.jetty.http2:http2-client:${jetty.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.jetty.http2:http2-common:${jetty.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.jetty.http2:http2-hpack:${jetty.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.jetty.http2:http2-http-client-transport:${jetty.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
 									<id>org.eclipse.jetty.osgi:jetty-osgi-boot:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
 									<id>org.eclipse.jetty.osgi:jetty-httpservice:${jetty.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.jetty.osgi:jetty-osgi-alpn:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>

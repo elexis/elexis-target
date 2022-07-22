@@ -9,6 +9,7 @@
 	<properties>
 		<swagger.version>1.5.24</swagger.version>
 		<jersey.version>2.24.1</jersey.version>
+		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 	</properties>
 
 	<build>
@@ -39,14 +40,12 @@
 				<configuration>
 					<instructions>
 						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-						<Bundle-Version>${project.version}</Bundle-Version>
+						<Bundle-Version>${project.version}.${maven.build.timestamp}</Bundle-Version>
 						<Bundle-Vendor>MEDEVIT</Bundle-Vendor>
 						<_exportcontents>
-							io.swagger.*,
-							com.fasterxml.jackson.*;version="2.9.10"
+							io.swagger.*
 						</_exportcontents>
 						<Import-Package>
-							!com.fasterxml.jackson.*,
 							!io.swagger.*,
 							!org.dom4j.*,
 							!org.joda.*,
@@ -112,6 +111,7 @@
 			</plugin>
 
 		</plugins>
+		<finalName>${project.artifactId}-${project.version}.v${maven.build.timestamp}</finalName>
 	</build>
 
 	<dependencies>
@@ -148,6 +148,42 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>21.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.10</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.10</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.9.10</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<version>2.9.10</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>1.29</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.21.0-GA</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

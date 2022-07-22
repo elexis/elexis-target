@@ -46,6 +46,7 @@
 				<version>4.2.1</version>
 				<extensions>true</extensions>
 				<configuration>
+					<finalName>${project.artifactId}-${project.version}.v${maven.build.timestamp}</finalName>
 					<instructions>
 						<Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}.v${maven.build.timestamp}</Bundle-Version>
@@ -54,22 +55,22 @@
 							ca.uhn.fhir.*,
 							org.hl7.fhir.*
 						</_exportcontents>
-						<!--  https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-base/5.4.2 -->
+						<!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-base/5.4.2 -->
 						<Import-Package>
 							!ca.uhn.fhir.*,
 							!org.hl7.fhir.*,
-							!com.helger.*, <!--  optional -->
-							!com.google.appengine.api,  <!--  ? -->
-							!com.google.apphosting.api,  <!--  ? -->
-							!com.github.*, <!--  ? -->
-							!org.commonmark.*, <!--  ? -->
-							!com.ctc.wstx.stax, <!--  ? -->
-							!org.codehaus.stax2.io, <!--  ? -->
-							!org.oclc.purl.dsdl.svrl, <!--  ? -->
-							!org.stringtemplate.v4, <!--  ? -->
-							!org.hamcrest, <!--  ? -->
-							!org.hamcrest.core, <!--  ? -->
-							!reactor.*, <!--  ? -->
+							!com.helger.*, <!-- optional -->
+							!com.google.appengine.api,  <!-- ? -->
+							!com.google.apphosting.api,  <!-- ? -->
+							!com.github.*, <!-- ? -->
+							!org.commonmark.*, <!-- ? -->
+							!com.ctc.wstx.stax, <!-- ? -->
+							!org.codehaus.stax2.io, <!-- ? -->
+							!org.oclc.purl.dsdl.svrl, <!-- ? -->
+							!org.stringtemplate.v4, <!-- ? -->
+							!org.hamcrest, <!-- ? -->
+							!org.hamcrest.core, <!-- ? -->
+							!reactor.*, <!-- ? -->
 							!android.os,
 							!com.codahale.metrics,
 							!com.google.appengine.api.utils,
@@ -134,13 +135,17 @@
 							!org.xmlpull.v1,
 							!rx,
 							!rx.functions,
+							!org.apache.tools.ant.*,
+							!org.apache.xml.resolver,
+							!org.apache.xml.resolver.*,
 							!org.eclipse.jetty.client.api,
-							org.springframework.*;resolution:=optional, <!--  https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-server/5.4.2 -->
-							org.fhir.ucum;resolution:=optional, <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-structures-dstu3/5.4.2 -->
+							!org.eclipse.jetty.*,
+							!org.springframework.*, <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-server/5.4.2 -->
+							!org.fhir.ucum, <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-structures-dstu3/5.4.2 -->
+							!org.apache.jena.*,
+							!org.thymeleaf.*,
 							org.apache.commons.compress.*;resolution:=optional, <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/org.hl7.fhir.utilities/5.4.2 -->
 							net.sf.saxon;resolution:=optional, <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/org.hl7.fhir.utilities/5.4.2 -->
-							org.apache.jena.*;resolution:=optional,
-							org.thymeleaf.*;resolution:=optional,
 							*
 						</Import-Package>
 						<Bundle-RequiredExecutionEnvironment>JavaSE-11</Bundle-RequiredExecutionEnvironment>
@@ -166,21 +171,14 @@
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>3.2.4</version>
 				<configuration>
-				<finalName>shaded-DO-NOT-USE</finalName>
+					<finalName>${project.artifactId}-${project.version}.v${maven.build.timestamp}</finalName>
 					<createSourcesJar>true</createSourcesJar>
 					<transformers>
 						<transformer
 							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 							<manifestEntries>
 								<Bundle-SymbolicName>${project.groupId}.${project.artifactId}.source</Bundle-SymbolicName>
-								<Eclipse-SourceBundle>${project.groupId}.${project.artifactId};version="${project.version}"</Eclipse-SourceBundle>
-								<Export-Package></Export-Package>
-								<Import-Package></Import-Package>
-								<Bundle-ClassPath></Bundle-ClassPath>
-								<Embedded-Artifacts></Embedded-Artifacts>
-								<Embed-Directory></Embed-Directory>
-								<Ignore-Package></Ignore-Package>
-								<Embed-Dependency></Embed-Dependency>
+								<Eclipse-SourceBundle>${project.groupId}.${project.artifactId};version="${project.version}.v${maven.build.timestamp}";roots:="."</Eclipse-SourceBundle>
 							</manifestEntries>
 						</transformer>
 					</transformers>
@@ -196,13 +194,18 @@
 			</plugin>
 
 		</plugins>
-<!-- 		<finalName>${project.artifactId}_${project.version}.v${maven.build.timestamp}</finalName> -->
+
 	</build>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
 			<artifactId>hapi-fhir-server</artifactId>
+			<version>${hapi.fhir.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-converter</artifactId>
 			<version>${hapi.fhir.version}</version>
 		</dependency>
 		<dependency>
@@ -217,7 +220,17 @@
 		</dependency>
 		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-validation-resources-dstu3</artifactId>
+			<version>${hapi.fhir.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
 			<artifactId>hapi-fhir-structures-r4</artifactId>
+			<version>${hapi.fhir.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ca.uhn.hapi.fhir</groupId>
+			<artifactId>hapi-fhir-validation-resources-r4</artifactId>
 			<version>${hapi.fhir.version}</version>
 		</dependency>
 		<dependency>
@@ -234,9 +247,9 @@
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
- 			 <artifactId>commons-codec</artifactId>
- 			 <version>1.1</version>
- 			 <scope>provided</scope>
+			<artifactId>commons-codec</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

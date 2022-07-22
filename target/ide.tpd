@@ -23,6 +23,9 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	
 	// logging
 	org.slf4j.api
+	// java.util.logging -> slf4j
+	org.slf4j.jul
+	org.slf4j.jcl
 	ch.qos.logback.classic
 	ch.qos.logback.core
 	ch.qos.logback.slf4j
@@ -36,6 +39,7 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 //	org.glassfish.jaxb.runtime
 	com.sun.xml.bind.jaxb-osgi
 	// javax.xml // -> bites with JDK java.xml
+	jakarta.xml.bind-api
 	
 	// persistence
 	com.h2database
@@ -56,6 +60,8 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	
 	bcprov
 	
+	// jackson
+	info.elexis.target.jackson.feature.group lazy
 	// hapi
 	info.elexis.target.hapi.fhir lazy
 	// jaxws
@@ -64,7 +70,25 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	info.elexis.target.ehealth.connector.ch lazy
 	// swagger
 	info.elexis.target.swagger.all lazy
-	
+	// apache commons
+	info.elexis.target.commons.feature.group lazy
+	// jax ws-rs
+	info.elexis.target.jaxwsrs.core.feature.group lazy
+	// shiro
+	info.elexis.target.apache.shiro.feature.group lazy
+	org.apache.shiro.web lazy // missing in feature, custom
+	// keycloak
+	info.elexis.target.keycloak.feature.group lazy
+	// Require-Capability: osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)"
+	org.apache.aries.spifly.dynamic.bundle
+	org.objectweb.asm
+	org.objectweb.asm.commons
+	org.objectweb.asm.tree
+	org.objectweb.asm.tree.analysis
+	org.objectweb.asm.util
+	org.jboss.logging.jboss-logging
+
+
 	org.jdom
 	com.google.gson
 	com.google.guava
@@ -87,13 +111,6 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	org.jfree.swtgraphics2d
 	xerces.Impl
 	
-	info.elexis.target.commons.feature.group lazy
-	// jax ws-rs
-	info.elexis.target.jaxwsrs.core.feature.group lazy
-	// shiro
-	info.elexis.target.apache.shiro.feature.group lazy
-	org.apache.shiro.web lazy // missing in feature, custom
-	
 	// ch.medelexis.openoffice
 	ag.ion.bion.workbench.office.editor.core
 	ag.ion.noa
@@ -103,6 +120,7 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	org.eclipse.nebula.cwt.feature.feature.group
 	org.eclipse.nebula.widgets.cdatetime.feature.feature.group
 	org.eclipse.nebula.widgets.tablecombo.feature.feature.group
+	org.eclipse.nebula.widgets.floatingtext.feature.feature.group
 	org.eclipse.nebula.widgets.nattable.core
 	org.eclipse.nebula.widgets.nattable.extension.glazedlists
 	ca.odell.glazedlists
@@ -129,7 +147,7 @@ location "https://download.elexis.info/elexis/target/2021-09-java11/" {
 	org.eclipse.pde.junit.runtime
 	
 	// translation
-	org.eclipse.swt.nl_de
+		org.eclipse.swt.nl_de
 	org.eclipse.swt.nl_fr
 	org.eclipse.swt.nl_it
 	org.eclipse.ui.workbench.nl_de

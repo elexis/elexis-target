@@ -1,2 +1,0 @@
-This is a copy of https://mvnrepository.com/artifact/org.apache.shiro/shiro-web/1.7.1 with
-modifications to relax version limitation on imported packages `javax.servlet` and `javax.servlet.http` to support version 4.

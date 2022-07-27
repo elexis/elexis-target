@@ -6,6 +6,9 @@
 	<artifactId>hapi.fhir</artifactId>
 	<version>5.4.2</version>
 
+
+<!--  nicht dstu2, nicht org/hl7/fhir/dstu2016may -->
+<!--  from ext org/apache/commons/collections4, rg/apache/commons/text -->
 	<properties>
 		<hapi.fhir.version>5.4.2</hapi.fhir.version>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
@@ -17,7 +20,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
 					<release>11</release>
 				</configuration>
@@ -26,7 +29,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.2.2</version>
 				<configuration>
 					<archive>
 						<index>false</index>
@@ -43,7 +46,7 @@
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
-				<version>4.2.1</version>
+				<version>5.1.7</version>
 				<extensions>true</extensions>
 				<configuration>
 					<finalName>${project.artifactId}-${project.version}.v${maven.build.timestamp}</finalName>
@@ -124,6 +127,8 @@
 							!javax.json.bind,
 							!javax.money,
 							!javax.money.format,
+							!javax.transaction,
+							!javax.transaction.*,
 							!net.sf.ehcache,
 							!net.sf.ehcache.*,
 							!okhttp3,
@@ -207,6 +212,16 @@
 			<groupId>ca.uhn.hapi.fhir</groupId>
 			<artifactId>hapi-fhir-converter</artifactId>
 			<version>${hapi.fhir.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>ca.uhn.hapi.fhir</groupId>
+					<artifactId>org.hl7.fhir.dstu2</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>ca.uhn.hapi.fhir</groupId>
+					<artifactId>org.hl7.fhir.dstu2016may</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>ca.uhn.hapi.fhir</groupId>
@@ -237,6 +252,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.9</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.4</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

@@ -23,6 +23,9 @@ location "https://download.eclipse.org/releases/2022-06/" {
 	org.eclipse.mylyn.wikitext_feature.feature.group
 	// dependencies for mylyn wikitext
 	org.jsoup
+	// required by p2 director
+	org.sat4j.core
+	org.sat4j.pb
 	// Jakarta XML Binding (JAXB)
 	// http://blog.vogella.com/2021/03/08/eclipse-rcp-java-11-jaxb/
 	// TODO Variant 2: jakarta.xml.bind-api fragment
@@ -88,6 +91,7 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202205311853
 	// TODO javax.transaction [1.1.1,1.2.0)
 	// Accessing, manipulating, and outputting XML data from Java code
 	org.jdom2
+	org.jaxen
 	// Apache POI - Java API To Access Microsoft Format Files
 	org.apache.poi [4.1.1,4.2.0)
 	org.apache.poi.ooxml [4.1.1,4.2.0)
@@ -99,6 +103,10 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202205311853
 	// TODO	javax.xml.ws [2.1.0.v200902101523,2.1.0.v200902101523]
 	// Testing
 	org.mockito [2.23.0,3.0.0)
+	// required by keycloak, solr, laborder ...
+	org.apache.httpcomponents.httpcore
+	org.apache.httpcomponents.httpclient
+	org.apache.httpcomponents.httpclient.win
 }
 
 // Chromium Browser - is this allowed??

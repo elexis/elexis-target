@@ -25,13 +25,6 @@
          unpack="false"/>
 
    <plugin
-         id="info.elexis.target.hapi.fhir"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="ag.ion.bion.workbench.office.editor.core"
          download-size="0"
          install-size="0"
@@ -185,7 +178,15 @@
          unpack="false"/>
 
    <plugin
-         id="org.apache.shiro.web"
+         id="jakarta.xml.bind-api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="info.elexis.target.hapi.fhir"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -199,11 +200,17 @@
          unpack="false"/>
 
    <plugin
-         id="jakarta.xml.bind-api"
+         id="org.apache.commons.commons-dbcp2"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.apache.geronimo.specs.geronimo-jta_1.1_spec"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

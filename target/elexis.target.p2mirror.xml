@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Download target platform" default="download.target.platform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    <target name="help">
-        <echo>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Download target platform" default="download.target.platform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<target name="help">
+		<echo>
 					Generated with useLatest =
 					false
 
@@ -23,143 +24,140 @@
 					-Ddebug=true -DfollowStrict=true
 					-DrepoDir=`pwd`/REPO/
 				</echo>
-    </target>
-    <target name="init" unless="repoDir">
-        <fail>Must set -DrepoDir=/abs/path/to/download/artifacts/</fail>
-    </target>
-    <target name="download.target.platform" depends="init" description="Download from target platform definition" if="repoDir">
-        <property name="verbose" value="false"/>
-        <property name="followStrict" value="true"/>
-        <echo level="info">Download features/plugins into ${repoDir}</echo>
-        <p2.mirror destination="file://${repoDir}" verbose="${verbose}">
-            <slicingOptions includeFeatures="true" followStrict="${followStrict}"/>
-            <source>
-                <repository location="https://download.eclipse.org/releases/2022-06/"/>
-                <repository location="https://download.eclipse.org/nattable/releases/2.0.2/repository/"/>
-                <repository location="https://download.eclipse.org/rt/eclipselink/updates/"/>
-                <repository location="https://download.elexis.info/elexis/target/gemini.jpa/"/>
-                <repository location="https://download.eclipse.org/nebula/releases/2.7.1/"/>
-                <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/"/>
-                <repository location="https://download.medelexis.ch/p2/chromium-swt-ee/"/>
-                <repository location="https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.2/2021-12/"/>
-            </source>
-            <iu id="a.jre.javase" version="17.0.0"/>
-            <iu id="org.eclipse.platform.feature.group" version="4.24.0.v20220607-0700"/>
-            <iu id="org.eclipse.platform.source.feature.group" version="4.24.0.v20220607-0700"/>
-            <iu id="org.eclipse.equinox.executable.feature.group" version="3.8.1700.v20220509-0833"/>
-            <iu id="org.eclipse.equinox.executable.source.feature.group" version="3.8.1700.v20220509-0833"/>
-            <iu id="org.eclipse.e4.rcp.feature.group" version="4.24.0.v20220530-1036"/>
-            <iu id="org.eclipse.e4.rcp.source.feature.group" version="4.24.0.v20220530-1036"/>
-            <iu id="org.eclipse.emf.common.feature.group" version="2.26.0.v20220325-0806"/>
-            <iu id="org.eclipse.emf.common.source.feature.group" version="2.26.0.v20220325-0806"/>
-            <iu id="org.eclipse.emf.ecore.feature.group" version="2.28.0.v20220426-0617"/>
-            <iu id="org.eclipse.emf.ecore.source.feature.group" version="2.28.0.v20220426-0617"/>
-            <iu id="org.eclipse.emf.databinding.feature.group" version="1.9.0.v20220516-1117"/>
-            <iu id="org.eclipse.emf.databinding.source.feature.group" version="1.9.0.v20220516-1117"/>
-            <iu id="org.eclipse.emf.edit.feature.group" version="2.18.0.v20220201-1551"/>
-            <iu id="org.eclipse.emf.edit.source.feature.group" version="2.18.0.v20220201-1551"/>
-            <iu id="org.eclipse.emf.common.ui.feature.group" version="2.19.0.v20220226-1304"/>
-            <iu id="org.eclipse.emf.common.ui.source.feature.group" version="2.19.0.v20220226-1304"/>
-            <iu id="org.eclipse.emf.edit.ui.feature.group" version="2.23.0.v20220226-1304"/>
-            <iu id="org.eclipse.emf.edit.ui.source.feature.group" version="2.23.0.v20220226-1304"/>
-            <iu id="org.eclipse.ecf.core.feature.feature.group" version="1.6.1.v20211005-1944"/>
-            <iu id="org.eclipse.ecf.core.feature.source.feature.group" version="1.6.1.v20211005-1944"/>
-            <iu id="org.eclipse.ecf.core.ssl.feature.feature.group" version="1.1.501.v20210409-2301"/>
-            <iu id="org.eclipse.ecf.core.ssl.feature.source.feature.group" version="1.1.501.v20210409-2301"/>
-            <iu id="org.eclipse.ecf.filetransfer.feature.feature.group" version="3.14.1800.v20220215-0126"/>
-            <iu id="org.eclipse.ecf.filetransfer.feature.source.feature.group" version="3.14.1800.v20220215-0126"/>
-            <iu id="org.eclipse.ecf.filetransfer.ssl.feature.feature.group" version="1.1.401.v20210409-2301"/>
-            <iu id="org.eclipse.ecf.filetransfer.ssl.feature.source.feature.group" version="1.1.401.v20210409-2301"/>
-            <iu id="org.eclipse.ecf.filetransfer.httpclient5.feature.feature.group" version="1.1.600.v20220215-0126"/>
-            <iu id="org.eclipse.ecf.filetransfer.httpclient5.feature.source.feature.group" version="1.1.600.v20220215-0126"/>
-            <iu id="org.eclipse.mylyn.wikitext_feature.feature.group" version="3.0.42.202201072301"/>
-            <iu id="org.eclipse.mylyn.wikitext_feature.source.feature.group" version="3.0.42.202201072301"/>
-            <iu id="org.jsoup" version="1.14.3.v20211012-1727"/>
-            <iu id="javax.activation" version="1.2.2.v20201119-1642"/>
-            <iu id="com.sun.xml.bind" version="2.3.3.v20201118-1818"/>
-            <iu id="javax.xml" version="1.3.4.v201005080400"/>
-            <iu id="org.junit" version="4.13.2.v20211018-1956"/>
-            <iu id="org.hamcrest.core" version="1.3.0.v20180420-1519"/>
-            <iu id="org.hamcrest.library" version="1.3.0.v20180524-2246"/>
-            <iu id="org.eclipse.jdt.junit.runtime" version="3.6.100.v20210708-1502"/>
-            <iu id="org.eclipse.jdt.junit4.runtime" version="1.2.0.v20210326-1251"/>
-            <iu id="org.eclipse.pde.junit.runtime" version="3.6.200.v20220523-1051"/>
-            <iu id="org.eclipse.nebula.widgets.nattable.core" version="2.0.2.202111300816"/>
-            <iu id="org.eclipse.nebula.widgets.nattable.extension.glazedlists" version="2.0.2.202111300816"/>
-            <iu id="org.eclipse.nebula.widgets.nattable.extension.e4" version="2.0.2.202111300816"/>
-            <iu id="org.eclipse.nebula.widgets.nattable.extension.nebula" version="2.0.2.202111300816"/>
-            <iu id="org.eclipse.nebula.widgets.richtext" version="1.4.0.202011020719"/>
-            <iu id="ca.odell.glazedlists" version="1.11.0.v20190926-1838"/>
-            <iu id="org.eclipse.collections" version="10.4.0.v20200820-2049"/>
-            <iu id="jakarta.persistence" version="2.2.3"/>
-            <iu id="org.eclipse.persistence.jpa.feature.group" version="2.7.10.v20211216-fe64cd39c3"/>
-            <iu id="org.eclipse.persistence.jpa.source.feature.group" version="2.7.10.v20211216-fe64cd39c3"/>
-            <iu id="org.eclipse.persistence.extension" version="2.7.10.v20211216-fe64cd39c3"/>
-            <iu id="org.eclipse.gemini.jpa.feature.feature.group" version="1.2.0.202105280757"/>
-            <iu id="org.eclipse.gemini.jpa.feature.source.feature.group" version="1.2.0.202105280757"/>
-            <iu id="org.eclipse.nebula.cwt.feature.feature.group" version="1.1.0.202207061644"/>
-            <iu id="org.eclipse.nebula.cwt.feature.source.feature.group" version="1.1.0.202207061644"/>
-            <iu id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="1.5.0.202207061644"/>
-            <iu id="org.eclipse.nebula.widgets.cdatetime.feature.source.feature.group" version="1.5.0.202207061644"/>
-            <iu id="org.eclipse.nebula.widgets.tablecombo.feature.feature.group" version="1.2.0.202207061644"/>
-            <iu id="org.eclipse.nebula.widgets.tablecombo.feature.source.feature.group" version="1.2.0.202207061644"/>
-            <iu id="org.eclipse.nebula.widgets.floatingtext.feature.feature.group" version="1.0.0.202207061644"/>
-            <iu id="org.eclipse.nebula.widgets.floatingtext.feature.source.feature.group" version="1.0.0.202207061644"/>
-            <iu id="org.slf4j.api" version="1.7.30.v20200204-2150"/>
-            <iu id="org.slf4j.apis.jcl" version="1.7.30.v20200204-2150"/>
-            <iu id="org.slf4j.bridge.jul" version="1.7.30.v20200204-2150"/>
-            <iu id="org.slf4j.apis.log4j" version="1.7.30.v20200204-2150"/>
-            <iu id="org.slf4j.binding.log4j12" version="1.7.30.v20201108-2042"/>
-            <iu id="ch.qos.logback.classic" version="1.2.3.v20200428-2012"/>
-            <iu id="ch.qos.logback.core" version="1.2.3.v20200428-2012"/>
-            <iu id="ch.qos.logback.slf4j" version="1.2.3.v20200428-2012"/>
-            <iu id="org.jdom2" version="2.0.6.v20191125-0928"/>
-            <iu id="org.apache.poi" version="4.1.1.v20200604-1524"/>
-            <iu id="org.apache.poi.ooxml" version="4.1.1.v20200820-1148"/>
-            <iu id="org.apache.poi.ooxml.schemas" version="4.1.1.v20200922-2105"/>
-            <iu id="org.apache.xmlbeans" version="3.1.0.v20200922-1359"/>
-            <iu id="com.google.guava" version="27.1.0.v20190517-1946"/>
-            <iu id="org.mockito" version="2.23.0.v20200310-1642"/>
-            <iu id="com.equo.chromium.feature.feature.group" version="88.0.6.202205201430"/>
-            <iu id="com.equo.chromium.feature.source.feature.group" version="88.0.6.202205201430"/>
-            <iu id="com.equo.chromium.cef.feature.feature.group" version="88.0.6.202205201415"/>
-            <iu id="com.equo.chromium.cef.feature.source.feature.group" version="88.0.6.202205201415"/>
-            <iu id="org.eclipse.swt.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.swt.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.swt.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.workbench.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.workbench.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.workbench.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.e4.ui.swt.gtk.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.e4.ui.swt.gtk.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.e4.ui.swt.gtk.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.e4.ui.workbench.renderers.swt.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.e4.ui.workbench.renderers.swt.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.e4.ui.workbench.renderers.swt.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.jface.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.jface.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.jface.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.browser.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.browser.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.browser.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.views.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.views.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.views.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.equinox.p2.ui.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.equinox.p2.ui.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.equinox.p2.ui.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.ui.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.platform.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.platform.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.platform.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.jdt.ui.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.jdt.ui.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.jdt.ui.nl_it" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.e4.ui.workbench.swt.nl_de" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.e4.ui.workbench.swt.nl_fr" version="4.22.0.v20211218020001"/>
-            <iu id="org.eclipse.e4.ui.workbench.swt.nl_it" version="4.22.0.v20211218020001"/>
-        </p2.mirror>
-    </target>
+	</target>
+	<target name="init" unless="repoDir">
+		<fail>Must set -DrepoDir=/abs/path/to/download/artifacts/</fail>
+	</target>
+	<target name="download.target.platform" depends="init" description="Download from target platform definition" if="repoDir">
+		<property name="verbose" value="false" />
+		<property name="followStrict" value="true" />
+		<echo level="info">Download features/plugins into ${repoDir}</echo>
+		<p2.mirror destination="file://${repoDir}" verbose="${verbose}">
+			<slicingOptions includeFeatures="true" followStrict="${followStrict}" />
+			<source>
+				<repository location="https://download.eclipse.org/releases/2022-06/" />
+				<repository location="https://download.eclipse.org/nattable/releases/2.0.2/repository/" />
+				<repository location="https://download.eclipse.org/rt/eclipselink/updates/" />
+				<repository location="https://download.elexis.info/elexis/target/gemini.jpa/" />
+				<repository location="https://download.eclipse.org/nebula/releases/2.7.1/" />
+				<repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/" />
+				<repository location="https://download.medelexis.ch/p2/chromium-swt-ee/" />
+				<repository location="https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.2/2021-12/" />
+			</source>
+			<iu id="a.jre.javase" version="17.0.0" />
+			<iu id="org.eclipse.platform.feature.group" version="4.24.0.v20220607-0700" />
+			<iu id="org.eclipse.platform.source.feature.group" version="4.24.0.v20220607-0700" />
+			<iu id="org.eclipse.equinox.executable.feature.group" version="3.8.1700.v20220509-0833" />
+			<iu id="org.eclipse.e4.rcp.feature.group" version="4.24.0.v20220530-1036" />
+			<iu id="org.eclipse.e4.rcp.source.feature.group" version="4.24.0.v20220530-1036" />
+			<iu id="org.eclipse.emf.common.feature.group" version="2.26.0.v20220325-0806" />
+			<iu id="org.eclipse.emf.common.source.feature.group" version="2.26.0.v20220325-0806" />
+			<iu id="org.eclipse.emf.ecore.feature.group" version="2.28.0.v20220426-0617" />
+			<iu id="org.eclipse.emf.ecore.source.feature.group" version="2.28.0.v20220426-0617" />
+			<iu id="org.eclipse.emf.databinding.feature.group" version="1.9.0.v20220516-1117" />
+			<iu id="org.eclipse.emf.databinding.source.feature.group" version="1.9.0.v20220516-1117" />
+			<iu id="org.eclipse.emf.edit.feature.group" version="2.18.0.v20220201-1551" />
+			<iu id="org.eclipse.emf.edit.source.feature.group" version="2.18.0.v20220201-1551" />
+			<iu id="org.eclipse.emf.common.ui.feature.group" version="2.19.0.v20220226-1304" />
+			<iu id="org.eclipse.emf.common.ui.source.feature.group" version="2.19.0.v20220226-1304" />
+			<iu id="org.eclipse.emf.edit.ui.feature.group" version="2.23.0.v20220226-1304" />
+			<iu id="org.eclipse.emf.edit.ui.source.feature.group" version="2.23.0.v20220226-1304" />
+			<iu id="org.eclipse.ecf.core.feature.feature.group" version="1.6.1.v20211005-1944" />
+			<iu id="org.eclipse.ecf.core.feature.source.feature.group" version="1.6.1.v20211005-1944" />
+			<iu id="org.eclipse.ecf.core.ssl.feature.feature.group" version="1.1.501.v20210409-2301" />
+			<iu id="org.eclipse.ecf.core.ssl.feature.source.feature.group" version="1.1.501.v20210409-2301" />
+			<iu id="org.eclipse.ecf.filetransfer.feature.feature.group" version="3.14.1800.v20220215-0126" />
+			<iu id="org.eclipse.ecf.filetransfer.feature.source.feature.group" version="3.14.1800.v20220215-0126" />
+			<iu id="org.eclipse.ecf.filetransfer.ssl.feature.feature.group" version="1.1.401.v20210409-2301" />
+			<iu id="org.eclipse.ecf.filetransfer.ssl.feature.source.feature.group" version="1.1.401.v20210409-2301" />
+			<iu id="org.eclipse.ecf.filetransfer.httpclient5.feature.feature.group" version="1.1.600.v20220215-0126" />
+			<iu id="org.eclipse.ecf.filetransfer.httpclient5.feature.source.feature.group" version="1.1.600.v20220215-0126" />
+			<iu id="org.eclipse.mylyn.wikitext_feature.feature.group" version="3.0.42.202201072301" />
+			<iu id="org.jsoup" version="1.14.3.v20211012-1727" />
+			<iu id="javax.activation" version="1.2.2.v20201119-1642" />
+			<iu id="com.sun.xml.bind" version="2.3.3.v20201118-1818" />
+			<iu id="javax.xml" version="1.3.4.v201005080400" />
+			<iu id="org.junit" version="4.13.2.v20211018-1956" />
+		    <iu id="org.sat4j.core" version="2.3.6.v20201214"/>
+		    <iu id="org.sat4j.pb" version="2.3.6.v20201214"/>
+			<iu id="org.hamcrest.core" version="1.3.0.v20180420-1519" />
+			<iu id="org.hamcrest.library" version="1.3.0.v20180524-2246" />
+			<iu id="org.eclipse.jdt.junit.runtime" version="3.6.100.v20210708-1502" />
+			<iu id="org.eclipse.jdt.junit4.runtime" version="1.2.0.v20210326-1251" />
+			<iu id="org.eclipse.pde.junit.runtime" version="3.6.200.v20220523-1051" />
+			<iu id="org.eclipse.nebula.widgets.nattable.core" version="2.0.2.202111300816" />
+			<iu id="org.eclipse.nebula.widgets.nattable.extension.glazedlists" version="2.0.2.202111300816" />
+			<iu id="org.eclipse.nebula.widgets.nattable.extension.e4" version="2.0.2.202111300816" />
+			<iu id="org.eclipse.nebula.widgets.nattable.extension.nebula" version="2.0.2.202111300816" />
+			<iu id="org.eclipse.nebula.widgets.richtext" version="1.4.0.202011020719" />
+			<iu id="ca.odell.glazedlists" version="1.11.0.v20190926-1838" />
+			<iu id="org.eclipse.collections" version="10.4.0.v20200820-2049" />
+			<iu id="jakarta.persistence" version="2.2.3" />
+			<iu id="org.eclipse.persistence.jpa.feature.group" version="2.7.10.v20211216-fe64cd39c3" />
+			<iu id="org.eclipse.persistence.extension" version="2.7.10.v20211216-fe64cd39c3" />
+			<iu id="org.eclipse.gemini.jpa.feature.feature.group" version="1.2.0.202105280757" />
+			<iu id="org.eclipse.nebula.cwt.feature.feature.group" version="1.1.0.202207061644" />
+			<iu id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="1.5.0.202207061644" />
+			<iu id="org.eclipse.nebula.widgets.tablecombo.feature.feature.group" version="1.2.0.202207061644" />
+			<iu id="org.eclipse.nebula.widgets.floatingtext.feature.feature.group" version="1.0.0.202207061644" />
+			<iu id="org.slf4j.api" version="1.7.30.v20200204-2150" />
+			<iu id="org.slf4j.apis.jcl" version="1.7.30.v20200204-2150" />
+			<iu id="org.slf4j.bridge.jul" version="1.7.30.v20200204-2150" />
+			<iu id="org.slf4j.apis.log4j" version="1.7.30.v20200204-2150" />
+			<iu id="org.slf4j.binding.log4j12" version="1.7.30.v20201108-2042" />
+			<iu id="ch.qos.logback.classic" version="1.2.3.v20200428-2012" />
+			<iu id="ch.qos.logback.core" version="1.2.3.v20200428-2012" />
+			<iu id="ch.qos.logback.slf4j" version="1.2.3.v20200428-2012" />
+			<iu id="org.jdom2" version="2.0.6.v20191125-0928" />
+			<iu id="org.jaxen" version="1.1.6.v20191106-1554"/>
+			<iu id="org.apache.poi" version="4.1.1.v20200604-1524" />
+			<iu id="org.apache.poi.ooxml" version="4.1.1.v20200820-1148" />
+			<iu id="org.apache.poi.ooxml.schemas" version="4.1.1.v20200922-2105" />
+			<iu id="org.apache.xmlbeans" version="3.1.0.v20200922-1359" />
+			<iu id="com.google.guava" version="27.1.0.v20190517-1946" />
+			<iu id="org.mockito" version="2.23.0.v20200310-1642" />
+		    <iu id="org.apache.httpcomponents.httpcore" version="4.4.15.v20220209-2345"/>
+		    <iu id="org.apache.httpcomponents.httpclient" version="4.5.13.v20210128-2225"/>
+		    <iu id="org.apache.httpcomponents.httpclient.win" version="4.5.13.v20211010-1849"/>
+			<iu id="com.equo.chromium.feature.feature.group" version="88.0.6.202205201430" />
+			<iu id="com.equo.chromium.feature.source.feature.group" version="88.0.6.202205201430" />
+			<iu id="com.equo.chromium.cef.feature.feature.group" version="88.0.6.202205201415" />
+			<iu id="org.eclipse.swt.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.swt.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.swt.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.workbench.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.workbench.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.workbench.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.e4.ui.swt.gtk.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.e4.ui.swt.gtk.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.e4.ui.swt.gtk.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.e4.ui.workbench.renderers.swt.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.e4.ui.workbench.renderers.swt.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.e4.ui.workbench.renderers.swt.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.jface.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.jface.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.jface.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.browser.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.browser.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.browser.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.views.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.views.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.views.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.equinox.p2.ui.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.equinox.p2.ui.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.equinox.p2.ui.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.ui.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.platform.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.platform.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.platform.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.jdt.ui.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.jdt.ui.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.jdt.ui.nl_it" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.e4.ui.workbench.swt.nl_de" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.e4.ui.workbench.swt.nl_fr" version="4.22.0.v20211218020001" />
+			<iu id="org.eclipse.e4.ui.workbench.swt.nl_it" version="4.22.0.v20211218020001" />
+		</p2.mirror>
+	</target>
 </project>

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.elexis.target</groupId>
 	<artifactId>target</artifactId>
-	<version>21.9.0-SNAPSHOT</version>
+	<version>22.6.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -119,6 +119,16 @@
 							<id>org.jfree:swtgraphics2d:1.1.0</id>
 							<transitive>false</transitive>
 						</artifact>
+						<artifact>
+							<!-- required by gemini.jpa -->
+							<id>org.osgi:org.osgi.service.jdbc:1.0.1</id>
+							<transitive>false</transitive>
+						</artifact>
+						<artifact>
+							<!-- required by gemini.jpa -->
+							<id>org.osgi:org.osgi.service.jndi:1.0.1</id>
+							<transitive>false</transitive>
+						</artifact>
 					</artifacts>
 					<featureDefinitions>
 						<!--  =============================================  -->
@@ -181,17 +191,29 @@
 									<id>org.apache.commons:commons-compress:1.21</id>
 									<source>true</source>
 								</artifact>
+<!-- 								<artifact> -->
+<!-- 									dbcp2 and pool2 with javax.transaction.xa problem -->
+<!-- 									 https://issues.apache.org/jira/browse/KARAF-6715 -->
+<!-- 									<id>org.apache.commons:commons-dbcp2:2.9.0</id> -->
+<!-- 									<transitive>false</transitive> -->
+<!-- 									<source>true</source> -->
+<!-- 								</artifact> -->
 								<artifact>
-									<!-- dbcp2 and pool2 with javax.transaction.xa problem -->
-									<id>commons-dbcp:commons-dbcp:1.4</id>
+									<id>org.apache.commons:commons-pool2:2.11.1</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>commons-pool:commons-pool:1.6</id>
+									<id>commons-logging:commons-logging:1.2</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
+<!-- 								<artifact> -->
+<!-- 									https://issues.apache.org/jira/browse/DBCP-571 -->
+<!-- 									<id>org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1</id> -->
+<!-- 									<transitive>false</transitive> -->
+<!-- 									<source>true</source> -->
+<!-- 								</artifact> -->
 							</artifacts>
 						</feature>
 						<!--  =============================================  -->
@@ -402,7 +424,7 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.yaml:snakeyaml:1.29</id>
+									<id>org.yaml:snakeyaml:1.30</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>

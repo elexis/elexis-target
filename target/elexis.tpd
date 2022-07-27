@@ -85,10 +85,6 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202205311853
 	ch.qos.logback.classic [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
 	ch.qos.logback.core [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
 	ch.qos.logback.slf4j [1.2.3.v20200428-2012,1.2.3.v20200428-2012]
-	// persistence - contains org.osgi.service.[jndi|jdbc] req for gemini.jpa
-	// TODO osgi.enterprise
-	// for org.apache.commons-dbcp
-	// TODO javax.transaction [1.1.1,1.2.0)
 	// Accessing, manipulating, and outputting XML data from Java code
 	org.jdom2
 	org.jaxen

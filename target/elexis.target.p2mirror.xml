@@ -114,7 +114,7 @@
 			<iu id="org.apache.poi.ooxml" version="4.1.1.v20200820-1148" />
 			<iu id="org.apache.poi.ooxml.schemas" version="4.1.1.v20200922-2105" />
 			<iu id="org.apache.xmlbeans" version="3.1.0.v20200922-1359" />
-			<iu id="com.google.guava" version="27.1.0.v20190517-1946" />
+			<iu id="com.google.guava" version="30.1.0.v20210127-2300" />
 			<iu id="org.mockito" version="2.23.0.v20200310-1642" />
 		    <iu id="org.apache.httpcomponents.httpcore" version="4.4.15.v20220209-2345"/>
 		    <iu id="org.apache.httpcomponents.httpclient" version="4.5.13.v20210128-2225"/>

@@ -94,7 +94,7 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202205311853
 	org.apache.poi.ooxml.schemas [4.1.1,4.2.0)
 	org.apache.xmlbeans [3.1.0,3.2.0)
 	// dependencies for mylyn wikitext
-	com.google.guava [27.1.0.v20190517-1946,27.1.0.v20190517-1946]
+	com.google.guava [30.1.0.v20210127-2300,30.1.0.v20210127-2300]
 	//
 	// TODO	javax.xml.ws [2.1.0.v200902101523,2.1.0.v200902101523]
 	// Testing

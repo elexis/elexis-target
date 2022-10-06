@@ -72,6 +72,11 @@
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
+							<!-- required by ebanking/artikelstamm/etc -->
+							<id>com.ibm.icu:icu4j:67.1</id>
+							<transitive>false</transitive>
+						</artifact>
+						<artifact>
 							<!-- Barcode encoding/decoding library -->
 							<id>com.google.zxing:core:3.4.1</id>
 							<transitive>false</transitive>
@@ -184,6 +189,10 @@
 								<artifact>
 									<!-- required by org.apache.poi -->
 									<id>org.apache.commons:commons-math3:3.6.1</id>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>commons-io:commons-io:2.11.0</id>
 									<source>true</source>
 								</artifact>
 								<artifact>

@@ -29,39 +29,39 @@
 		<fail>Must set -DrepoDir=/abs/path/to/download/artifacts/</fail>
 	</target>
 	<target name="download.target.platform" depends="init" description="Download from target platform definition" if="repoDir">
-		<property name="verbose" value="false" />
+		<property name="verbose" value="true" />
 		<property name="followStrict" value="true" />
 		<echo level="info">Download features/plugins into ${repoDir}</echo>
 		<p2.mirror destination="file://${repoDir}" verbose="${verbose}">
 			<slicingOptions includeFeatures="true" followStrict="${followStrict}" />
 			<source>
-				<repository location="https://download.eclipse.org/releases/2022-06/" />
+				<repository location="https://download.eclipse.org/releases/2022-09/" />
 				<repository location="https://download.eclipse.org/nattable/releases/2.0.3/repository/" />
 				<repository location="https://download.eclipse.org/rt/eclipselink/updates/" />
 				<repository location="https://download.elexis.info/elexis/target/gemini.jpa/" />
-				<repository location="https://download.eclipse.org/nebula/releases/2.7.1/" />
-				<repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/" />
+				<repository location="https://download.eclipse.org/nebula/releases/2.7.2/" />
+				<repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220830213456/repository/" />
 				<repository location="https://download.medelexis.ch/p2/chromium-swt-ee/" />
 				<repository location="https://ftp.fau.de/eclipse/technology/babel/update-site/R0.19.2/2021-12/" />
 			</source>
 			<iu id="a.jre.javase" version="17.0.0" />
-			<iu id="org.eclipse.platform.feature.group" version="4.24.0.v20220607-0700" />
-			<iu id="org.eclipse.platform.source.feature.group" version="4.24.0.v20220607-0700" />
-			<iu id="org.eclipse.equinox.executable.feature.group" version="3.8.1700.v20220509-0833" />
-			<iu id="org.eclipse.e4.rcp.feature.group" version="4.24.0.v20220530-1036" />
-			<iu id="org.eclipse.e4.rcp.source.feature.group" version="4.24.0.v20220530-1036" />
-			<iu id="org.eclipse.emf.common.feature.group" version="2.26.0.v20220325-0806" />
-			<iu id="org.eclipse.emf.common.source.feature.group" version="2.26.0.v20220325-0806" />
-			<iu id="org.eclipse.emf.ecore.feature.group" version="2.28.0.v20220426-0617" />
-			<iu id="org.eclipse.emf.ecore.source.feature.group" version="2.28.0.v20220426-0617" />
-			<iu id="org.eclipse.emf.databinding.feature.group" version="1.9.0.v20220516-1117" />
-			<iu id="org.eclipse.emf.databinding.source.feature.group" version="1.9.0.v20220516-1117" />
+			<iu id="org.eclipse.platform.feature.group" version="4.25.0.v20220831-1800" />
+			<iu id="org.eclipse.platform.source.feature.group" version="4.25.0.v20220831-1800" />
+			<iu id="org.eclipse.equinox.executable.feature.group" version="3.8.1800.v20220720-1949" />
+			<iu id="org.eclipse.e4.rcp.feature.group" version="4.25.0.v20220829-1402" />
+			<iu id="org.eclipse.e4.rcp.source.feature.group" version="4.25.0.v20220829-1402" />
+			<iu id="org.eclipse.emf.common.feature.group" version="2.27.0.v20220817-1401" />
+			<iu id="org.eclipse.emf.common.source.feature.group" version="2.27.0.v20220817-1401" />
+			<iu id="org.eclipse.emf.ecore.feature.group" version="2.29.0.v20220817-1401" />
+			<iu id="org.eclipse.emf.ecore.source.feature.group" version="2.29.0.v20220817-1401" />
+			<iu id="org.eclipse.emf.databinding.feature.group" version="1.9.0.v20220517-0824" />
+			<iu id="org.eclipse.emf.databinding.source.feature.group" version="1.9.0.v20220517-0824" />
 			<iu id="org.eclipse.emf.edit.feature.group" version="2.18.0.v20220201-1551" />
 			<iu id="org.eclipse.emf.edit.source.feature.group" version="2.18.0.v20220201-1551" />
 			<iu id="org.eclipse.emf.common.ui.feature.group" version="2.19.0.v20220226-1304" />
 			<iu id="org.eclipse.emf.common.ui.source.feature.group" version="2.19.0.v20220226-1304" />
-			<iu id="org.eclipse.emf.edit.ui.feature.group" version="2.23.0.v20220226-1304" />
-			<iu id="org.eclipse.emf.edit.ui.source.feature.group" version="2.23.0.v20220226-1304" />
+			<iu id="org.eclipse.emf.edit.ui.feature.group" version="2.24.0.v20220619-0533" />
+			<iu id="org.eclipse.emf.edit.ui.source.feature.group" version="2.24.0.v20220619-0533" />
 			<iu id="org.eclipse.ecf.core.feature.feature.group" version="1.6.1.v20211005-1944" />
 			<iu id="org.eclipse.ecf.core.feature.source.feature.group" version="1.6.1.v20211005-1944" />
 			<iu id="org.eclipse.ecf.core.ssl.feature.feature.group" version="1.1.501.v20210409-2301" />
@@ -82,8 +82,8 @@
 		    <iu id="org.sat4j.pb" version="2.3.6.v20201214"/>
 			<iu id="org.hamcrest.core" version="1.3.0.v20180420-1519" />
 			<iu id="org.hamcrest.library" version="1.3.0.v20180524-2246" />
-			<iu id="org.eclipse.jdt.junit.runtime" version="3.6.100.v20210708-1502" />
-			<iu id="org.eclipse.jdt.junit4.runtime" version="1.2.0.v20210326-1251" />
+			<iu id="org.eclipse.jdt.junit.runtime" version="3.7.0.v20220609-1843" />
+			<iu id="org.eclipse.jdt.junit4.runtime" version="1.3.0.v20220609-1843" />
 			<iu id="org.eclipse.pde.junit.runtime" version="3.6.200.v20220523-1051" />
 			<iu id="org.eclipse.nebula.widgets.nattable.core" version="2.0.3.202208090440" />
 			<iu id="org.eclipse.nebula.widgets.nattable.core.source" version="2.0.3.202208090440" />
@@ -102,10 +102,10 @@
 			<iu id="org.eclipse.persistence.jpa.feature.group" version="2.7.10.v20211216-fe64cd39c3" />
 			<iu id="org.eclipse.persistence.extension" version="2.7.10.v20211216-fe64cd39c3" />
 			<iu id="org.eclipse.gemini.jpa.feature.feature.group" version="1.2.0.202105280757" />
-			<iu id="org.eclipse.nebula.cwt.feature.feature.group" version="1.1.0.202207061644" />
-			<iu id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="1.5.0.202207061644" />
-			<iu id="org.eclipse.nebula.widgets.tablecombo.feature.feature.group" version="1.2.0.202207061644" />
-			<iu id="org.eclipse.nebula.widgets.floatingtext.feature.feature.group" version="1.0.0.202207061644" />
+			<iu id="org.eclipse.nebula.cwt.feature.feature.group" version="1.1.0.202208171809" />
+			<iu id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="1.5.0.202208171809" />
+			<iu id="org.eclipse.nebula.widgets.tablecombo.feature.feature.group" version="1.2.0.202208171809" />
+			<iu id="org.eclipse.nebula.widgets.floatingtext.feature.feature.group" version="1.0.0.202208171809" />
 			<iu id="org.slf4j.api" version="1.7.30.v20200204-2150" />
 			<iu id="org.slf4j.apis.jcl" version="1.7.30.v20200204-2150" />
 			<iu id="org.slf4j.bridge.jul" version="1.7.30.v20200204-2150" />

@@ -4,20 +4,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.elexis.target</groupId>
 	<artifactId>target</artifactId>
-	<version>22.6.0-SNAPSHOT</version>
+	<version>22.9.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<target-name>2022-06-java17</target-name>
-		<platform-version-name>2022-06</platform-version-name>
-		<tycho-version>2.7.4</tycho-version>
-		<tycho-extras-version>2.7.4</tycho-extras-version>
+		<target-name>2022-09-java17</target-name>
+		<platform-version-name>2022-09</platform-version-name>
+		<tycho-version>2.7.5</tycho-version>
+		<tycho-extras-version>2.7.5</tycho-extras-version>
 		<p2-maven-plugin-version>2.0.0</p2-maven-plugin-version>
 		<maven-resources-version>3.2.0</maven-resources-version>
-		<jetty.version>10.0.9</jetty.version>
+		<jetty.version>10.0.11</jetty.version>
 		<jersey.version>2.36</jersey.version>
 		<jackson.version>2.13.3</jackson.version>
-		<keycloak.version>18.0.2</keycloak.version>
+		<keycloak.version>19.0.2</keycloak.version>
 	</properties>
 
 	<build>
@@ -537,6 +537,7 @@
 							<artifactId>org.eclipse.ant.core</artifactId>
 							<type>eclipse-plugin</type>
 						</dependency>
+						<!--  https://www.lorenzobettini.it/2015/01/creating-p2-composite-repositories-during-the-build/ equinox ds? -->
 					</dependencies>
 				</configuration>
 				<executions>

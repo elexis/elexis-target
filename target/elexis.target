@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Elexis" sequenceNumber="1664352515">
+<target name="Elexis" sequenceNumber="1665055292">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="a.jre.javase" version="17.0.0"/>
-      <unit id="org.eclipse.platform.feature.group" version="4.24.0.v20220607-0700"/>
-      <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.1700.v20220509-0833"/>
-      <unit id="org.eclipse.e4.rcp.feature.group" version="4.24.0.v20220530-1036"/>
-      <unit id="org.eclipse.emf.common.feature.group" version="2.26.0.v20220325-0806"/>
-      <unit id="org.eclipse.emf.ecore.feature.group" version="2.28.0.v20220426-0617"/>
-      <unit id="org.eclipse.emf.databinding.feature.group" version="1.9.0.v20220516-1117"/>
+      <unit id="org.eclipse.platform.feature.group" version="4.25.0.v20220831-1800"/>
+      <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.1800.v20220720-1949"/>
+      <unit id="org.eclipse.e4.rcp.feature.group" version="4.25.0.v20220829-1402"/>
+      <unit id="org.eclipse.emf.common.feature.group" version="2.27.0.v20220817-1401"/>
+      <unit id="org.eclipse.emf.ecore.feature.group" version="2.29.0.v20220817-1401"/>
+      <unit id="org.eclipse.emf.databinding.feature.group" version="1.9.0.v20220517-0824"/>
       <unit id="org.eclipse.emf.edit.feature.group" version="2.18.0.v20220201-1551"/>
       <unit id="org.eclipse.emf.common.ui.feature.group" version="2.19.0.v20220226-1304"/>
-      <unit id="org.eclipse.emf.edit.ui.feature.group" version="2.23.0.v20220226-1304"/>
+      <unit id="org.eclipse.emf.edit.ui.feature.group" version="2.24.0.v20220619-0533"/>
       <unit id="org.eclipse.ecf.core.feature.feature.group" version="1.6.1.v20211005-1944"/>
       <unit id="org.eclipse.ecf.core.ssl.feature.feature.group" version="1.1.501.v20210409-2301"/>
       <unit id="org.eclipse.ecf.filetransfer.feature.feature.group" version="3.14.1800.v20220215-0126"/>
@@ -29,10 +29,10 @@
       <unit id="org.junit" version="4.13.2.v20211018-1956"/>
       <unit id="org.hamcrest.core" version="1.3.0.v20180420-1519"/>
       <unit id="org.hamcrest.library" version="1.3.0.v20180524-2246"/>
-      <unit id="org.eclipse.jdt.junit.runtime" version="3.6.100.v20210708-1502"/>
-      <unit id="org.eclipse.jdt.junit4.runtime" version="1.2.0.v20210326-1251"/>
+      <unit id="org.eclipse.jdt.junit.runtime" version="3.7.0.v20220609-1843"/>
+      <unit id="org.eclipse.jdt.junit4.runtime" version="1.3.0.v20220609-1843"/>
       <unit id="org.eclipse.pde.junit.runtime" version="3.6.200.v20220523-1051"/>
-      <repository location="https://download.eclipse.org/releases/2022-06/"/>
+      <repository location="https://download.eclipse.org/releases/2022-09/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.nebula.widgets.nattable.core" version="2.0.3.202208090440"/>
@@ -55,11 +55,11 @@
       <repository location="https://download.elexis.info/elexis/target/gemini.jpa/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="org.eclipse.nebula.cwt.feature.feature.group" version="1.1.0.202207061644"/>
-      <unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="1.5.0.202207061644"/>
-      <unit id="org.eclipse.nebula.widgets.tablecombo.feature.feature.group" version="1.2.0.202207061644"/>
-      <unit id="org.eclipse.nebula.widgets.floatingtext.feature.feature.group" version="1.0.0.202207061644"/>
-      <repository location="https://download.eclipse.org/nebula/releases/2.7.1/"/>
+      <unit id="org.eclipse.nebula.cwt.feature.feature.group" version="1.1.0.202208171809"/>
+      <unit id="org.eclipse.nebula.widgets.cdatetime.feature.feature.group" version="1.5.0.202208171809"/>
+      <unit id="org.eclipse.nebula.widgets.tablecombo.feature.feature.group" version="1.2.0.202208171809"/>
+      <unit id="org.eclipse.nebula.widgets.floatingtext.feature.feature.group" version="1.0.0.202208171809"/>
+      <repository location="https://download.eclipse.org/nebula/releases/2.7.2/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.slf4j.api" version="1.7.30.v20200204-2150"/>
@@ -81,7 +81,7 @@
       <unit id="org.apache.httpcomponents.httpcore" version="4.4.15.v20220209-2345"/>
       <unit id="org.apache.httpcomponents.httpclient" version="4.5.13.v20210128-2225"/>
       <unit id="org.apache.httpcomponents.httpclient.win" version="4.5.13.v20211010-1849"/>
-      <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/"/>
+      <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20220830213456/repository/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="com.equo.chromium.feature.feature.group" version="88.0.6.202205201430"/>

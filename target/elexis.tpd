@@ -1,7 +1,7 @@
 target "Elexis" with source allEnvironments
 
 // Eclipse 4.24
-location "https://download.eclipse.org/releases/2022-06/" {
+location "https://download.eclipse.org/releases/2022-09/" {
 	// Specifies the expectation of the installation environment
 	// https://p2-dev.eclipse.narkive.com/SzdeAveT/p2-director-third-party-package-bombs-on-javax-crypto-package-dependency
 	a.jre.javase [17.0.0,18.0.0)
@@ -65,15 +65,15 @@ location "https://download.elexis.info/elexis/target/gemini.jpa/" {
 	org.eclipse.gemini.jpa.feature.feature.group
 }
 
-location "https://download.eclipse.org/nebula/releases/2.7.1/" {
+location "https://download.eclipse.org/nebula/releases/2.7.2/" {
 	org.eclipse.nebula.cwt.feature.feature.group
 	org.eclipse.nebula.widgets.cdatetime.feature.feature.group
 	org.eclipse.nebula.widgets.tablecombo.feature.feature.group
 	org.eclipse.nebula.widgets.floatingtext.feature.feature.group
 }
 
-// R20220531185310 	Tue, 31 May 2022 -- 18:53 (UTC) 	2022-06
-location "https://download.eclipse.org/tools/orbit/downloads/drops/R20220531185310/repository/" {
+// R20220830213456 	Tue, 30 Aug 2022 -- 21:34 (UTC) 	2022-09
+location "https://download.eclipse.org/tools/orbit/downloads/drops/R20220830213456/repository/" {
 	// logging
 	org.slf4j.api [1.7.30.v20200204-2150,1.7.30.v20200204-2150]
 	

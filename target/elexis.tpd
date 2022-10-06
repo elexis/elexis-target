@@ -21,6 +21,9 @@ location "https://download.eclipse.org/releases/2022-09/" {
 	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
 	org.eclipse.ecf.filetransfer.httpclient5.feature.feature.group
 	org.eclipse.mylyn.wikitext_feature.feature.group
+	// deliberately manually added missing 
+	// went in after release again https://github.com/eclipse-platform/eclipse.platform.ui/commit/929d163f7a7d8a772ff949ce2531a0fb9c118060
+	org.eclipse.e4.ui.progress
 	// dependencies for mylyn wikitext
 	org.jsoup
 	// required by p2 director

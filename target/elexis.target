@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Elexis" sequenceNumber="1665055292">
+<target name="Elexis" sequenceNumber="1665064345">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="a.jre.javase" version="17.0.0"/>
@@ -20,6 +20,7 @@
       <unit id="org.eclipse.ecf.filetransfer.ssl.feature.feature.group" version="1.1.401.v20210409-2301"/>
       <unit id="org.eclipse.ecf.filetransfer.httpclient5.feature.feature.group" version="1.1.600.v20220215-0126"/>
       <unit id="org.eclipse.mylyn.wikitext_feature.feature.group" version="3.0.42.202201072301"/>
+      <unit id="org.eclipse.e4.ui.progress" version="0.3.500.v20220717-1456"/>
       <unit id="org.jsoup" version="1.14.3.v20211012-1727"/>
       <unit id="org.sat4j.core" version="2.3.6.v20201214"/>
       <unit id="org.sat4j.pb" version="2.3.6.v20201214"/>

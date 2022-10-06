@@ -73,6 +73,7 @@
 			<iu id="org.eclipse.ecf.filetransfer.httpclient5.feature.feature.group" version="1.1.600.v20220215-0126" />
 			<iu id="org.eclipse.ecf.filetransfer.httpclient5.feature.source.feature.group" version="1.1.600.v20220215-0126" />
 			<iu id="org.eclipse.mylyn.wikitext_feature.feature.group" version="3.0.42.202201072301" />
+			<iu id="org.eclipse.e4.ui.progress" version="0.3.500.v20220717-1456"/>
 			<iu id="org.jsoup" version="1.14.3.v20211012-1727" />
 			<iu id="javax.activation" version="1.2.2.v20201119-1642" />
 			<iu id="com.sun.xml.bind" version="2.3.3.v20201118-1818" />

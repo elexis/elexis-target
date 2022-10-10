@@ -10,6 +10,6 @@
 		<child location='elexis-p2' />
 		<child location='eclipse-p2' />
 		<child location='maven-p2' />
-		<child location='../justj.11' />
+		<child location='../justj.17' />
 	</children>
 </repository>

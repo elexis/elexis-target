@@ -10,7 +10,7 @@
 <!--  nicht dstu2, nicht org/hl7/fhir/dstu2016may -->
 <!--  from ext org/apache/commons/collections4, rg/apache/commons/text -->
 	<properties>
-		<hapi.fhir.version>5.4.2</hapi.fhir.version>
+		<hapi.fhir.version>5.5.0</hapi.fhir.version>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 	</properties>
 
@@ -179,8 +179,7 @@
 					<finalName>${project.artifactId}-${project.version}.v${maven.build.timestamp}</finalName>
 					<createSourcesJar>true</createSourcesJar>
 					<transformers>
-						<transformer
-							implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+						<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 							<manifestEntries>
 								<Bundle-SymbolicName>${project.groupId}.${project.artifactId}.source</Bundle-SymbolicName>
 								<Eclipse-SourceBundle>${project.groupId}.${project.artifactId};version="${project.version}.v${maven.build.timestamp}";roots:="."</Eclipse-SourceBundle>

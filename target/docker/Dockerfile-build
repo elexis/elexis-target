@@ -1,0 +1,15 @@
+FROM maven:3.8-eclipse-temurin-17-focal
+ENV LANG=de_CH.UTF-8 LANGUAGE=de_CH:de LC_ALL=de_CH.UTF-8
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libswt-gtk-4-jni dbus-x11 xvfb && \
+    echo "de_CH.UTF-8 UTF-8" >> /etc/locale.gen && \
+    locale-gen de_CH.UTF-8 && \ 
+    ln -fs /usr/share/zoneinfo/Europe/Zurich /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata && \
+    rm -rf /var/lib/apt/lists/* && \
+    chmod ugo+rwx /root/
+COPY pom.xml /tmp/pom.xml
+RUN mvn -B -f /tmp/pom.xml -s /usr/share/maven/ref/settings-docker.xml dependency:resolve
+# on docker host https://gist.github.com/heyfluke/b8372df866ec2584f9a51ca7d7fe9ebb
+#               https://docs.docker.com/engine/security/userns-remap/
+# map root to local user running this image

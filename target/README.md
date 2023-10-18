@@ -52,6 +52,39 @@ In order to add local bundles to the target, perform the following steps:
 * Run `mvn resources:copy-resources` to copy the p2 information files from `template/` to `target/$target-name/`.
 * Update `rsync.sh` to the current target location and run it.
 
+### Docker usage
+
+#### Docker host
+
+Only on x86_64 architecture
+
+In `docker/` a docker build image can be built. This can be used like `docker run -it --rm --init -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java17 xvfb-run mvn clean verify` 
+
+To keep the state `mkdir m2` then
+`docker run -it --rm  --init -v "$(pwd)":/usr/src/mymaven -v "$(pwd)/m2":/root/.m2 -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java17 xvfb-run mvn clean install`
+
+this will populate a local m2 repository. 
+
+#### Surefire Test Debugging
+
+If required to debug a failing test, start with (after keeping the state)
+
+`docker run -it --rm  --network host --init -v "$(pwd)":/usr/src/mymaven -v "$(pwd)/m2":/root/.m2 -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java17 xvfb-run mvn install -DdebugPort=8000 -rf :THE_TEST_PLUGIN`
+
+you can the connect Eclipse using remote debugging, and if you modify the tests `pom.xml` to include
+
+```
+<artifactId>tycho-surefire-plugin</artifactId>
+	<configuration>
+	  <systemProperties>
+		<osgi.console>7234</osgi.console>
+	  </systemProperties>
+          <dependencies>
+    </configureation>
+```
+
+the OSGI console will be available at port 7234
+
 ## Target Rules
 
 * Eclipse Release leads new target, versioning oriented on Eclipse Release

@@ -14,16 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.commons.dbcp2;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Duration;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
 
 import org.apache.commons.logging.Log;
@@ -57,7 +58,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
 
     private volatile String validationQuery;
 
-    private volatile int validationQueryTimeoutSeconds = -1;
+    private volatile Duration validationQueryTimeoutDuration = Duration.ofSeconds(-1);
 
     private Collection<String> connectionInitSqls;
 
@@ -89,11 +90,11 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
 
     private int maxOpenPreparedStatements = GenericKeyedObjectPoolConfig.DEFAULT_MAX_TOTAL_PER_KEY;
 
-    private long maxConnLifetimeMillis = -1;
+    private Duration maxConnDuration = Duration.ofMillis(-1);
 
     private final AtomicLong connectionIndex = new AtomicLong();
 
-    private Integer defaultQueryTimeoutSeconds;
+    private Duration defaultQueryTimeoutDuration;
 
     /**
      * Creates a new {@code PoolableConnectionFactory}.
@@ -109,7 +110,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
     }
 
     @Override
-    public void activateObject(final PooledObject<PoolableConnection> p) throws Exception {
+    public void activateObject(final PooledObject<PoolableConnection> p) throws SQLException {
 
         validateLifetime(p);
 
@@ -132,11 +133,11 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
         if (defaultSchema != null && !defaultSchema.equals(Jdbc41Bridge.getSchema(pConnection))) {
             Jdbc41Bridge.setSchema(pConnection, defaultSchema);
         }
-        pConnection.setDefaultQueryTimeout(defaultQueryTimeoutSeconds);
+        pConnection.setDefaultQueryTimeout(defaultQueryTimeoutDuration);
     }
 
     @Override
-    public void destroyObject(final PooledObject<PoolableConnection> p) throws Exception {
+    public void destroyObject(final PooledObject<PoolableConnection> p) throws SQLException {
         p.getObject().reallyClose();
     }
 
@@ -144,7 +145,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
      * @since 2.9.0
      */
     @Override
-    public void destroyObject(final PooledObject<PoolableConnection> p, final DestroyMode mode) throws Exception {
+    public void destroyObject(final PooledObject<PoolableConnection> p, final DestroyMode mode) throws SQLException {
         if (mode == DestroyMode.ABANDONED) {
             p.getObject().getInnermostDelegate().abort(Runnable::run);
         } else {
@@ -156,7 +157,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
      * Gets the cache state.
      *
      * @return The cache state.
-     * @since Made public in 2.6.0.
+     * @since 2.6.0.
      */
     public boolean getCacheState() {
         return cacheState;
@@ -166,7 +167,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
      * Gets the connection factory.
      *
      * @return The connection factory.
-     * @since Made public in 2.6.0.
+     * @since 2.6.0.
      */
     public ConnectionFactory getConnectionFactory() {
         return connectionFactory;
@@ -186,7 +187,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
 
     /**
      * @return The data source JMX ObjectName
-     * @since Made public in 2.6.0.
+     * @since 2.6.0.
      */
     public ObjectName getDataSourceJmxName() {
         return dataSourceJmxObjectName;
@@ -218,17 +219,31 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
 
     /**
      * @return Default query timeout in seconds.
+     * @deprecated Use {@link #getDefaultQueryTimeoutDuration()}.
      */
+    @Deprecated
     public Integer getDefaultQueryTimeout() {
-        return defaultQueryTimeoutSeconds;
+        return getDefaultQueryTimeoutSeconds();
+    }
+
+    /**
+     * Gets the default query timeout Duration.
+     *
+     * @return Default query timeout Duration.
+     * @since 2.10.0
+     */
+    public Duration getDefaultQueryTimeoutDuration() {
+        return defaultQueryTimeoutDuration;
     }
 
     /**
      * @return Default query timeout in seconds.
      * @since 2.6.0
+     * @deprecated Use {@link #getDefaultQueryTimeoutDuration()}.
      */
+    @Deprecated
     public Integer getDefaultQueryTimeoutSeconds() {
-        return defaultQueryTimeoutSeconds;
+        return defaultQueryTimeoutDuration == null ? null : (int) defaultQueryTimeoutDuration.getSeconds();
     }
 
     /**
@@ -258,7 +273,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
     /**
      * SQL_STATE codes considered to signal fatal conditions.
      * <p>
-     * Overrides the defaults in {@link Utils#DISCONNECTION_SQL_CODES} (plus anything starting with
+     * Overrides the defaults in {@link Utils#getDisconnectionSqlCodes()} (plus anything starting with
      * {@link Utils#DISCONNECTION_SQL_CODE_PREFIX}). If this property is non-null and {@link #isFastFailValidation()} is
      * {@code true}, whenever connections created by this factory generate exceptions with SQL_STATE codes in this list,
      * they will be marked as "fatally disconnected" and subsequent validations will fail fast (no attempt at isValid or
@@ -276,11 +291,23 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
     }
 
     /**
+     * Gets the Maximum connection duration.
+     *
+     * @return Maximum connection duration.
+     * @since 2.10.0
+     */
+    public Duration getMaxConnDuration() {
+        return maxConnDuration;
+    }
+
+    /**
+     * Gets the Maximum connection lifetime in milliseconds.
+     *
      * @return Maximum connection lifetime in milliseconds.
      * @since 2.6.0
      */
     public long getMaxConnLifetimeMillis() {
-        return maxConnLifetimeMillis;
+        return maxConnDuration.toMillis();
     }
 
     protected int getMaxOpenPreparedStatements() {
@@ -296,7 +323,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
     }
     /**
      * @return Whether to pool statements.
-     * @since Made public in 2.6.0.
+     * @since 2.6.0.
      */
     public boolean getPoolStatements() {
         return poolStatements;
@@ -310,11 +337,25 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
     }
 
     /**
+     * Gets the query timeout in seconds.
+     *
+     * @return Validation query timeout in seconds.
+     * @since 2.10.0
+     */
+    public Duration getValidationQueryTimeoutDuration() {
+        return validationQueryTimeoutDuration;
+    }
+
+    /**
+     * Gets the query timeout in seconds.
+     *
      * @return Validation query timeout in seconds.
      * @since 2.6.0
+     * @deprecated Use {@link #getValidationQueryTimeoutDuration()}.
      */
+    @Deprecated
     public int getValidationQueryTimeoutSeconds() {
-        return validationQueryTimeoutSeconds;
+        return (int) validationQueryTimeoutDuration.getSeconds();
     }
 
     protected void initializeConnection(final Connection conn) throws SQLException {
@@ -322,11 +363,10 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
         if (conn.isClosed()) {
             throw new SQLException("initializeConnection: connection closed");
         }
-        if (null != sqls) {
-            try (Statement stmt = conn.createStatement()) {
+        if (!Utils.isEmpty(sqls)) {
+            try (Statement statement = conn.createStatement()) {
                 for (final String sql : sqls) {
-                    Objects.requireNonNull(sql, "null connectionInitSqls element");
-                    stmt.execute(sql);
+                    statement.execute(Objects.requireNonNull(sql, "null connectionInitSqls element"));
                 }
             }
         }
@@ -370,18 +410,18 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
     }
 
     @Override
-    public PooledObject<PoolableConnection> makeObject() throws Exception {
+    public PooledObject<PoolableConnection> makeObject() throws SQLException {
         Connection conn = connectionFactory.createConnection();
         if (conn == null) {
             throw new IllegalStateException("Connection factory returned null from createConnection");
         }
         try {
             initializeConnection(conn);
-        } catch (final SQLException sqle) {
+        } catch (final SQLException e) {
             // Make sure the connection is closed
-            Utils.closeQuietly(conn);
+            Utils.closeQuietly((AutoCloseable) conn);
             // Rethrow original exception so it is visible to caller
-            throw sqle;
+            throw e;
         }
 
         final long connIndex = connectionIndex.getAndIncrement();
@@ -391,7 +431,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
             final GenericKeyedObjectPoolConfig<DelegatingPreparedStatement> config = new GenericKeyedObjectPoolConfig<>();
             config.setMaxTotalPerKey(-1);
             config.setBlockWhenExhausted(false);
-            config.setMaxWaitMillis(0);
+            config.setMaxWait(Duration.ZERO);
             config.setMaxIdlePerKey(1);
             config.setMaxTotal(maxOpenPreparedStatements);
             if (dataSourceJmxObjectName != null) {
@@ -404,8 +444,7 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
                 config.setJmxEnabled(false);
             }
             final PoolingConnection poolingConn = (PoolingConnection) conn;
-            final KeyedObjectPool<PStmtKey, DelegatingPreparedStatement> stmtPool = new GenericKeyedObjectPool<>(
-                    poolingConn, config);
+            final KeyedObjectPool<PStmtKey, DelegatingPreparedStatement> stmtPool = new GenericKeyedObjectPool<>(poolingConn, config);
             poolingConn.setStatementPool(stmtPool);
             poolingConn.setClearStatementPoolOnReturn(clearStatementPoolOnReturn);
             poolingConn.setCacheState(cacheState);
@@ -416,19 +455,23 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
         if (dataSourceJmxObjectName == null) {
             connJmxName = null;
         } else {
-            connJmxName = new ObjectName(
-                    dataSourceJmxObjectName.toString() + Constants.JMX_CONNECTION_BASE_EXT + connIndex);
+            final String name = dataSourceJmxObjectName.toString() + Constants.JMX_CONNECTION_BASE_EXT + connIndex;
+            try {
+                connJmxName = new ObjectName(name);
+            } catch (MalformedObjectNameException e) {
+                Utils.closeQuietly((AutoCloseable) conn);
+                throw new SQLException(name, e);
+            }
         }
 
-        final PoolableConnection pc = new PoolableConnection(conn, pool, connJmxName, disconnectionSqlCodes,
-                fastFailValidation);
+        final PoolableConnection pc = new PoolableConnection(conn, pool, connJmxName, disconnectionSqlCodes, fastFailValidation);
         pc.setCacheState(cacheState);
 
         return new DefaultPooledObject<>(pc);
     }
 
     @Override
-    public void passivateObject(final PooledObject<PoolableConnection> p) throws Exception {
+    public void passivateObject(final PooledObject<PoolableConnection> p) throws SQLException {
 
         validateLifetime(p);
 
@@ -506,8 +549,25 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
         this.defaultCatalog = defaultCatalog;
     }
 
+    /**
+     * Sets the query timeout Duration.
+     *
+     * @param defaultQueryTimeoutDuration the query timeout Duration.
+     * @since 2.10.0
+     */
+    public void setDefaultQueryTimeout(final Duration defaultQueryTimeoutDuration) {
+        this.defaultQueryTimeoutDuration = defaultQueryTimeoutDuration;
+    }
+
+    /**
+     * Sets the query timeout in seconds.
+     *
+     * @param defaultQueryTimeoutSeconds the query timeout in seconds.
+     * @deprecated Use {@link #setDefaultQueryTimeout(Duration)}.
+     */
+    @Deprecated
     public void setDefaultQueryTimeout(final Integer defaultQueryTimeoutSeconds) {
-        this.defaultQueryTimeoutSeconds = defaultQueryTimeoutSeconds;
+        this.defaultQueryTimeoutDuration = defaultQueryTimeoutSeconds == null ? null : Duration.ofSeconds(defaultQueryTimeoutSeconds);
     }
 
     /**
@@ -574,11 +634,25 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
      * Sets the maximum lifetime in milliseconds of a connection after which the connection will always fail activation,
      * passivation and validation. A value of zero or less indicates an infinite lifetime. The default value is -1.
      *
+     * @param maxConnDuration
+     *            The maximum lifetime in milliseconds.
+     * @since 2.10.0
+     */
+    public void setMaxConn(final Duration maxConnDuration) {
+        this.maxConnDuration = maxConnDuration;
+    }
+
+    /**
+     * Sets the maximum lifetime in milliseconds of a connection after which the connection will always fail activation,
+     * passivation and validation. A value of zero or less indicates an infinite lifetime. The default value is -1.
+     *
      * @param maxConnLifetimeMillis
      *            The maximum lifetime in milliseconds.
+     * @deprecated Use {@link #setMaxConn(Duration)}.
      */
+    @Deprecated
     public void setMaxConnLifetimeMillis(final long maxConnLifetimeMillis) {
-        this.maxConnLifetimeMillis = maxConnLifetimeMillis;
+        this.maxConnDuration = Duration.ofMillis(maxConnLifetimeMillis);
     }
 
     /**
@@ -636,38 +710,50 @@ public class PoolableConnectionFactory implements PooledObjectFactory<PoolableCo
     }
 
     /**
+     * Sets the validation query timeout, the amount of time, that connection validation will wait for a response from the
+     * database when executing a validation query. Use a value less than or equal to 0 for no timeout.
+     *
+     * @param validationQueryTimeoutDuration new validation query timeout duration.
+     * @since 2.10.0
+     */
+    public void setValidationQueryTimeout(final Duration validationQueryTimeoutDuration) {
+        this.validationQueryTimeoutDuration = validationQueryTimeoutDuration;
+    }
+
+    /**
      * Sets the validation query timeout, the amount of time, in seconds, that connection validation will wait for a
      * response from the database when executing a validation query. Use a value less than or equal to 0 for no timeout.
      *
      * @param validationQueryTimeoutSeconds
      *            new validation query timeout value in seconds
+     * @deprecated {@link #setValidationQueryTimeout(Duration)}.
      */
+    @Deprecated
     public void setValidationQueryTimeout(final int validationQueryTimeoutSeconds) {
-        this.validationQueryTimeoutSeconds = validationQueryTimeoutSeconds;
+        this.validationQueryTimeoutDuration = Duration.ofSeconds(validationQueryTimeoutSeconds);
     }
 
+    /**
+     * Validates the given connection if it is open.
+     *
+     * @param conn the connection to validate.
+     * @throws SQLException if the connection is closed or validate fails.
+     */
     public void validateConnection(final PoolableConnection conn) throws SQLException {
         if (conn.isClosed()) {
             throw new SQLException("validateConnection: connection closed");
         }
-        conn.validate(validationQuery, validationQueryTimeoutSeconds);
+        conn.validate(validationQuery, validationQueryTimeoutDuration);
     }
 
-    private void validateLifetime(final PooledObject<PoolableConnection> p) throws Exception {
-        if (maxConnLifetimeMillis > 0) {
-            final long lifetimeMillis = System.currentTimeMillis() - p.getCreateTime();
-            if (lifetimeMillis > maxConnLifetimeMillis) {
-                throw new LifetimeExceededException(Utils.getMessage("connectionFactory.lifetimeExceeded",
-                        lifetimeMillis, maxConnLifetimeMillis));
-            }
-        }
+    private void validateLifetime(final PooledObject<PoolableConnection> p) throws LifetimeExceededException {
+        Utils.validateLifetime(p, maxConnDuration);
     }
 
     @Override
     public boolean validateObject(final PooledObject<PoolableConnection> p) {
         try {
             validateLifetime(p);
-
             validateConnection(p.getObject());
             return true;
         } catch (final Exception e) {

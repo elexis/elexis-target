@@ -1,19 +1,18 @@
 /*
-
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.commons.dbcp2.managed;
 
@@ -69,8 +68,8 @@ public class TransactionContext {
      */
     public TransactionContext(final TransactionRegistry transactionRegistry, final Transaction transaction,
                               final TransactionSynchronizationRegistry transactionSynchronizationRegistry) {
-        Objects.requireNonNull(transactionRegistry, "transactionRegistry is null");
-        Objects.requireNonNull(transaction, "transaction is null");
+        Objects.requireNonNull(transactionRegistry, "transactionRegistry");
+        Objects.requireNonNull(transaction, "transaction");
         this.transactionRegistry = transactionRegistry;
         this.transactionRef = new WeakReference<>(transaction);
         this.transactionComplete = false;
@@ -89,19 +88,13 @@ public class TransactionContext {
         try {
             if (!isActive()) {
                 final Transaction transaction = this.transactionRef.get();
-                listener.afterCompletion(TransactionContext.this,
-                        transaction != null && transaction.getStatus() == Status.STATUS_COMMITTED);
+                listener.afterCompletion(this, transaction != null && transaction.getStatus() == Status.STATUS_COMMITTED);
                 return;
             }
-            final Synchronization s = new Synchronization() {
+            final Synchronization s = new SynchronizationAdapter() {
                 @Override
                 public void afterCompletion(final int status) {
                     listener.afterCompletion(TransactionContext.this, status == Status.STATUS_COMMITTED);
-                }
-
-                @Override
-                public void beforeCompletion() {
-                    // empty
                 }
             };
             if (transactionSynchronizationRegistry != null) {
@@ -109,7 +102,7 @@ public class TransactionContext {
             } else {
                 getTransaction().registerSynchronization(s);
             }
-        } catch (final RollbackException e) {
+        } catch (final RollbackException ignored) {
             // JTA spec doesn't let us register with a transaction marked rollback only
             // just ignore this and the tx state will be cleared another way.
         } catch (final Exception e) {
@@ -200,7 +193,7 @@ public class TransactionContext {
         } catch (final IllegalStateException e) {
             // This can happen if the transaction is already timed out
             throw new SQLException("Unable to enlist connection in the transaction", e);
-        } catch (final RollbackException e) {
+        } catch (final RollbackException ignored) {
             // transaction was rolled back... proceed as if there never was a transaction
         } catch (final SystemException e) {
             throw new SQLException("Unable to enlist connection the transaction", e);

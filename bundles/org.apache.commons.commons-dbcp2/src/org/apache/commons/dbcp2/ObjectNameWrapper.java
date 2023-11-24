@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.commons.dbcp2;
 
 import java.lang.management.ManagementFactory;
@@ -32,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @since 2.2.1
  */
-class ObjectNameWrapper {
+final class ObjectNameWrapper {
 
     private static final Log log = LogFactory.getLog(ObjectNameWrapper.class);
 

@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.commons.dbcp2.datasources;
 
 import java.io.IOException;
@@ -33,15 +32,15 @@ import org.apache.commons.pool2.impl.GenericKeyedObjectPoolConfig;
 
 /**
  * <p>
- * A pooling <code>DataSource</code> appropriate for deployment within J2EE environment. There are many configuration
+ * A pooling {@code DataSource} appropriate for deployment within J2EE environment. There are many configuration
  * options, most of which are defined in the parent class. All users (based on user name) share a single maximum number
  * of Connections in this data source.
  * </p>
  *
  * <p>
  * User passwords can be changed without re-initializing the data source. When a
- * <code>getConnection(user name, password)</code> request is processed with a password that is different from those
- * used to create connections in the pool associated with <code>user name</code>, an attempt is made to create a new
+ * {@code getConnection(user name, password)} request is processed with a password that is different from those
+ * used to create connections in the pool associated with {@code user name}, an attempt is made to create a new
  * connection using the supplied password and if this succeeds, idle connections created using the old password are
  * destroyed and new connections are created using the new password.
  * </p>
@@ -69,7 +68,7 @@ public class SharedPoolDataSource extends InstanceKeyDataSource {
      * Closes pool being maintained by this data source.
      */
     @Override
-    public void close() throws Exception {
+    public void close() throws SQLException {
         if (pool != null) {
             pool.close();
         }
@@ -146,7 +145,7 @@ public class SharedPoolDataSource extends InstanceKeyDataSource {
      * Supports Serialization interface.
      *
      * @param in
-     *            a <code>java.io.ObjectInputStream</code> value
+     *            a {@code java.io.ObjectInputStream} value
      * @throws IOException
      *             if an error occurs
      * @throws ClassNotFoundException
@@ -155,8 +154,7 @@ public class SharedPoolDataSource extends InstanceKeyDataSource {
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         try {
             in.defaultReadObject();
-            final SharedPoolDataSource oldDS = (SharedPoolDataSource) new SharedPoolDataSourceFactory()
-                    .getObjectInstance(getReference(), null, null, null);
+            final SharedPoolDataSource oldDS = (SharedPoolDataSource) new SharedPoolDataSourceFactory().getObjectInstance(getReference(), null, null, null);
             this.pool = oldDS.pool;
         } catch (final NamingException e) {
             throw new IOException("NamingException: " + e);
@@ -168,9 +166,8 @@ public class SharedPoolDataSource extends InstanceKeyDataSource {
         final ConnectionPoolDataSource cpds = testCPDS(userName, password);
 
         // Create an object pool to contain our PooledConnections
-        factory = new KeyedCPDSConnectionFactory(cpds, getValidationQuery(), getValidationQueryTimeout(),
-            isRollbackAfterValidation());
-        factory.setMaxConnLifetime(getMaxConnLifetime());
+        factory = new KeyedCPDSConnectionFactory(cpds, getValidationQuery(), getValidationQueryTimeoutDuration(), isRollbackAfterValidation());
+        factory.setMaxConn(getMaxConnDuration());
 
         final GenericKeyedObjectPoolConfig<PooledConnectionAndInfo> config = new GenericKeyedObjectPoolConfig<>();
         config.setBlockWhenExhausted(getDefaultBlockWhenExhausted());
@@ -179,19 +176,18 @@ public class SharedPoolDataSource extends InstanceKeyDataSource {
         config.setMaxIdlePerKey(getDefaultMaxIdle());
         config.setMaxTotal(getMaxTotal());
         config.setMaxTotalPerKey(getDefaultMaxTotal());
-        config.setMaxWaitMillis(getDefaultMaxWait().toMillis());
-        config.setMinEvictableIdleTimeMillis(getDefaultMinEvictableIdleTimeMillis());
+        config.setMaxWait(getDefaultMaxWait());
+        config.setMinEvictableIdleDuration(getDefaultMinEvictableIdleDuration());
         config.setMinIdlePerKey(getDefaultMinIdle());
         config.setNumTestsPerEvictionRun(getDefaultNumTestsPerEvictionRun());
-        config.setSoftMinEvictableIdleTimeMillis(getDefaultSoftMinEvictableIdleTimeMillis());
+        config.setSoftMinEvictableIdleDuration(getDefaultSoftMinEvictableIdleDuration());
         config.setTestOnCreate(getDefaultTestOnCreate());
         config.setTestOnBorrow(getDefaultTestOnBorrow());
         config.setTestOnReturn(getDefaultTestOnReturn());
         config.setTestWhileIdle(getDefaultTestWhileIdle());
-        config.setTimeBetweenEvictionRunsMillis(getDefaultTimeBetweenEvictionRunsMillis());
+        config.setTimeBetweenEvictionRuns(getDefaultDurationBetweenEvictionRuns());
 
-        final KeyedObjectPool<UserPassKey, PooledConnectionAndInfo> tmpPool = new GenericKeyedObjectPool<>(factory,
-            config);
+        final KeyedObjectPool<UserPassKey, PooledConnectionAndInfo> tmpPool = new GenericKeyedObjectPool<>(factory, config);
         factory.setPool(tmpPool);
         pool = tmpPool;
     }

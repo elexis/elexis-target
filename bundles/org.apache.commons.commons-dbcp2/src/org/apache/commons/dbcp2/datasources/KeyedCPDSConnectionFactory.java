@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.commons.dbcp2.datasources;
 
 import java.sql.Connection;
@@ -44,7 +43,7 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
  *
  * @since 2.0
  */
-class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey, PooledConnectionAndInfo>,
+final class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey, PooledConnectionAndInfo>,
         ConnectionEventListener, PooledConnectionManager {
 
     private static final String NO_KEY_MESSAGE = "close() was called on a Connection, but "
@@ -52,7 +51,7 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
 
     private final ConnectionPoolDataSource cpds;
     private final String validationQuery;
-    private final int validationQueryTimeoutSeconds;
+    private final Duration validationQueryTimeoutDuration;
     private final boolean rollbackAfterValidation;
     private KeyedObjectPool<UserPassKey, PooledConnectionAndInfo> pool;
     private Duration maxConnLifetime = Duration.ofMillis(-1);
@@ -68,7 +67,30 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
     private final Map<PooledConnection, PooledConnectionAndInfo> pcMap = new ConcurrentHashMap<>();
 
     /**
-     * Create a new {@code KeyedPoolableConnectionFactory}.
+     * Creates a new {@code KeyedPoolableConnectionFactory}.
+     *
+     * @param cpds
+     *            the ConnectionPoolDataSource from which to obtain PooledConnections
+     * @param validationQuery
+     *            a query to use to {@link #validateObject validate} {@link Connection}s. Should return at least one
+     *            row. May be {@code null} in which case3 {@link Connection#isValid(int)} will be used to validate
+     *            connections.
+     * @param validationQueryTimeoutSeconds
+     *            The Duration to allow for the validation query to complete
+     * @param rollbackAfterValidation
+     *            whether a rollback should be issued after {@link #validateObject validating} {@link Connection}s.
+     * @since 2.10.0
+     */
+    public KeyedCPDSConnectionFactory(final ConnectionPoolDataSource cpds, final String validationQuery,
+            final Duration validationQueryTimeoutSeconds, final boolean rollbackAfterValidation) {
+        this.cpds = cpds;
+        this.validationQuery = validationQuery;
+        this.validationQueryTimeoutDuration = validationQueryTimeoutSeconds;
+        this.rollbackAfterValidation = rollbackAfterValidation;
+    }
+
+    /**
+     * Creates a new {@code KeyedPoolableConnectionFactory}.
      *
      * @param cpds
      *            the ConnectionPoolDataSource from which to obtain PooledConnections
@@ -80,17 +102,16 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
      *            The time, in seconds, to allow for the validation query to complete
      * @param rollbackAfterValidation
      *            whether a rollback should be issued after {@link #validateObject validating} {@link Connection}s.
+     * @deprecated Use {@link #KeyedCPDSConnectionFactory(ConnectionPoolDataSource, String, Duration, boolean)}.
      */
+    @Deprecated
     public KeyedCPDSConnectionFactory(final ConnectionPoolDataSource cpds, final String validationQuery,
             final int validationQueryTimeoutSeconds, final boolean rollbackAfterValidation) {
-        this.cpds = cpds;
-        this.validationQuery = validationQuery;
-        this.validationQueryTimeoutSeconds = validationQueryTimeoutSeconds;
-        this.rollbackAfterValidation = rollbackAfterValidation;
+        this(cpds, validationQuery, Duration.ofSeconds(validationQueryTimeoutSeconds), rollbackAfterValidation);
     }
 
     @Override
-    public void activateObject(final UserPassKey key, final PooledObject<PooledConnectionAndInfo> p) throws Exception {
+    public void activateObject(final UserPassKey key, final PooledObject<PooledConnectionAndInfo> p) throws SQLException {
         validateLifetime(p);
     }
 
@@ -165,7 +186,7 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
      * Closes the PooledConnection and stops listening for events from it.
      */
     @Override
-    public void destroyObject(final UserPassKey key, final PooledObject<PooledConnectionAndInfo> p) throws Exception {
+    public void destroyObject(final UserPassKey key, final PooledObject<PooledConnectionAndInfo> p) throws SQLException {
         final PooledConnection pooledConnection = p.getObject().getPooledConnection();
         pooledConnection.removeConnectionEventListener(this);
         pcMap.remove(pooledConnection);
@@ -184,7 +205,7 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
     /**
      * Invalidates the PooledConnection in the pool. The KeyedCPDSConnectionFactory closes the connection and pool
      * counters are updated appropriately. Also clears any idle instances associated with the user name that was used to
-     * create the PooledConnection. Connections associated with this user are not affected and they will not be
+     * create the PooledConnection. Connections associated with this user are not affected, and they will not be
      * automatically closed on return to the pool.
      */
     @Override
@@ -202,10 +223,6 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
         }
     }
 
-    // ***********************************************************************
-    // java.sql.ConnectionEventListener implementation
-    // ***********************************************************************
-
     /**
      * Creates a new {@code PooledConnectionAndInfo} from the given {@code UserPassKey}.
      *
@@ -213,10 +230,10 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
      *            {@code UserPassKey} containing user credentials
      * @throws SQLException
      *             if the connection could not be created.
-     * @see org.apache.commons.pool2.KeyedPooledObjectFactory#makeObject(java.lang.Object)
+     * @see org.apache.commons.pool2.KeyedPooledObjectFactory#makeObject(Object)
      */
     @Override
-    public synchronized PooledObject<PooledConnectionAndInfo> makeObject(final UserPassKey userPassKey) throws Exception {
+    public synchronized PooledObject<PooledConnectionAndInfo> makeObject(final UserPassKey userPassKey) throws SQLException {
         PooledConnection pooledConnection = null;
         final String userName = userPassKey.getUserName();
         final String password = userPassKey.getPassword();
@@ -240,13 +257,21 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
     }
 
     @Override
-    public void passivateObject(final UserPassKey key, final PooledObject<PooledConnectionAndInfo> p) throws Exception {
+    public void passivateObject(final UserPassKey key, final PooledObject<PooledConnectionAndInfo> p) throws SQLException {
         validateLifetime(p);
     }
 
-    // ***********************************************************************
-    // PooledConnectionManager implementation
-    // ***********************************************************************
+    /**
+     * Sets the maximum lifetime of a connection after which the connection will always fail activation,
+     * passivation and validation.
+     *
+     * @param maxConnLifetimeMillis
+     *            A value of zero or less indicates an infinite lifetime. The default value is -1 milliseconds.
+     * @since 2.10.0
+     */
+    public void setMaxConn(final Duration maxConnLifetimeMillis) {
+        this.maxConnLifetime = maxConnLifetimeMillis;
+    }
 
     /**
      * Sets the maximum lifetime of a connection after which the connection will always fail activation,
@@ -255,7 +280,9 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
      * @param maxConnLifetimeMillis
      *            A value of zero or less indicates an infinite lifetime. The default value is -1 milliseconds.
      * @since 2.9.0
+     * @deprecated Use {@link #setMaxConn(Duration)}.
      */
+    @Deprecated
     public void setMaxConnLifetime(final Duration maxConnLifetimeMillis) {
         this.maxConnLifetime = maxConnLifetimeMillis;
     }
@@ -270,7 +297,7 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
      */
     @Deprecated
     public void setMaxConnLifetimeMillis(final long maxConnLifetimeMillis) {
-        setMaxConnLifetime(Duration.ofMillis(maxConnLifetimeMillis));
+        setMaxConn(Duration.ofMillis(maxConnLifetimeMillis));
     }
 
     /**
@@ -285,14 +312,8 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
         this.pool = pool;
     }
 
-    private void validateLifetime(final PooledObject<PooledConnectionAndInfo> p) throws Exception {
-        if (maxConnLifetime.compareTo(Duration.ZERO) > 0) {
-            final long lifetimeMillis = System.currentTimeMillis() - p.getCreateTime();
-            if (lifetimeMillis > maxConnLifetime.toMillis()) {
-                throw new Exception(
-                    Utils.getMessage("connectionFactory.lifetimeExceeded", lifetimeMillis, maxConnLifetime));
-            }
-        }
+    private void validateLifetime(final PooledObject<PooledConnectionAndInfo> pooledObject) throws SQLException {
+        Utils.validateLifetime(pooledObject, maxConnLifetime);
     }
 
     /**
@@ -312,22 +333,22 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
             return false;
         }
         boolean valid = false;
-        final PooledConnection pconn = pooledObject.getObject().getPooledConnection();
+        final PooledConnection pooledConn = pooledObject.getObject().getPooledConnection();
         Connection conn = null;
-        validatingSet.add(pconn);
+        validatingSet.add(pooledConn);
         if (null == validationQuery) {
-            int timeoutSeconds = validationQueryTimeoutSeconds;
-            if (timeoutSeconds < 0) {
-                timeoutSeconds = 0;
+            Duration timeoutDuration = validationQueryTimeoutDuration;
+            if (timeoutDuration.isNegative()) {
+                timeoutDuration = Duration.ZERO;
             }
             try {
-                conn = pconn.getConnection();
-                valid = conn.isValid(timeoutSeconds);
+                conn = pooledConn.getConnection();
+                valid = conn.isValid((int) timeoutDuration.getSeconds());
             } catch (final SQLException e) {
                 valid = false;
             } finally {
-                Utils.closeQuietly(conn);
-                validatingSet.remove(pconn);
+                Utils.closeQuietly((AutoCloseable) conn);
+                validatingSet.remove(pooledConn);
             }
         } else {
             Statement stmt = null;
@@ -336,9 +357,9 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
             // before another one can be requested and closing it will
             // generate an event. Keep track so we know not to return
             // the PooledConnection
-            validatingSet.add(pconn);
+            validatingSet.add(pooledConn);
             try {
-                conn = pconn.getConnection();
+                conn = pooledConn.getConnection();
                 stmt = conn.createStatement();
                 rset = stmt.executeQuery(validationQuery);
                 valid = rset.next();
@@ -348,10 +369,10 @@ class KeyedCPDSConnectionFactory implements KeyedPooledObjectFactory<UserPassKey
             } catch (final Exception e) {
                 valid = false;
             } finally {
-                Utils.closeQuietly(rset);
-                Utils.closeQuietly(stmt);
-                Utils.closeQuietly(conn);
-                validatingSet.remove(pconn);
+                Utils.closeQuietly((AutoCloseable) rset);
+                Utils.closeQuietly((AutoCloseable) stmt);
+                Utils.closeQuietly((AutoCloseable) conn);
+                validatingSet.remove(pooledConn);
             }
         }
         return valid;

@@ -7,7 +7,7 @@
 		<location path="${project_loc}/ehealth-connector/" type="Directory"/>
 		<location path="${project_loc}/noa4e/" type="Directory"/>
 		<location path="${project_loc}/swagger/" type="Directory"/>
-		<location path="${project_loc:/elexis-target}/target/2022-09-java17/eclipse-p2/" type="Directory"/>
-		<location path="${project_loc:/elexis-target}/target/2022-09-java17/maven-p2" type="Directory"/>
+		<location path="${project_loc:/elexis-target}/target/2023-09-java17/maven-p2" type="Directory"/>
+		<location path="${project_loc:/elexis-target}/target/2023-09-java17/eclipse-p2/" type="Directory"/>
 	</locations>
 </target>

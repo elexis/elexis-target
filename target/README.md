@@ -1,8 +1,32 @@
-# Elexis Development and Production Target 2022-06-java17
+# Elexis Development and Production Target 2023-09-java17
 
-Current: `2022-06-java17` 
+### Updates
 
-## About the target
+https://redmine.medelexis.ch/issues/23378
+https://redmine.medelexis.ch/issues/22666
+https://redmine.medelexis.ch/issues/25682 Jaxrs Consumer soll HTTP/2 unterstützen
+https://redmine.medelexis.ch/issues/25687 com.eclipsesource.jaxrs.provider.gson.GsonProvider updates
+
+* ch.elexis.core.jcifs -> move ?
+* ch.elexis.core.pdfbox -> move?
+* ch.elexis.fop_wrapper (elexis-3-base) -> move ?
+* ch.elexis.core.logback.rocketchat -> move
+* ch.elexis.core.serial -> move ?
+* org.eclipse.nebula.widgets.gallery
+* Remove commons-exec
+* Replace com.ibm.icu SimpleDateFormat -> java.text
+* SimpleDateFormat to DateTimeFormatter 
+* Unify XML|JSON implementations: JAXB-RI, jackson (fasterxml), gson -> move to JAXB-RI (XML) and GSON (Json)
+* Use https://github.com/MEDEVIT/osgi-jax-rs-connector/commits/5.4.0_osgi_only
+* Swagger -> Update 1.5 to 1.6 -> JACKSON
+	* at.medevit.elexis.documents.converter SWAGGER CLIENT
+* JDBC 4.2 (ab Java 8)
+	* Postgres
+	* mysql-j
+	* h2
+	
+	
+* Ersatz com.eclipsesource.jaxrs.consumer mit https://eclipse-ee4j.github.io/jersey.github.io/apidocs/2.29.1/jersey/org/glassfish/jersey/client/proxy/package-summary.html
 
 ### Versioning System
 
@@ -30,7 +54,7 @@ the local development environment, and finally uploaded to the server for public
 
 ### p2 repo: Eclipse P2 artifacts (`eclipse-p2`)
 
-* Modify `elexis.tpd`, than use Eclipse to build `elexis.target` out of it
+* Modify `elexis.tpd`, then use Eclipse to build `elexis.target` out of it
 * Generate `target2p2mirror.xml ` by running `ant/elexis-target target2p2mirror.xml.launch`
 * Run `mvn tycho-eclipserun:eclipse-run` to build eclipse target derived p2 site into `target/$target-name/eclipse-p2` 
 
@@ -53,8 +77,6 @@ In order to add local bundles to the target, perform the following steps:
 * Update `rsync.sh` to the current target location and run it.
 
 ### Docker usage
-
-#### Docker host
 
 Only on x86_64 architecture
 
@@ -83,7 +105,7 @@ you can the connect Eclipse using remote debugging, and if you modify the tests 
     </configureation>
 ```
 
-the OSGI console will be available at port 7234
+the OSGI console will be available at port 7234.
 
 ## Target Rules
 

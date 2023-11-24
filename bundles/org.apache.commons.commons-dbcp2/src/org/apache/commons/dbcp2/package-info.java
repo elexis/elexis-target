@@ -39,7 +39,7 @@
  * <p>
  * A: The {@link org.apache.commons.pool2.ObjectPool ObjectPool} interface is defined in Commons Pool. You can use one
  * of the provided implementations such as {@link org.apache.commons.pool2.impl.GenericObjectPool GenericObjectPool},
- * {@link org.apache.commons.pool2.proxy.ProxiedObjectPool ProxiedObjectPool} or
+ *  org.apache.commons.pool2.proxy.ProxiedObjectPool ProxiedObjectPool or
  * {@link org.apache.commons.pool2.impl.SoftReferenceObjectPool SoftReferenceObjectPool} or you can create your own.
  * </p>
  * <p>

@@ -21,6 +21,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.Collection;
 import java.util.concurrent.Executor;
 
@@ -45,7 +46,7 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
     static {
         try {
             MBEAN_SERVER = ManagementFactory.getPlatformMBeanServer();
-        } catch (final NoClassDefFoundError | Exception ex) {
+        } catch (final NoClassDefFoundError | Exception ignored) {
             // ignore - JMX not available
         }
     }
@@ -68,7 +69,7 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
 
     /**
      * SQL_STATE codes considered to signal fatal conditions. Overrides the defaults in
-     * {@link Utils#DISCONNECTION_SQL_CODES} (plus anything starting with {@link Utils#DISCONNECTION_SQL_CODE_PREFIX}).
+     * {@link Utils#getDisconnectionSqlCodes()} (plus anything starting with {@link Utils#DISCONNECTION_SQL_CODE_PREFIX}).
      */
     private final Collection<String> disconnectionSqlCodes;
 
@@ -115,7 +116,7 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
         if (jmxObjectName != null) {
             try {
                 MBEAN_SERVER.registerMBean(this, jmxObjectName);
-            } catch (InstanceAlreadyExistsException | MBeanRegistrationException | NotCompliantMBeanException e) {
+            } catch (InstanceAlreadyExistsException | MBeanRegistrationException | NotCompliantMBeanException ignored) {
                 // For now, simply skip registration
             }
         }
@@ -154,7 +155,7 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
                 // pool is closed, so close the connection
                 passivate();
                 getInnermostDelegate().close();
-            } catch (final Exception ie) {
+            } catch (final Exception ignored) {
                 // DO NOTHING the original exception will be rethrown
             }
             throw new SQLException("Cannot close connection (isClosed check failed)", e);
@@ -203,7 +204,7 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
     }
 
     /**
-     * Expose the {@link #toString()} method via a bean getter so it can be read as a property via JMX.
+     * Expose the {@link #toString()} method via a bean getter, so it can be read as a property via JMX.
      */
     @Override
     public String getToString() {
@@ -212,7 +213,7 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
 
     @Override
     protected void handleException(final SQLException e) throws SQLException {
-        fatalSqlExceptionThrown |= isDisconnectionSqlException(e);
+        fatalSqlExceptionThrown |= isFatalException(e);
         super.handleException(e);
     }
 
@@ -241,32 +242,24 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
     }
 
     /**
-     * Checks the SQLState of the input exception and any nested SQLExceptions it wraps.
+     * Checks the SQLState of the input exception.
      * <p>
-     * If {@link #disconnectionSqlCodes} has been set, sql states are compared to those in the
-     * configured list of fatal exception codes. If this property is not set, codes are compared against the default
-     * codes in {@link Utils#DISCONNECTION_SQL_CODES} and in this case anything starting with #{link
+     * If {@link #disconnectionSqlCodes} has been set, sql states are compared to those in the configured list of fatal
+     * exception codes. If this property is not set, codes are compared against the default codes in
+     * {@link Utils#getDisconnectionSqlCodes()} and in this case anything starting with #{link
      * Utils.DISCONNECTION_SQL_CODE_PREFIX} is considered a disconnection.
      * </p>
      *
-     * @param e
-     *            SQLException to be examined
+     * @param e SQLException to be examined
      * @return true if the exception signals a disconnection
      */
-    private boolean isDisconnectionSqlException(final SQLException e) {
+    boolean isDisconnectionSqlException(final SQLException e) {
         boolean fatalException = false;
         final String sqlState = e.getSQLState();
         if (sqlState != null) {
             fatalException = disconnectionSqlCodes == null
-                    ? sqlState.startsWith(Utils.DISCONNECTION_SQL_CODE_PREFIX)
-                            || Utils.DISCONNECTION_SQL_CODES.contains(sqlState)
-                    : disconnectionSqlCodes.contains(sqlState);
-            if (!fatalException) {
-                final SQLException nextException = e.getNextException();
-                if (nextException != null && nextException != e) {
-                    fatalException = isDisconnectionSqlException(e.getNextException());
-                }
-            }
+                ? sqlState.startsWith(Utils.DISCONNECTION_SQL_CODE_PREFIX) || Utils.getDisconnectionSqlCodes().contains(sqlState)
+                : disconnectionSqlCodes.contains(sqlState);
         }
         return fatalException;
     }
@@ -277,6 +270,33 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
      */
     public boolean isFastFailValidation() {
         return fastFailValidation;
+    }
+
+    /**
+     * Checks the SQLState of the input exception and any nested SQLExceptions it wraps.
+     * <p>
+     * If {@link #disconnectionSqlCodes} has been set, sql states are compared to those in the
+     * configured list of fatal exception codes. If this property is not set, codes are compared against the default
+     * codes in {@link Utils#getDisconnectionSqlCodes()} and in this case anything starting with #{link
+     * Utils.DISCONNECTION_SQL_CODE_PREFIX} is considered a disconnection.
+     * </p>
+     *
+     * @param e
+     *            SQLException to be examined
+     * @return true if the exception signals a disconnection
+     */
+    boolean isFatalException(final SQLException e) {
+        boolean fatalException = isDisconnectionSqlException(e);
+        if (!fatalException) {
+            SQLException parentException = e;
+            SQLException nextException = e.getNextException();
+            while (nextException != null && nextException != parentException && !fatalException) {
+                fatalException = isDisconnectionSqlException(nextException);
+                parentException = nextException;
+                nextException = parentException.getNextException();
+            }
+        }
+        return fatalException;
     }
 
     @Override
@@ -298,10 +318,64 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
         }
 
         if (validationPreparedStatement != null) {
-            Utils.closeQuietly(validationPreparedStatement);
+            Utils.closeQuietly((AutoCloseable) validationPreparedStatement);
         }
 
         super.closeInternal();
+    }
+
+    /**
+     * Validates the connection, using the following algorithm:
+     * <ol>
+     * <li>If {@code fastFailValidation} (constructor argument) is {@code true} and this connection has previously
+     * thrown a fatal disconnection exception, a {@code SQLException} is thrown.</li>
+     * <li>If {@code sql} is null, the driver's #{@link Connection#isValid(int) isValid(timeout)} is called. If it
+     * returns {@code false}, {@code SQLException} is thrown; otherwise, this method returns successfully.</li>
+     * <li>If {@code sql} is not null, it is executed as a query and if the resulting {@code ResultSet} contains at
+     * least one row, this method returns successfully. If not, {@code SQLException} is thrown.</li>
+     * </ol>
+     *
+     * @param sql
+     *            The validation SQL query.
+     * @param timeoutDuration
+     *            The validation timeout in seconds.
+     * @throws SQLException
+     *             Thrown when validation fails or an SQLException occurs during validation
+     * @since 2.10.0
+     */
+    public void validate(final String sql, Duration timeoutDuration) throws SQLException {
+        if (fastFailValidation && fatalSqlExceptionThrown) {
+            throw new SQLException(Utils.getMessage("poolableConnection.validate.fastFail"));
+        }
+
+        if (sql == null || sql.isEmpty()) {
+            if (timeoutDuration.isNegative()) {
+                timeoutDuration = Duration.ZERO;
+            }
+            if (!isValid(timeoutDuration)) {
+                throw new SQLException("isValid() returned false");
+            }
+            return;
+        }
+
+        if (!sql.equals(lastValidationSql)) {
+            lastValidationSql = sql;
+            // Has to be the innermost delegate else the prepared statement will
+            // be closed when the pooled connection is passivated.
+            validationPreparedStatement = getInnermostDelegateInternal().prepareStatement(sql);
+        }
+
+        if (timeoutDuration.compareTo(Duration.ZERO) > 0) {
+            validationPreparedStatement.setQueryTimeout((int) timeoutDuration.getSeconds());
+        }
+
+        try (ResultSet rs = validationPreparedStatement.executeQuery()) {
+            if (!rs.next()) {
+                throw new SQLException("validationQuery didn't return a row");
+            }
+        } catch (final SQLException sqle) {
+            throw sqle;
+        }
     }
 
     /**
@@ -321,39 +395,10 @@ public class PoolableConnection extends DelegatingConnection<Connection> impleme
      *            The validation timeout in seconds.
      * @throws SQLException
      *             Thrown when validation fails or an SQLException occurs during validation
+     * @deprecated Use {@link #validate(String, Duration)}.
      */
-    public void validate(final String sql, int timeoutSeconds) throws SQLException {
-        if (fastFailValidation && fatalSqlExceptionThrown) {
-            throw new SQLException(Utils.getMessage("poolableConnection.validate.fastFail"));
-        }
-
-        if (sql == null || sql.isEmpty()) {
-            if (timeoutSeconds < 0) {
-                timeoutSeconds = 0;
-            }
-            if (!isValid(timeoutSeconds)) {
-                throw new SQLException("isValid() returned false");
-            }
-            return;
-        }
-
-        if (!sql.equals(lastValidationSql)) {
-            lastValidationSql = sql;
-            // Has to be the innermost delegate else the prepared statement will
-            // be closed when the pooled connection is passivated.
-            validationPreparedStatement = getInnermostDelegateInternal().prepareStatement(sql);
-        }
-
-        if (timeoutSeconds > 0) {
-            validationPreparedStatement.setQueryTimeout(timeoutSeconds);
-        }
-
-        try (ResultSet rs = validationPreparedStatement.executeQuery()) {
-            if (!rs.next()) {
-                throw new SQLException("validationQuery didn't return a row");
-            }
-        } catch (final SQLException sqle) {
-            throw sqle;
-        }
+    @Deprecated
+    public void validate(final String sql, final int timeoutSeconds) throws SQLException {
+        validate(sql, Duration.ofSeconds(timeoutSeconds));
     }
 }

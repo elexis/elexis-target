@@ -17,8 +17,8 @@
 
 package org.apache.commons.dbcp2.datasources;
 
+import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Objects;
 
 import org.apache.commons.dbcp2.Utils;
 
@@ -30,7 +30,9 @@ import org.apache.commons.dbcp2.Utils;
  *
  * @since 2.9.0
  */
-final class CharArray {
+final class CharArray implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     static final CharArray NULL = new CharArray((char[]) null);
 
@@ -71,19 +73,12 @@ final class CharArray {
      * @return value, may be null.
      */
     char[] get() {
-        return chars == null ? null : chars.clone();
+        return Utils.clone(chars);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Arrays.hashCode(chars));
+        return Arrays.hashCode(chars);
     }
 
-    /**
-     * Calls {@code super.toString()} and does not reveal its contents inadvertently.
-     */
-    @Override
-    public String toString() {
-        return super.toString();
-    }
 }

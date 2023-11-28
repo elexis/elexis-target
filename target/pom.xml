@@ -37,22 +37,6 @@
 					<additionalArgs>-artifactRepository file:${project.basedir}/target/${target-name}/maven-p2 -metadataRepository file:${project.basedir}/target/${target-name}/maven-p2</additionalArgs>
 					<!-- @formatter:on -->
 					<artifacts>
-						<!--						<artifact>-->
-						<!--							<id>javax.xml.bind:jaxb-api:2.3.1</id>-->
-						<!--							<transitive>false</transitive>-->
-						<!--							<source>true</source>-->
-						<!--						</artifact>-->
-						<!--						<artifact>-->
-						<!--							<id>com.sun.xml.bind:jaxb-osgi:2.3.9</id>
-						https://eclipse-ee4j.github.io/jaxb-ri/ -->
-						<!--							<transitive>false</transitive>-->
-						<!--							<source>true</source>-->
-						<!--						</artifact>-->
-						<!-- <artifact> -->
-						<!-- <id>org.glassfish.jaxb:jaxb-runtime:2.3.4</id> -->
-						<!-- <transitive>false</transitive> -->
-						<!-- <source>true</source> -->
-						<!-- </artifact> -->
 						<artifact>
 							<id>org.postgresql:postgresql:42.7.0</id>
 						</artifact>
@@ -70,7 +54,6 @@
 							<id>com.google.code.gson:gson:2.10.1</id>
 							<source>true</source>
 						</artifact>
-
 						<artifact>
 							<id>org.apache-extras.beanshell:bsh:2.0b6</id>
 						</artifact>
@@ -78,11 +61,6 @@
 							<id>com.opencsv:opencsv:3.10</id>
 							<transitive>false</transitive>
 						</artifact>
-						<!--						<artifact>-->
-						<!--							 required by ebanking/artikelstamm/etc -->
-						<!--							<id>com.ibm.icu:icu4j:67.1</id>-->
-						<!--							<transitive>false</transitive>-->
-						<!--						</artifact>-->
 						<artifact>
 							<!-- Barcode encoding/decoding library -->
 							<id>com.google.zxing:core:3.5.2</id>
@@ -99,12 +77,6 @@
 							<id>com.lowagie:itext:2.1.7</id>
 							<transitive>false</transitive>
 						</artifact>
-						<!--						<artifact>-->
-						<!--							<id>org.bouncycastle:bcprov-jdk15on:1.70</id>-->
-						<!--							  TODO https://github.com/AgNO3/jcifs-ng/issues/250 -->
-						<!--							  kecloak/jcifs -->
-						<!--						</artifact>-->
-
 						<!-- CONTINUE HERE -->
 						<artifact>
 							<!-- Xerces2 provides high performance, fully
@@ -155,22 +127,19 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										commons-collections:commons-collections:3.2.2</id>
+									<id>commons-collections:commons-collections:3.2.2</id>
 									<transitive>false</transitive>
 									<source>true</source>
 									<!-- TODO remove in favour of collections 4
 									? -->
 								</artifact>
 								<artifact>
-									<id>
-										org.apache.commons:commons-collections4:4.4</id>
+									<id>org.apache.commons:commons-collections4:4.4</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										commons-beanutils:commons-beanutils:1.9.4</id>
+									<id>commons-beanutils:commons-beanutils:1.9.4</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
@@ -251,116 +220,97 @@
 							<generateSourceFeature>true</generateSourceFeature>
 							<artifacts>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-io:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-io:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-client:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-client:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-security:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-security:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-server:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-server:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-servlet:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-servlet:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-util:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-util:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-util-ajax:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-util-ajax:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-deploy:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-deploy:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-webapp:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-webapp:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-http:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-http:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-xml:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-xml:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-jndi:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-jndi:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-plus:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-plus:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-annotations:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-annotations:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-servlets:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-servlets:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-alpn-client:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-alpn-client:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty:jetty-alpn-java-client:${jetty.version}</id>
+									<id>org.eclipse.jetty:jetty-alpn-java-client:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty.http2:http2-client:${jetty.version}</id>
+									<id>org.eclipse.jetty.http2:http2-client:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty.http2:http2-common:${jetty.version}</id>
+									<id>org.eclipse.jetty.http2:http2-common:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
@@ -370,26 +320,17 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty.http2:http2-http-client-transport:${jetty.version}</id>
+									<id>org.eclipse.jetty.http2:http2-http-client-transport:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty.osgi:jetty-osgi-boot:${jetty.version}</id>
+									<id>org.eclipse.jetty.osgi:jetty-httpservice:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>
-										org.eclipse.jetty.osgi:jetty-httpservice:${jetty.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>
-										org.eclipse.jetty.osgi:jetty-osgi-alpn:${jetty.version}</id>
+									<id>org.eclipse.jetty.osgi:jetty-osgi-alpn:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
@@ -397,8 +338,7 @@
 									<!-- Unresolved requirement:
 									Require-Capability: osgi.extender;
 									filter:="(osgi.extender=osgi.serviceloader.processor)"  -->
-									<id>
-										org.apache.aries.spifly:org.apache.aries.spifly.dynamic.bundle:1.3.4</id>
+									<id>org.apache.aries.spifly:org.apache.aries.spifly.dynamic.bundle:1.3.4</id>
 									<source>true</source>
 								</artifact>
 							</artifacts>

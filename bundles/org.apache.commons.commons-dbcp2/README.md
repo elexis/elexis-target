@@ -1,3 +1,5 @@
+# Adapted fork of dbpc2 with modifications
+
 This is a "fork" of the source code of <https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2/2.11.0>
 with some adaptations to mitigate <https://issues.apache.org/jira/browse/DBCP-571>
 

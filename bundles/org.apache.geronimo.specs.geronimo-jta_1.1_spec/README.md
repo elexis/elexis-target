@@ -1,3 +1,5 @@
+### Required by org.apache.commons.commons-dbcp2
+
 This is a "fork" of the source code of <https://mvnrepository.com/artifact/org.apache.geronimo.specs/geronimo-jta_1.1_spec>
 with some adaptations to mitigate <https://issues.apache.org/jira/browse/DBCP-571>
 

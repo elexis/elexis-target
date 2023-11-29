@@ -42,8 +42,6 @@ location "https://download.eclipse.org/releases/2023-09/" {
 	// com.sun.xml.bind [2.3.3,3.0.0) // JAXB-Implementation
 	// bound for removal
 	// javax.xml [1.3.4,2.0.0) // https://bugs.eclipse.org/bugs/show_bug.cgi?id=571532 // bites with jdk java.xml
-	com.sun.jna // req org.eclipse.urischeme
-	com.sun.jna.platform // req org.eclipse.urischeme
 	org.apache.commons.jxpath // req e4.emf.xpath
 	// Testing and IDE integration
 	org.junit
@@ -53,6 +51,13 @@ location "https://download.eclipse.org/releases/2023-09/" {
 	org.eclipse.jdt.junit.runtime
 	org.eclipse.jdt.junit4.runtime
 	org.eclipse.pde.junit.runtime
+}
+
+location "https://download.eclipse.org/releases/2022-12/" {
+	// using from differenc location, as the version in
+	// 2023-09 -> 5.13.0 suddenly stopped exporting during target -> export to p2 dir
+	com.sun.jna // req org.eclipse.urischeme
+	com.sun.jna.platform // req org.eclipse.urischeme
 }
 
 location "https://download.eclipse.org/nattable/releases/2.2.1/repository/" {
@@ -102,18 +107,18 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202305310105
 	org.jdom2
 	org.jaxen
 	// Apache POI - Java API To Access Microsoft Format Files
- 	org.apache.poi [4.1.1,4.2.0)
- 	org.apache.poi.ooxml [4.1.1,4.2.0)
- 	org.apache.poi.ooxml.schemas [4.1.1,4.2.0)
- 	org.apache.xmlbeans [3.1.0,3.2.0)
-// // dependencies for mylyn wikitext
-// // TODO	javax.xml.ws [2.1.0.v200902101523,2.1.0.v200902101523]
-// // Testing
-// org.mockito [2.23.0,3.0.0)
+	org.apache.poi [4.1.1,4.2.0)
+	org.apache.poi.ooxml [4.1.1,4.2.0)
+	org.apache.poi.ooxml.schemas [4.1.1,4.2.0)
+	org.apache.xmlbeans [3.1.0,3.2.0)
+	// // dependencies for mylyn wikitext
+	// // TODO	javax.xml.ws [2.1.0.v200902101523,2.1.0.v200902101523]
+	// // Testing
+	// org.mockito [2.23.0,3.0.0)
 	// required by keycloak, solr, laborder ...
- 	org.apache.httpcomponents.httpcore
- 	org.apache.httpcomponents.httpclient
- 	org.apache.httpcomponents.httpclient.win
+	org.apache.httpcomponents.httpcore
+	org.apache.httpcomponents.httpclient
+	org.apache.httpcomponents.httpclient.win
 }
 
 // Chromium Browser - is this allowed??
@@ -157,67 +162,4 @@ location "https://ftp.fau.de/eclipse/technology/babel/update-site/R0.20.0/2022-1
 	org.eclipse.e4.ui.workbench.swt.nl_de
 	org.eclipse.e4.ui.workbench.swt.nl_fr
 	org.eclipse.e4.ui.workbench.swt.nl_it
-}
-
-maven MavenDependencies scope=compile,test dependencyDepth=none missingManifest=generate includeSources {
-	// JAXB
-	dependency {
-		groupId="javax.xml.bind"
-		artifactId="jaxb-api"
-		version="2.3.1"
-	}
-	// https://eclipse-ee4j.github.io/jaxb-ri/
-	dependency {
-		groupId="com.sun.xml.bind"
-		artifactId="jaxb-osgi"
-		version="2.3.9"
-	}
-	dependency {
-		groupId="org.bouncycastle"
-		artifactId="bcprov-jdk18on"
-		version="1.77"
-	}
-	dependency {
-		groupId="org.bouncycastle"
-		artifactId="bcpg-jdk18on"
-		version="1.77"
-	}
-	dependency {
-		groupId="com.google.guava"
-		artifactId="guava"
-		version="32.1.3-jre"
-	}
-	// jpa
-	dependency {
-		groupId="org.osgi"
-		artifactId="org.osgi.service.jndi"
-		version="1.0.1"
-	}
-	dependency {
-		groupId="org.osgi"
-		artifactId="org.osgi.service.jdbc"
-		version="1.0.1"
-	}
-	dependency {
-		groupId="commons-logging"
-		artifactId="commons-logging"
-		version="1.2"
-	}
-	dependency {
-		groupId="org.apache.commons"
-		artifactId="commons-pool2"
-		version="2.12.0"
-	}
-	// commons-dbcp2 from local repo
-	// required by guava
-	dependency {
-		groupId="com.google.guava"
-		artifactId="failureaccess"
-		version="1.0.2"
-	}
-	dependency {
-		groupId="eu.agno3.jcifs"
-		artifactId="jcifs-ng"
-		version="2.1.10"
-	}
 }

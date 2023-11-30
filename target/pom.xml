@@ -53,8 +53,8 @@
 							<id>com.h2database:h2:1.4.200</id>
 						</artifact>
 						<artifact>
-							<id>com.mysql:mysql-connector-j:8.2.0</id>
-							<!-- Liquibase problem with 8.0.23
+							<id>mysql:mysql-connector-java:8.0.22</id>
+							<!-- Liquibase problem with >= 8.0.23
 							https://github.com/liquibase/liquibase/issues/1639 -->
 						</artifact>
 						<artifact>

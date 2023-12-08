@@ -1,32 +1,40 @@
 # Elexis Development and Production Target 2023-09-java17
 
-### Updates
+### Updates 2023-09-java17
+
+* Multiple updates to Eclipse and libraries
+* `ch.elexis.core.logback.rocketchat`  moved from ch.elexis.core to target
+* Removed `com.eclipsesource.*` replaced with jetty based solutions (e.g. [Client](https://eclipse-ee4j.github.io/jersey.github.io/apidocs/2.29.1/jersey/org/glassfish/jersey/client/proxy/package-summary.html "client") )
+* Removed `commons-exec` replacement via Java internal functions
+* Removal of Jackson due to GSON, successful in all but keycloak, now added to keycloak feature
+* Removed swagger, updated to swagger v3 OAS but only annotations kept for the moment, no service
+
+**Problems** 
+
+* Update h2 from 1.4.200 to 2.222 in combination with liquibase 3.10.3 does not work
+* Also mysql updates > 8.0.22 blocked due to liquibase
+
+**Notes**
+
+* Export target does not work as expected, no entries are created for contents in maven_libs [Issue](https://github.com/eclipse-pde/eclipse.pde/issues/950 "Github Issue") 
 
 https://redmine.medelexis.ch/issues/23378
 https://redmine.medelexis.ch/issues/22666
 https://redmine.medelexis.ch/issues/25682 Jaxrs Consumer soll HTTP/2 unterstützen
-https://redmine.medelexis.ch/issues/25687 com.eclipsesource.jaxrs.provider.gson.GsonProvider updates
+
+### Next steps (?)
 
 * ch.elexis.core.jcifs -> move ?
 * ch.elexis.core.pdfbox -> move?
 * ch.elexis.fop_wrapper (elexis-3-base) -> move ?
-* ch.elexis.core.logback.rocketchat -> move
 * ch.elexis.core.serial -> move ?
-* org.eclipse.nebula.widgets.gallery
-* Remove commons-exec
+* include org.eclipse.nebula.widgets.gallery
 * Replace com.ibm.icu SimpleDateFormat -> java.text
 * SimpleDateFormat to DateTimeFormatter 
 * Unify XML|JSON implementations: JAXB-RI, jackson (fasterxml), gson -> move to JAXB-RI (XML) and GSON (Json)
-* Use https://github.com/MEDEVIT/osgi-jax-rs-connector/commits/5.4.0_osgi_only
 * Swagger -> Update 1.5 to 1.6 -> JACKSON
 	* at.medevit.elexis.documents.converter SWAGGER CLIENT
-* JDBC 4.2 (ab Java 8)
-	* Postgres
-	* mysql-j
-	* h2
-	
-	
-* Ersatz com.eclipsesource.jaxrs.consumer mit https://eclipse-ee4j.github.io/jersey.github.io/apidocs/2.29.1/jersey/org/glassfish/jersey/client/proxy/package-summary.html
+* ehealth is not available anymore -> switch to husky
 
 ### Versioning System
 
@@ -55,7 +63,7 @@ the local development environment, and finally uploaded to the server for public
 ### p2 repo: Eclipse P2 artifacts (`eclipse-p2`)
 
 * Modify `elexis.tpd`, then use Eclipse to build `elexis.target` out of it
-* Generate `target2p2mirror.xml ` by running `ant/elexis-target target2p2mirror.xml.launch`
+* Manually generate `elexis.target.p2mirror.xml` by copying stuff from .target into it
 * Run `mvn tycho-eclipserun:eclipse-run` to build eclipse target derived p2 site into `target/$target-name/eclipse-p2` 
 
 ### p2 repo: Maven based artifacts (`maven-p2`)
@@ -130,11 +138,15 @@ Load the target within `ide.target` to get your IDE set up.
 https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
 
 
+# TO Test
 
+* OcrMyPDF Service
+* Databindings
+* igmbestellung -> removal of commons-exec
 
 # Notes / Open Topics / ToDos
 
-* Export target does not work as expected, no entries are created for contents in maven_libs
+
 * https://github.com/elexis/elexis-server-dependencies/blob/master/pom.xml
 * https://javahacks.net/2014/10/08/adding-maven-artifacts-to-your-target-platform/
 * https://wiki.eclipse.org/Equinox/p2/Ant_Tasks

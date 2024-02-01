@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.commons.dbcp2;
 
 import java.io.InputStream;
@@ -98,7 +97,7 @@ public final class DelegatingResultSet extends AbandonedTrace implements ResultS
 
     /**
      * Creates a wrapper for the ResultSet which traces this ResultSet to the Connection which created it (via, for
-     * example DatabaseMetadata, and the code which created it.
+     * example DatabaseMetadata), and the code which created it.
      * <p>
      * Private to ensure all construction is {@link #wrapResultSet(Connection, ResultSet)}
      * </p>

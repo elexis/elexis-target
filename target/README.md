@@ -1,8 +1,40 @@
-# Elexis Development and Production Target 2022-06-java17
+# Elexis Development and Production Target 2023-09-java17
 
-Current: `2022-06-java17` 
+### Updates 2023-09-java17
 
-## About the target
+* Multiple updates to Eclipse and libraries
+* `ch.elexis.core.logback.rocketchat`  moved from ch.elexis.core to target
+* Removed `com.eclipsesource.*` replaced with jetty based solutions (e.g. [Client](https://eclipse-ee4j.github.io/jersey.github.io/apidocs/2.29.1/jersey/org/glassfish/jersey/client/proxy/package-summary.html "client") )
+* Removed `commons-exec` replacement via Java internal functions
+* Removal of Jackson due to GSON, successful in all but keycloak, now added to keycloak feature
+* Removed swagger, updated to swagger v3 OAS but only annotations kept for the moment, no service
+
+**Problems** 
+
+* Update h2 from 1.4.200 to 2.222 in combination with liquibase 3.10.3 does not work
+* Also mysql updates > 8.0.22 blocked due to liquibase
+
+**Notes**
+
+* Export target does not work as expected, no entries are created for contents in maven_libs [Issue](https://github.com/eclipse-pde/eclipse.pde/issues/950 "Github Issue") 
+
+https://redmine.medelexis.ch/issues/23378
+https://redmine.medelexis.ch/issues/22666
+https://redmine.medelexis.ch/issues/25682 Jaxrs Consumer soll HTTP/2 unterstützen
+
+### Next steps (?)
+
+* ch.elexis.core.jcifs -> move ?
+* ch.elexis.core.pdfbox -> move?
+* ch.elexis.fop_wrapper (elexis-3-base) -> move ?
+* ch.elexis.core.serial -> move ?
+* include org.eclipse.nebula.widgets.gallery
+* Replace com.ibm.icu SimpleDateFormat -> java.text
+* SimpleDateFormat to DateTimeFormatter 
+* Unify XML|JSON implementations: JAXB-RI, jackson (fasterxml), gson -> move to JAXB-RI (XML) and GSON (Json)
+* Swagger -> Update 1.5 to 1.6 -> JACKSON
+	* at.medevit.elexis.documents.converter SWAGGER CLIENT
+* ehealth is not available anymore -> switch to husky
 
 ### Versioning System
 
@@ -30,8 +62,8 @@ the local development environment, and finally uploaded to the server for public
 
 ### p2 repo: Eclipse P2 artifacts (`eclipse-p2`)
 
-* Modify `elexis.tpd`, than use Eclipse to build `elexis.target` out of it
-* Generate `target2p2mirror.xml ` by running `ant/elexis-target target2p2mirror.xml.launch`
+* Modify `elexis.tpd`, then use Eclipse to build `elexis.target` out of it
+* Manually generate `elexis.target.p2mirror.xml` by copying stuff from .target into it
 * Run `mvn tycho-eclipserun:eclipse-run` to build eclipse target derived p2 site into `target/$target-name/eclipse-p2` 
 
 ### p2 repo: Maven based artifacts (`maven-p2`)
@@ -51,6 +83,37 @@ In order to add local bundles to the target, perform the following steps:
 
 * Run `mvn resources:copy-resources` to copy the p2 information files from `template/` to `target/$target-name/`.
 * Update `rsync.sh` to the current target location and run it.
+
+### Docker usage
+
+Only on x86_64 architecture
+
+In `docker/` a docker build image can be built. This can be used like `docker run -it --rm --init -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java17 xvfb-run mvn clean verify` 
+
+To keep the state `mkdir m2` then
+`docker run -it --rm  --init -v "$(pwd)":/usr/src/mymaven -v "$(pwd)/m2":/root/.m2 -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java17 xvfb-run mvn clean install`
+
+this will populate a local m2 repository. 
+
+#### Surefire Test Debugging
+
+If required to debug a failing test, start with (after keeping the state)
+
+`docker run -it --rm  --network host --init -v "$(pwd)":/usr/src/mymaven -v "$(pwd)/m2":/root/.m2 -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java17 xvfb-run mvn install -DdebugPort=8000 -rf :THE_TEST_PLUGIN`
+
+you can the connect Eclipse using remote debugging, and if you modify the tests `pom.xml` to include
+
+```
+<artifactId>tycho-surefire-plugin</artifactId>
+	<configuration>
+	  <systemProperties>
+		<osgi.console>7234</osgi.console>
+	  </systemProperties>
+          <dependencies>
+    </configureation>
+```
+
+the OSGI console will be available at port 7234.
 
 ## Target Rules
 
@@ -75,11 +138,15 @@ Load the target within `ide.target` to get your IDE set up.
 https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
 
 
+# TO Test
 
+* OcrMyPDF Service
+* Databindings
+* igmbestellung -> removal of commons-exec
 
 # Notes / Open Topics / ToDos
 
-* Export target does not work as expected, no entries are created for contents in maven_libs
+
 * https://github.com/elexis/elexis-server-dependencies/blob/master/pom.xml
 * https://javahacks.net/2014/10/08/adding-maven-artifacts-to-your-target-platform/
 * https://wiki.eclipse.org/Equinox/p2/Ant_Tasks

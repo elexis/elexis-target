@@ -19,11 +19,11 @@ package org.apache.commons.dbcp2.datasources;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -37,7 +37,7 @@ import org.apache.commons.dbcp2.ListException;
 import org.apache.commons.dbcp2.Utils;
 
 /**
- * A JNDI ObjectFactory which creates <code>SharedPoolDataSource</code>s or <code>PerUserPoolDataSource</code>s
+ * A JNDI ObjectFactory which creates {@code SharedPoolDataSource}s or {@code PerUserPoolDataSource}s
  *
  * @since 2.0
  */
@@ -48,29 +48,23 @@ abstract class InstanceKeyDataSourceFactory implements ObjectFactory {
     /**
      * Closes all pools associated with this class.
      *
-     * @throws Exception
+     * @throws ListException
      *             a {@link ListException} containing all exceptions thrown by {@link InstanceKeyDataSource#close()}
      * @see InstanceKeyDataSource#close()
-     * @see ListException
      * @since 2.4.0 throws a {@link ListException} instead of, in 2.3.0 and before, the first exception thrown by
      *        {@link InstanceKeyDataSource#close()}.
      */
-    public static void closeAll() throws Exception {
+    public static void closeAll() throws ListException {
         // Get iterator to loop over all instances of this data source.
         final List<Throwable> exceptionList = new ArrayList<>(INSTANCE_MAP.size());
-        for (final Entry<String, InstanceKeyDataSource> next : INSTANCE_MAP.entrySet()) {
+        INSTANCE_MAP.entrySet().forEach(entry -> {
             // Bullet-proof to avoid anything else but problems from InstanceKeyDataSource#close().
-            if (next != null) {
-                @SuppressWarnings("resource") final InstanceKeyDataSource value = next.getValue();
-                if (value != null) {
-                    try {
-                        value.close();
-                    } catch (final Exception e) {
-                        exceptionList.add(e);
-                    }
-                }
+            if (entry != null) {
+                @SuppressWarnings("resource")
+                final InstanceKeyDataSource value = entry.getValue();
+                Utils.close(value, exceptionList::add);
             }
-        }
+        });
         INSTANCE_MAP.clear();
         if (!exceptionList.isEmpty()) {
             throw new ListException("Could not close all InstanceKeyDataSource instances.", exceptionList);
@@ -106,7 +100,7 @@ abstract class InstanceKeyDataSourceFactory implements ObjectFactory {
             if (s != null) {
                 try {
                     max = Math.max(max, Integer.parseInt(s));
-                } catch (final NumberFormatException e) {
+                } catch (final NumberFormatException ignored) {
                     // no sweat, ignore those keys
                 }
             }
@@ -179,6 +173,8 @@ abstract class InstanceKeyDataSourceFactory implements ObjectFactory {
     }
 
     /**
+     * Tests if className is the value returned from getClass().getName().toString().
+     *
      * @param className
      *            The class name to test.
      *
@@ -186,17 +182,29 @@ abstract class InstanceKeyDataSourceFactory implements ObjectFactory {
      */
     protected abstract boolean isCorrectClass(String className);
 
+    boolean parseBoolean(final RefAddr refAddr) {
+        return Boolean.parseBoolean(toString(refAddr));
+    }
+
+    int parseInt(final RefAddr refAddr) {
+        return Integer.parseInt(toString(refAddr));
+    }
+
+    long parseLong(final RefAddr refAddr) {
+        return Long.parseLong(toString(refAddr));
+    }
+
     private void setCommonProperties(final Reference ref, final InstanceKeyDataSource ikds)
             throws IOException, ClassNotFoundException {
 
         RefAddr refAddr = ref.get("dataSourceName");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDataSourceName(refAddr.getContent().toString());
+            ikds.setDataSourceName(toString(refAddr));
         }
 
         refAddr = ref.get("description");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDescription(refAddr.getContent().toString());
+            ikds.setDescription(toString(refAddr));
         }
 
         refAddr = ref.get("jndiEnvironment");
@@ -207,123 +215,127 @@ abstract class InstanceKeyDataSourceFactory implements ObjectFactory {
 
         refAddr = ref.get("loginTimeout");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setLoginTimeout(Integer.parseInt(refAddr.getContent().toString()));
+            ikds.setLoginTimeout(Duration.ofSeconds(parseInt(refAddr)));
         }
 
         // Pool properties
         refAddr = ref.get("blockWhenExhausted");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultBlockWhenExhausted(Boolean.parseBoolean(refAddr.getContent().toString()));
+            ikds.setDefaultBlockWhenExhausted(parseBoolean(refAddr));
         }
 
         refAddr = ref.get("evictionPolicyClassName");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultEvictionPolicyClassName(refAddr.getContent().toString());
+            ikds.setDefaultEvictionPolicyClassName(toString(refAddr));
         }
 
         // Pool properties
         refAddr = ref.get("lifo");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultLifo(Boolean.parseBoolean(refAddr.getContent().toString()));
+            ikds.setDefaultLifo(parseBoolean(refAddr));
         }
 
         refAddr = ref.get("maxIdlePerKey");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultMaxIdle(Integer.parseInt(refAddr.getContent().toString()));
+            ikds.setDefaultMaxIdle(parseInt(refAddr));
         }
 
         refAddr = ref.get("maxTotalPerKey");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultMaxTotal(Integer.parseInt(refAddr.getContent().toString()));
+            ikds.setDefaultMaxTotal(parseInt(refAddr));
         }
 
         refAddr = ref.get("maxWaitMillis");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultMaxWaitMillis(Long.parseLong(refAddr.getContent().toString()));
+            ikds.setDefaultMaxWait(Duration.ofMillis(parseLong(refAddr)));
         }
 
         refAddr = ref.get("minEvictableIdleTimeMillis");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultMinEvictableIdleTimeMillis(Long.parseLong(refAddr.getContent().toString()));
+            ikds.setDefaultMinEvictableIdle(Duration.ofMillis(parseLong(refAddr)));
         }
 
         refAddr = ref.get("minIdlePerKey");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultMinIdle(Integer.parseInt(refAddr.getContent().toString()));
+            ikds.setDefaultMinIdle(parseInt(refAddr));
         }
 
         refAddr = ref.get("numTestsPerEvictionRun");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultNumTestsPerEvictionRun(Integer.parseInt(refAddr.getContent().toString()));
+            ikds.setDefaultNumTestsPerEvictionRun(parseInt(refAddr));
         }
 
         refAddr = ref.get("softMinEvictableIdleTimeMillis");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultSoftMinEvictableIdleTimeMillis(Long.parseLong(refAddr.getContent().toString()));
+            ikds.setDefaultSoftMinEvictableIdle(Duration.ofMillis(parseLong(refAddr)));
         }
 
         refAddr = ref.get("testOnCreate");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultTestOnCreate(Boolean.parseBoolean(refAddr.getContent().toString()));
+            ikds.setDefaultTestOnCreate(parseBoolean(refAddr));
         }
 
         refAddr = ref.get("testOnBorrow");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultTestOnBorrow(Boolean.parseBoolean(refAddr.getContent().toString()));
+            ikds.setDefaultTestOnBorrow(parseBoolean(refAddr));
         }
 
         refAddr = ref.get("testOnReturn");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultTestOnReturn(Boolean.parseBoolean(refAddr.getContent().toString()));
+            ikds.setDefaultTestOnReturn(parseBoolean(refAddr));
         }
 
         refAddr = ref.get("testWhileIdle");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultTestWhileIdle(Boolean.parseBoolean(refAddr.getContent().toString()));
+            ikds.setDefaultTestWhileIdle(parseBoolean(refAddr));
         }
 
         refAddr = ref.get("timeBetweenEvictionRunsMillis");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultTimeBetweenEvictionRunsMillis(Long.parseLong(refAddr.getContent().toString()));
+            ikds.setDefaultDurationBetweenEvictionRuns(Duration.ofMillis(parseLong(refAddr)));
         }
 
         // Connection factory properties
 
         refAddr = ref.get("validationQuery");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setValidationQuery(refAddr.getContent().toString());
+            ikds.setValidationQuery(toString(refAddr));
         }
 
         refAddr = ref.get("validationQueryTimeout");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setValidationQueryTimeout(Integer.parseInt(refAddr.getContent().toString()));
+            ikds.setValidationQueryTimeout(Duration.ofSeconds(parseInt(refAddr)));
         }
 
         refAddr = ref.get("rollbackAfterValidation");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setRollbackAfterValidation(Boolean.parseBoolean(refAddr.getContent().toString()));
+            ikds.setRollbackAfterValidation(parseBoolean(refAddr));
         }
 
         refAddr = ref.get("maxConnLifetimeMillis");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setMaxConnLifetimeMillis(Long.parseLong(refAddr.getContent().toString()));
+            ikds.setMaxConnLifetime(Duration.ofMillis(parseLong(refAddr)));
         }
 
         // Connection properties
 
         refAddr = ref.get("defaultAutoCommit");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultAutoCommit(Boolean.valueOf(refAddr.getContent().toString()));
+            ikds.setDefaultAutoCommit(Boolean.valueOf(toString(refAddr)));
         }
 
         refAddr = ref.get("defaultTransactionIsolation");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultTransactionIsolation(Integer.parseInt(refAddr.getContent().toString()));
+            ikds.setDefaultTransactionIsolation(parseInt(refAddr));
         }
 
         refAddr = ref.get("defaultReadOnly");
         if (refAddr != null && refAddr.getContent() != null) {
-            ikds.setDefaultReadOnly(Boolean.valueOf(refAddr.getContent().toString()));
+            ikds.setDefaultReadOnly(Boolean.valueOf(toString(refAddr)));
         }
+    }
+
+    String toString(final RefAddr refAddr) {
+        return refAddr.getContent().toString();
     }
 }

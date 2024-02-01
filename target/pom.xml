@@ -4,26 +4,27 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.elexis.target</groupId>
 	<artifactId>target</artifactId>
-	<version>22.9.0-SNAPSHOT</version>
+	<version>23.9.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<target-name>2022-09-java17</target-name>
-		<platform-version-name>2022-09</platform-version-name>
-		<tycho-version>2.7.5</tycho-version>
-		<tycho-extras-version>2.7.5</tycho-extras-version>
-		<p2-maven-plugin-version>2.0.0</p2-maven-plugin-version>
-		<maven-resources-version>3.2.0</maven-resources-version>
-		<jetty.version>10.0.11</jetty.version>
-		<jersey.version>2.36</jersey.version>
-		<jackson.version>2.13.3</jackson.version>
-		<keycloak.version>19.0.2</keycloak.version>
+		<target-name>2023-09-java17</target-name>
+		<platform-version-name>2023-09</platform-version-name>
+		<tycho-version>3.0.5</tycho-version>
+		<tycho-extras-version>3.0.5</tycho-extras-version>
+		<p2-maven-plugin-version>2.1.0</p2-maven-plugin-version>
+		<maven-resources-version>3.3.1</maven-resources-version>
+		<jetty.version>10.0.18</jetty.version>			<!-- Servlet container -->
+		<jersey.version>2.41</jersey.version>			<!-- JAX/RS Implementation-->
+		<keycloak.version>20.0.5</keycloak.version>
+		<!-- https://github.com/keycloak/keycloak/issues/25118 -->
 	</properties>
 
 	<build>
 		<plugins>
 
-			<!-- (1) Maven based artifacts: build p2 repository containing this.artifacts -->
+			<!-- (1) Maven based artifacts: build p2 repository containing
+			this.artifacts -->
 			<!-- https://github.com/reficio/p2-maven-plugin -->
 			<plugin>
 				<groupId>org.reficio</groupId>
@@ -31,9 +32,7 @@
 				<version>${p2-maven-plugin-version}</version>
 				<configuration>
 					<destinationDirectory>${project.basedir}/target/${target-name}/maven-p2</destinationDirectory>
-					<!-- @formatter:off -->
 					<additionalArgs>-artifactRepository file:${project.basedir}/target/${target-name}/maven-p2 -metadataRepository file:${project.basedir}/target/${target-name}/maven-p2</additionalArgs>
-					<!-- @formatter:on -->
 					<artifacts>
 						<artifact>
 							<id>javax.xml.bind:jaxb-api:2.3.1</id>
@@ -45,23 +44,21 @@
 							<transitive>false</transitive>
 							<source>true</source>
 						</artifact>
-						<!-- <artifact> -->
-						<!-- <id>org.glassfish.jaxb:jaxb-runtime:2.3.4</id> -->
-						<!-- <transitive>false</transitive> -->
-						<!-- <source>true</source> -->
-						<!-- </artifact> -->
 						<artifact>
-							<id>org.postgresql:postgresql:42.2.19.jre7</id>
+							<id>org.postgresql:postgresql:42.7.0</id>
 						</artifact>
 						<artifact>
+							<!-- updating to a newer version -->
+							<!-- fails as liquibase is not compatible then -->
 							<id>com.h2database:h2:1.4.200</id>
 						</artifact>
 						<artifact>
 							<id>mysql:mysql-connector-java:8.0.22</id>
-							<!-- Liquibase problem with 8.0.23 https://github.com/liquibase/liquibase/issues/1639 -->
+							<!-- Liquibase problem with >= 8.0.23
+							https://github.com/liquibase/liquibase/issues/1639 -->
 						</artifact>
 						<artifact>
-							<id>com.google.code.gson:gson:2.8.9</id>
+							<id>com.google.code.gson:gson:2.10.1</id>
 							<source>true</source>
 						</artifact>
 						<artifact>
@@ -72,31 +69,40 @@
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
-							<!-- required by ebanking/artikelstamm/etc -->
-							<id>com.ibm.icu:icu4j:67.1</id>
-							<transitive>false</transitive>
-						</artifact>
-						<artifact>
 							<!-- Barcode encoding/decoding library -->
-							<id>com.google.zxing:core:3.4.1</id>
+							<id>com.google.zxing:core:3.5.2</id>
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
-							<id>com.google.zxing:javase:3.4.1</id>
+							<id>com.google.zxing:javase:3.5.2</id>
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
 							<!-- iText, a free Java-PDF library -->
+							<!-- ch.gpb.elexis.cst / net.medshare.percentile.v2 -->
 							<id>com.lowagie:itext:2.1.7</id>
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
-							<id>org.bouncycastle:bcprov-jdk15on:1.70</id>
-							<!--  TODO https://github.com/AgNO3/jcifs-ng/issues/250 -->
-							<!--  kecloak/jcifs -->
+							<id>org.bouncycastle:bcprov-jdk18on:1.77</id>
+							<transitive>false</transitive>
 						</artifact>
 						<artifact>
-							<!-- Xerces2 provides high performance, fully compliant XML parsers -->
+							<id>org.bouncycastle:bcpg-jdk18on:1.77</id>
+							<transitive>false</transitive>
+						</artifact>
+						<artifact>
+							<id>com.google.guava:guava:32.1.3-jre</id>
+							<transitive>false</transitive>
+						</artifact>
+						<artifact>
+							<id>com.google.guava:failureaccess:1.0.2</id>
+							<transitive>false</transitive>
+						</artifact>
+						<!-- CONTINUE HERE -->
+						<artifact>
+							<!-- Xerces2 provides high performance, fully
+							compliant XML parsers -->
 							<id>xerces:xercesImpl:2.12.2</id>
 							<transitive>false</transitive>
 						</artifact>
@@ -104,7 +110,7 @@
 							<id>jakarta.mail:jakarta.mail-api:1.6.7</id>
 						</artifact>
 						<artifact>
-							<id>com.healthmarketscience.jackcess:jackcess:4.0.0</id>
+							<id>com.healthmarketscience.jackcess:jackcess:4.0.5</id>
 							<source>true</source>
 							<transitive>false</transitive>
 						</artifact>
@@ -153,36 +159,35 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>commons-collections:commons-collections:3.2.2</id>
-									<transitive>false</transitive>
-									<source>true</source>
-									<!-- TODO remove in favour of collections 4 ? -->
-								</artifact>
-								<artifact>
-									<id>org.apache.commons:commons-collections4:4.4</id>
+									<id>
+										commons-collections:commons-collections:3.2.2</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>commons-beanutils:commons-beanutils:1.9.4</id>
+									<id>
+										org.apache.commons:commons-collections4:4.4</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
-								<!-- required to use from eclipse-p2 in version 1.14 due to org.apache.httpcomponents.httpclient 
-									<artifact> <id>commons-codec:commons-codec:1.15</id> <transitive>false</transitive> 
+								<artifact>
+									<id>
+										commons-beanutils:commons-beanutils:1.9.4</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<!-- required to use from eclipse-p2 in version
+								1.14 due to org.apache.httpcomponents.httpclient 
+									<artifact> <id>commons-codec:commons-codec:1.15</id>
+								<transitive>false</transitive> 
 									<source>true</source> </artifact> -->
 								<artifact>
-									<id>org.apache.commons:commons-lang3:3.12.0</id>
+									<id>org.apache.commons:commons-lang3:3.14.0</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.apache.commons:commons-text:1.9</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.apache.commons:commons-exec:1.3</id>
+									<id>org.apache.commons:commons-text:1.11.0</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
@@ -192,23 +197,16 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>commons-io:commons-io:2.11.0</id>
+									<id>commons-io:commons-io:2.15.0</id>
 									<source>true</source>
 								</artifact>
 								<artifact>
 									<!-- required by org.apache.poi -->
-									<id>org.apache.commons:commons-compress:1.21</id>
+									<id>org.apache.commons:commons-compress:1.25.0</id>
 									<source>true</source>
 								</artifact>
-<!-- 								<artifact> -->
-<!-- 									dbcp2 and pool2 with javax.transaction.xa problem -->
-<!-- 									 https://issues.apache.org/jira/browse/KARAF-6715 -->
-<!-- 									<id>org.apache.commons:commons-dbcp2:2.9.0</id> -->
-<!-- 									<transitive>false</transitive> -->
-<!-- 									<source>true</source> -->
-<!-- 								</artifact> -->
 								<artifact>
-									<id>org.apache.commons:commons-pool2:2.11.1</id>
+									<id>org.apache.commons:commons-pool2:2.12.0</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
@@ -217,12 +215,6 @@
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
-<!-- 								<artifact> -->
-<!-- 									https://issues.apache.org/jira/browse/DBCP-571 -->
-<!-- 									<id>org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1</id> -->
-<!-- 									<transitive>false</transitive> -->
-<!-- 									<source>true</source> -->
-<!-- 								</artifact> -->
 							</artifacts>
 						</feature>
 						<!--  =============================================  -->
@@ -251,195 +243,213 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-server:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-server:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-servlet:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-servlet:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-util:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-util:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-util-ajax:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-util-ajax:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-deploy:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-deploy:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-webapp:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-webapp:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-http:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-http:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-xml:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-xml:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-jndi:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-jndi:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-plus:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-plus:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-annotations:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-annotations:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-servlets:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-servlets:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-alpn-client:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-alpn-client:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty:jetty-alpn-java-client:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty:jetty-alpn-java-client:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty.http2:http2-client:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty.http2:http2-client:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty.http2:http2-common:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty.http2:http2-common:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty.http2:http2-hpack:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty.http2:http2-hpack:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty.http2:http2-http-client-transport:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty.http2:http2-http-client-transport:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty.osgi:jetty-osgi-boot:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty.osgi:jetty-httpservice:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty.osgi:jetty-httpservice:${jetty.version}</id>
+									<id>
+										org.eclipse.jetty.osgi:jetty-osgi-alpn:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.eclipse.jetty.osgi:jetty-osgi-alpn:${jetty.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<!-- Unresolved requirement: Require-Capability: osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)"  -->
-									<id>org.apache.aries.spifly:org.apache.aries.spifly.dynamic.bundle:1.3.4</id>
+									<!-- Unresolved requirement:
+									Require-Capability: osgi.extender;
+									filter:="(osgi.extender=osgi.serviceloader.processor)"  -->
+									<id>org.apache.aries.spifly:org.apache.aries.spifly.dynamic.bundle:1.3.7</id>
 									<source>true</source>
 								</artifact>
 							</artifacts>
 						</feature>
-						<!--  =============================================  -->
-						<!-- JAX-RS -->
-						<!--  =============================================  -->
+						<!--
+						==========================================================================================  -->
+						<!-- JAX-RS (via Jersey: implementation of JAX-RS (Java
+						API for RESTful Web Services) -->
+						<!-- Jersey 2.41 is JAX-RS 2.1 / Jersey 2.26+ -->
+						<!-- https://eclipse-ee4j.github.io/jersey/download.html -->
+						<!--
+						https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/modules-and-dependencies.html -->
+						<!--
+						==========================================================================================  -->
 						<feature>
 							<id>info.elexis.target.jaxwsrs.core</id>
 							<version>${project.version}</version>
 							<label>Bundled Jakarta WS RS and Jersey Libraries</label>
 							<providerName>${project.groupId}</providerName>
 							<generateSourceFeature>true</generateSourceFeature>
-							<!-- https://eclipse-ee4j.github.io/jersey/download.html -->
-							<!-- JAX-RS 2.1 / Jersey 2.26+ -->
-							<!-- https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/modules-and-dependencies.html -->
 							<artifacts>
 								<artifact>
-									<id>org.glassfish.jersey.core:jersey-client:${jersey.version}</id>
-									<source>true</source>
-								</artifact>
-
-								<artifact>
-									<id>org.glassfish.jersey.inject:jersey-hk2:${jersey.version}</id>
+									<id>
+										org.glassfish.jersey.core:jersey-client:${jersey.version}</id>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.glassfish.jersey.media:jersey-media-jaxb:${jersey.version}</id>
+									<!-- Replacement for
+									com.eclipsesource.jaxrs.consumer -->
+									<id>
+										org.glassfish.jersey.ext:jersey-proxy-client:${jersey.version}</id>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.glassfish.jersey.media:jersey-media-multipart:${jersey.version}</id>
+									<id>
+										org.glassfish.jersey.inject:jersey-hk2:${jersey.version}</id>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.glassfish.jersey.core:jersey-server:${jersey.version}</id>
+									<id>
+										org.glassfish.jersey.media:jersey-media-jaxb:${jersey.version}</id>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.glassfish.jersey.containers:jersey-container-servlet:${jersey.version}</id>
+									<id>
+										org.glassfish.jersey.media:jersey-media-json-gson:${jersey.version}</id>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>
+										org.glassfish.jersey.media:jersey-media-multipart:${jersey.version}</id>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>
+										org.glassfish.jersey.core:jersey-server:${jersey.version}</id>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>
+										org.glassfish.jersey.containers:jersey-container-servlet:${jersey.version}</id>
 									<source>true</source>
 								</artifact>
 							</artifacts>
 						</feature>
 						<!--  =============================================  -->
-						<!--  JACKSON -->
+						<!-- SWAGGER (only annotations at the moment) -->
 						<!--  =============================================  -->
 						<feature>
-							<id>info.elexis.target.jackson</id>
+							<id>info.elexis.target.swagger.all</id>
 							<version>${project.version}</version>
-							<label>Bundled Jackson Libraries</label>
+							<label>Bundled Swagger Libraries</label>
 							<providerName>${project.groupId}</providerName>
 							<generateSourceFeature>true</generateSourceFeature>
 							<artifacts>
 								<artifact>
-									<id>com.fasterxml.jackson.core:jackson-core:${jackson.version}</id>
-									<transitive>false</transitive>
+									<id>io.swagger.core.v3:swagger-annotations:2.2.19</id>
 									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>com.fasterxml.jackson.core:jackson-databind:${jackson.version}</id>
 									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>com.fasterxml.jackson.core:jackson-annotations:${jackson.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jackson.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.yaml:snakeyaml:1.30</id>
-									<transitive>false</transitive>
-									<source>true</source>
 								</artifact>
 							</artifacts>
 						</feature>
-						<!--  =============================================  -->
+						<!--  ============================================  -->
 						<!-- KEYCLOAK -->
 						<!--  =============================================  -->
 						<feature>
@@ -450,17 +460,20 @@
 							<generateSourceFeature>true</generateSourceFeature>
 							<artifacts>
 								<artifact>
-									<id>org.keycloak:keycloak-servlet-filter-adapter:${keycloak.version}</id>
+									<id>
+										org.keycloak:keycloak-servlet-filter-adapter:${keycloak.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.keycloak:keycloak-core:${keycloak.version}</id>
+									<id>
+										org.keycloak:keycloak-core:${keycloak.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.keycloak:keycloak-adapter-spi:${keycloak.version}</id>
+									<id>
+										org.keycloak:keycloak-adapter-spi:${keycloak.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
@@ -475,17 +488,35 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.keycloak:keycloak-common:${keycloak.version}</id>
+									<id>
+										org.keycloak:keycloak-common:${keycloak.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.keycloak:keycloak-authz-client:${keycloak.version}</id>
+									<id>
+										org.keycloak:keycloak-authz-client:${keycloak.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
 								<artifact>
-									<id>org.jboss.logging:jboss-logging:3.4.3.Final</id>
+									<id>
+										org.jboss.logging:jboss-logging:3.4.3.Final</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>com.fasterxml.jackson.core:jackson-core:2.16.0</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>com.fasterxml.jackson.core:jackson-annotations:2.16.0</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>com.fasterxml.jackson.core:jackson-databind:2.16.0</id>
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
@@ -505,9 +536,9 @@
 			</plugin>
 
 
-
 			<!-- (2) Build p2 repository from elexis.target -->
 			<!-- https://wiki.eclipse.org/Tycho/Additional_Tools -->
+			<!-- IF NULL VALUES NOT ALLOWED -> https://github.com/eclipse-equinox/p2/issues/117 -->
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-eclipserun-plugin</artifactId>
@@ -546,7 +577,9 @@
 							<artifactId>org.eclipse.ant.core</artifactId>
 							<type>eclipse-plugin</type>
 						</dependency>
-						<!--  https://www.lorenzobettini.it/2015/01/creating-p2-composite-repositories-during-the-build/ equinox ds? -->
+						<!--
+						https://www.lorenzobettini.it/2015/01/creating-p2-composite-repositories-during-the-build/
+						equinox ds? -->
 					</dependencies>
 				</configuration>
 				<executions>
@@ -560,7 +593,8 @@
 				</executions>
 			</plugin>
 
-			<!-- (3) Copy files from template/ to target repo and replace variables -->
+			<!-- (3) Copy files from template/ to target repo and replace
+			variables -->
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>${maven-resources-version}</version>

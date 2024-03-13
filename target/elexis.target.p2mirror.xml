@@ -94,7 +94,9 @@
 			<iu id="ca.odell.glazedlists" version="1.11.0.v20190926-1838" />
 			<iu id="org.eclipse.collections" version="10.4.0.v20200820-2049" />
 			<iu id="jakarta.persistence" version="2.2.3" />
+			<iu id="jakarta.persistence.source" version="2.2.3" />
 			<iu id="org.eclipse.persistence.jpa.feature.group" version="2.7.11.v20220804-52dea2a3c0" />
+			<iu id="org.eclipse.persistence.jpa.source.feature.group" version="2.7.11.v20220804-52dea2a3c0" />
 			<iu id="org.eclipse.persistence.extension" version="2.7.11.v20220804-52dea2a3c0" />
 			<iu id="org.eclipse.gemini.jpa.feature.feature.group" version="1.2.0.202105280757" />
 			<iu id="org.eclipse.nebula.cwt.feature.feature.group" version="1.1.0.202303072132" />

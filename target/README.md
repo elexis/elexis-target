@@ -1,6 +1,6 @@
-# Elexis Development and Production Target 2023-09-java17
+# Elexis Development and Production Target 2023-09-java21
 
-### Updates 2023-09-java17
+### Updates 2023-09-java21
 
 * Multiple updates to Eclipse and libraries
 * `ch.elexis.core.logback.rocketchat`  moved from ch.elexis.core to target
@@ -88,10 +88,10 @@ In order to add local bundles to the target, perform the following steps:
 
 Only on x86_64 architecture
 
-In `docker/` a docker build image can be built. This can be used like `docker run -it --rm --init -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java17 xvfb-run mvn clean verify` 
+In `docker/` a docker build image can be built. This can be used like `docker run -it --rm --init -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java21 xvfb-run mvn clean verify` 
 
 To keep the state `mkdir m2` then
-`docker run -it --rm  --init -v "$(pwd)":/usr/src/mymaven -v "$(pwd)/m2":/root/.m2 -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java17 xvfb-run mvn clean install`
+`docker run -it --rm  --init -v "$(pwd)":/usr/src/mymaven -v "$(pwd)/m2":/root/.m2 -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java21 xvfb-run mvn clean install`
 
 this will populate a local m2 repository. 
 
@@ -99,7 +99,7 @@ this will populate a local m2 repository.
 
 If required to debug a failing test, start with (after keeping the state)
 
-`docker run -it --rm  --network host --init -v "$(pwd)":/usr/src/mymaven -v "$(pwd)/m2":/root/.m2 -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java17 xvfb-run mvn install -DdebugPort=8000 -rf :THE_TEST_PLUGIN`
+`docker run -it --rm  --network host --init -v "$(pwd)":/usr/src/mymaven -v "$(pwd)/m2":/root/.m2 -w /usr/src/mymaven gitlab.medelexis.ch:4567/elexis/docker-build:2023-03-java21 xvfb-run mvn install -DdebugPort=8000 -rf :THE_TEST_PLUGIN`
 
 you can the connect Eclipse using remote debugging, and if you modify the tests `pom.xml` to include
 

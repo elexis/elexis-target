@@ -45,7 +45,7 @@
 				<repository location="https://download.medelexis.ch/p2/chromium-swt-ee/" />
 				<repository location="https://ftp.fau.de/eclipse/technology/babel/update-site/R0.20.0/2022-12/" />
 			</source>
-			<iu id="a.jre.javase" version="17.0.0" />
+			<iu id="a.jre.javase" version="21.0.0" />
 			<iu id="org.eclipse.platform.feature.group" version="4.29.0.v20230903-1000" />
 			<iu id="org.eclipse.platform.source.feature.group" version="4.29.0.v20230903-1000" />
 			<iu id="org.eclipse.equinox.executable.feature.group" version="3.8.2200.v20230717-2134" />

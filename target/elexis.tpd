@@ -4,7 +4,7 @@ target "Elexis" with source allEnvironments
 location "https://download.eclipse.org/releases/2023-09/" {
 	// Specifies the expectation of the installation environment
 	// https://p2-dev.eclipse.narkive.com/SzdeAveT/p2-director-third-party-package-bombs-on-javax-crypto-package-dependency
-	a.jre.javase [17.0.0,18.0.0)
+	a.jre.javase [21.0.0,22.0.0)
 	// Eclipse base
 	org.eclipse.platform.feature.group
 	org.eclipse.equinox.executable.feature.group

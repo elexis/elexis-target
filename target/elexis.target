@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Elexis" sequenceNumber="1701265593">
+<target name="Elexis" sequenceNumber="1717236140">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="a.jre.javase" version="17.0.0"/>
+      <unit id="a.jre.javase" version="21.0.0"/>
       <unit id="org.eclipse.platform.feature.group" version="4.29.0.v20230903-1000"/>
       <unit id="org.eclipse.equinox.executable.feature.group" version="3.8.2200.v20230717-2134"/>
       <unit id="org.eclipse.rcp.feature.group" version="4.29.0.v20230903-1000"/>

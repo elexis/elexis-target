@@ -17,6 +17,7 @@
 		<jetty.version>10.0.18</jetty.version>			<!-- Servlet container -->
 		<jersey.version>2.41</jersey.version>			<!-- JAX/RS Implementation-->
 		<keycloak.version>20.0.5</keycloak.version>
+		<eclipse.persistence>2.7.15</eclipse.persistence>
 		<!-- https://github.com/keycloak/keycloak/issues/25118 -->
 	</properties>
 
@@ -142,6 +143,59 @@
 						</artifact>
 					</artifacts>
 					<featureDefinitions>
+						<!--  =============================================  -->
+						<!-- EclipseLink > 2.7.11 -->
+						<!--  =============================================  -->
+						<feature>
+							<id>org.eclipse.persistence.jpa</id>
+							<version>${eclipse.persistence}</version>
+							<label>EclipseLink JPA for Elexis</label>
+							<providerName>Eclipse.org - EclipseLink Project</providerName>
+							<license>EPL 2.0</license>
+							<generateSourceFeature>true</generateSourceFeature>
+							<artifacts>
+								<artifact>
+									<id>com.sun.activation:jakarta.activation:2.0.1</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>com.sun.mail:jakarta.mail:2.0.1</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.persistence:org.eclipse.persistence.antlr:${eclipse.persistence}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.persistence:org.eclipse.persistence.asm:9.7.0</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.persistence:org.eclipse.persistence.core:${eclipse.persistence}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.persistence:org.eclipse.persistence.jpa:${eclipse.persistence}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.persistence:org.eclipse.persistence.jpa.jpql:${eclipse.persistence}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.persistence:org.eclipse.persistence.extension:${eclipse.persistence}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+							</artifacts>
+						</feature>
 						<!--  =============================================  -->
 						<!-- APACHE COMMONS -->
 						<!--  =============================================  -->

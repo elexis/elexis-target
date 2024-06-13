@@ -127,6 +127,10 @@ location "https://download.medelexis.ch/p2/chromium-swt-ee/" {
 	com.equo.chromium.cef.feature.feature.group
 }
 
+location "https://download.eclipse.org/swtchart/releases/0.14.0/repository" {
+	org.eclipse.swtchart.feature.feature.group
+}
+
 // i18n
 location "https://ftp.fau.de/eclipse/technology/babel/update-site/R0.20.0/2022-12/" {
 	org.eclipse.swt.nl_de

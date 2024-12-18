@@ -141,6 +141,10 @@
 							<id>org.osgi:org.osgi.service.jndi:1.0.1</id>
 							<transitive>false</transitive>
 						</artifact>
+						<artifact>
+							<id>com.googlecode.libphonenumber:libphonenumber:jar:8.13.49</id>
+							<transitive>false</transitive>
+						</artifact>
 					</artifacts>
 					<featureDefinitions>
 						<!--  =============================================  -->

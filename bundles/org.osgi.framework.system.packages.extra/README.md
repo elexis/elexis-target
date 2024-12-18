@@ -12,3 +12,5 @@ See https://github.com/eclipse-ee4j/jaxb-api/issues/92 and
 https://bugs.eclipse.org/bugs/show_bug.cgi?id=540426
 
 Also see https://stackoverflow.com/questions/32628098/unable-to-satisfy-dependency-from-com-lmax-disruptor-3-2-0-to-package-sun-misc-0/33379935#33379935
+
+## Test if still needed on new tycho version

@@ -1,4 +1,51 @@
-# Elexis Development and Production Target 2023-09-java21
+# Elexis Development and Production Target 2024-12-java21
+
+NOT USED, DUE TO SWT REGRESSION in 2024-12 https://github.com/eclipse-nattable/nattable/issues/141#issuecomment-2633432854
+
+## Target Usage 
+
+
+DO NOT use `org.eclipse.e4.emf.xpath-0.5.0.v20240923-2023` it has old dependencies,
+thus we added a drop-in replacement to this target. See https://github.com/eclipse-platform/eclipse.platform.ui/issues/423
+
+
+java.lang.RuntimeException: java.lang.ClassNotFoundException: Provider for jakarta.ws.rs.ext.RuntimeDelegate` cannot be found
+if jersey-client and jersey-common not started in level 2
+
+
+## Tasks
+	
+* Update to Eclipse 4.34
+* Remove all jars from `elexis-3-core, base, server...`
+* Fetch them via maven
+* populate p2 features via maven?
+* `org.jdom2` remove, merge to another library http://jdom.org/
+* Update org.slf4j v1.7 to v2
+* `javax.persistence` -> maven https://wiki.eclipse.org/EclipseLink/Maven 4.0.4
+
+### Refactorings
+
+* import bundle `org.eclipse.osgi.services` replace with import package
+* bundle imports nur auf unsere eigenen bundles, dritte über packages
+* oder so lassen, war convenience wegen re-export
+
+
+### Refactorings TODO
+
+* `Display.getDefault().asyncExec` replace with `@Inject private UISynchronize uiSynchronize;`
+
+### Updates 2024-12-java21
+
+* Removed `ch.elexis.core.logback.rocketchat`
+* Removed `at.medevit.logback.mattermost`
+* Removed `at.medevit.logback.pushnotification`
+* Deleted `com.eclipsesource.*` from repository
+* Deleted `ag.ion.*` (noa4e) from repository
+
+#### Notes 2024-12-java-21
+
+* nattable.extension.e4 https://github.com/eclipse-nattable/nattable/issues/141#issuecomment-2636161202
+
 
 ### Updates 2023-09-java21
 
@@ -18,9 +65,9 @@
 
 * Export target does not work as expected, no entries are created for contents in maven_libs [Issue](https://github.com/eclipse-pde/eclipse.pde/issues/950 "Github Issue") 
 
-https://redmine.medelexis.ch/issues/23378
-https://redmine.medelexis.ch/issues/22666
-https://redmine.medelexis.ch/issues/25682 Jaxrs Consumer soll HTTP/2 unterstützen
+* https://redmine.medelexis.ch/issues/23378
+* https://redmine.medelexis.ch/issues/22666
+* https://redmine.medelexis.ch/issues/25682 Jaxrs Consumer soll HTTP/2 unterstützen
 
 ### Next steps (?)
 
@@ -53,25 +100,25 @@ The target is distributed as a [p2](https://www.eclipse.org/equinox/p2/) reposit
 	maven-p2/				Contains the Maven based artifacts
 	../justj.11				Contains the Java JRE
 
-## How to update the target
+# How to update the target
 
 Target development is done within the Eclipse IDE. That is, the target is prepared (developed and tested) within
 the local development environment, and finally uploaded to the server for public usage.
 
 * Update `pom.xml` base values like `target-name` etc to reflect the changes
 
-### p2 repo: Eclipse P2 artifacts (`eclipse-p2`)
+## p2 repo: Eclipse P2 artifacts (`eclipse-p2`)
 
 * Modify `elexis.tpd`, then use Eclipse to build `elexis.target` out of it
-* Manually generate `elexis.target.p2mirror.xml` by copying stuff from .target into it
-* Run `mvn tycho-eclipserun:eclipse-run` to build eclipse target derived p2 site into `target/$target-name/eclipse-p2` 
+* Manually generate `elexis.target.p2mirror.xml` by copying stuff from .target into it, use the `target2mirror.xml.sh` script to help you generate some of the lines.
+* Run `mvn tycho-eclipse:eclipse-run` to build eclipse target derived p2 site into `target/$target-name/eclipse-p2` 
 
-### p2 repo: Maven based artifacts (`maven-p2`)
+## p2 repo: Maven based artifacts (`maven-p2`)
 
 * Update the requirements in `pom.xml`
 * Run `mvn p2:site -U` to build maven derived p2 site into `target/$target-name/maven-p2`
 
-#### p2 repo: Local artifacts (`elexis-p2`)
+### p2 repo: Local artifacts (`elexis-p2`)
 
 In order to add local bundles to the target, perform the following steps:
 
@@ -79,12 +126,16 @@ In order to add local bundles to the target, perform the following steps:
 * In `bundles/info.elexis.target.repo` you find a temporary target to load (update it first) and update `feature.xml` against. 
 * Now within your IDE export the feature into the target directory `target/$target-name/elexis-p2/`
 
-### Uploading the target 
+## Removing unwanted artefacts
+
+Execute `elexis-target cleanup-p2-repo.xml.launch` to remove unwanted artefacts from the p2 repo
+
+## Uploading the target 
 
 * Run `mvn resources:copy-resources` to copy the p2 information files from `template/` to `target/$target-name/`.
 * Update `rsync.sh` to the current target location and run it.
 
-### Docker usage
+## Docker usage
 
 Only on x86_64 architecture
 
@@ -95,7 +146,7 @@ To keep the state `mkdir m2` then
 
 this will populate a local m2 repository. 
 
-#### Surefire Test Debugging
+### Surefire Test Debugging
 
 If required to debug a failing test, start with (after keeping the state)
 

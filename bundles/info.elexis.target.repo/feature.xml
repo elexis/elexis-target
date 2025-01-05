@@ -2,7 +2,7 @@
 <feature
       id="info.elexis.target.repo"
       label="Elexis Target Repo"
-      version="2023.9.0.qualifier"
+      version="2024.12.0.qualifier"
       provider-name="elexis.info">
 
    <description url="http://www.example.com/description">
@@ -18,143 +18,39 @@
    </license>
 
    <plugin
-         id="info.elexis.target.jaxws.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.bion.workbench.office.editor.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.noa"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.noa4e.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.bion.workbench.office.editor.activation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.bion.workbench.office.editor.activation.nl1"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.noa4e.search"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.noa4e.search.nl1"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.bion.workbench.office.editor.ui.nl1"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.bion.workbench.office.editor.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="ag.ion.noa4e.ui.nl1"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
-         id="at.medevit.logback.mattermost"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
-         id="at.medevit.logback.pushnotification"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
-
-   <plugin
-         id="info.elexis.target.hapi.fhir"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="info.elexis.target.hapi.fhir.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.apache.commons.commons-dbcp2"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.apache.geronimo.specs.geronimo-jta_1.1_spec"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
-         id="ch.elexis.core.logback.rocketchat"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
+         id="org.eclipse.e4.emf.xpath"
+         version="0.0.0"/>
 
    <plugin
-         id="info.elexis.target.ehealth.connector.ch"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         id="org.glassfish.jersey.core.jersey-client"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.glassfish.jersey.core.jersey-common"
+         version="0.0.0"/>
+
+   <plugin
+         id="jakarta.ws.rs-api"
+         version="0.0.0"/>
+
+   <plugin
+         id="info.elexis.target.liquibase"
+         version="0.0.0"/>
+
+   <plugin
+         id="info.elexis.target.jaxws.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="info.elexis.target.hapi.fhir"
+         version="0.0.0"/>
 
 </feature>

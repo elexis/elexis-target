@@ -4,25 +4,25 @@ Build-Jdk-Spec: 21
 Implementation-Title: Apache Commons DBCP
 Implementation-Vendor: The Apache Software Foundation
 Implementation-Vendor-Id: org.apache
-Implementation-Version: 2.11.0
+Implementation-Version: 2.13.0
 Specification-Title: Apache Commons DBCP
 Specification-Vendor: The Apache Software Foundation
-Specification-Version: 2.11.0
+Specification-Version: 2.13.0
 X-Compile-Source-JDK: 1.8
 X-Compile-Target-JDK: 1.8
 Bundle-Description: Apache Commons DBCP software implements Database Con
  nection Pooling
-Bundle-DocURL: https://commons.apache.org/dbcp/
+Bundle-DocURL: https://commons.apache.org/proper/commons-dbcp/
 Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
 Bundle-ManifestVersion: 2
 Bundle-Name: Apache Commons DBCP
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-SymbolicName: org.apache.commons.commons-dbcp2
 Bundle-Vendor: The Apache Software Foundation
-Bundle-Version: 2.11.0
-Export-Package: org.apache.commons.dbcp2;version="2.11.0",org.apache.com
- mons.dbcp2.cpdsadapter;version="2.11.0",org.apache.commons.dbcp2.dataso
- urces;version="2.11.0",org.apache.commons.dbcp2.managed;version="2.11.0
+Bundle-Version: 2.13.0
+Export-Package: org.apache.commons.dbcp2;version="2.13.0",org.apache.com
+ mons.dbcp2.cpdsadapter;version="2.13.0",org.apache.commons.dbcp2.dataso
+ urces;version="2.13.0",org.apache.commons.dbcp2.managed;version="2.13.0
  "
 Import-Package: javax.management,
  javax.naming,
@@ -37,3 +37,4 @@ Include-Resource: org/apache/commons/dbcp2/LocalStrings.properties=src/m
  /LICENSE.txt=LICENSE.txt,META-INF/NOTICE.txt=NOTICE.txt
 Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 Tool: Bnd-6.4.1.202306080939
+Multi-Release: true

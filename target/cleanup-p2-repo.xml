@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Cleanup p2 repo" default="cleanup.target.platform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<target name="cleanup.target.platform" description="Cleanup">
+		<!-- https://help.eclipse.org/latest/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fp2_repositorytasks.htm -->
+		<p2.remove.iu>
+			<repository location="/Users/mdescher/Development/elexis-target/git/elexis-target/target/target/2024-12-java21/eclipse-p2" />
+			<!-- Remove these, as we override them locally -->
+			<iu id="org.eclipse.e4.emf.xpath" />
+			<iu id="org.eclipse.e4.emf.xpath.source" />
+		</p2.remove.iu>
+	</target>
+</project>
+<!--
+
+org.eclipse.ogsi.services?
+
+-->

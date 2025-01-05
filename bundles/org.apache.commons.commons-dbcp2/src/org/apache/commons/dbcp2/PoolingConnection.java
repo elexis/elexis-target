@@ -20,6 +20,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
@@ -27,6 +28,7 @@ import org.apache.commons.pool2.KeyedObjectPool;
 import org.apache.commons.pool2.KeyedPooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
+import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 
 /**
  * A {@link DelegatingConnection} that pools {@link PreparedStatement}s.
@@ -46,18 +48,27 @@ public class PoolingConnection extends DelegatingConnection<Connection>
     /**
      * Statement types.
      *
+     * See subclasses of {@link Statement}.
+     *
      * @since 2.0 protected enum.
      * @since 2.4.0 public enum.
+     * @see Statement
+     * @see CallableStatement
+     * @see PreparedStatement
      */
     public enum StatementType {
 
         /**
          * Callable statement.
+         *
+         * @see CallableStatement
          */
         CALLABLE_STATEMENT,
 
         /**
          * Prepared statement.
+         *
+         * @see PreparedStatement
          */
         PREPARED_STATEMENT
     }
@@ -68,7 +79,7 @@ public class PoolingConnection extends DelegatingConnection<Connection>
     private boolean clearStatementPoolOnReturn;
 
     /**
-     * Constructor.
+     * Constructs a new instance.
      *
      * @param connection
      *            the underlying {@link Connection}.
@@ -111,7 +122,11 @@ public class PoolingConnection extends DelegatingConnection<Connection>
             }
         } finally {
             try {
-                getDelegateInternal().close();
+                @SuppressWarnings("resource")
+                final Connection delegateInternal = getDelegateInternal();
+                if (delegateInternal != null) {
+                    delegateInternal.close();
+                }
             } finally {
                 setClosedInternal(true);
             }
@@ -292,9 +307,18 @@ public class PoolingConnection extends DelegatingConnection<Connection>
      *            the wrapped pooled statement to be destroyed.
      */
     @Override
-    public void destroyObject(final PStmtKey key, final PooledObject<DelegatingPreparedStatement> pooledObject)
-            throws SQLException {
-        pooledObject.getObject().getInnermostDelegate().close();
+    public void destroyObject(final PStmtKey key, final PooledObject<DelegatingPreparedStatement> pooledObject) throws SQLException {
+        if (pooledObject != null) {
+            @SuppressWarnings("resource")
+            final DelegatingPreparedStatement object = pooledObject.getObject();
+            if (object != null) {
+                @SuppressWarnings("resource")
+                final Statement innermostDelegate = object.getInnermostDelegate();
+                if (innermostDelegate != null) {
+                    innermostDelegate.close();
+                }
+            }
+        }
     }
 
     private String getCatalogOrNull() {
@@ -552,7 +576,6 @@ public class PoolingConnection extends DelegatingConnection<Connection>
      * @return a {@link PoolablePreparedStatement}
      * @throws SQLException
      *             Wraps an underlying exception.
-     *
      */
     @Override
     public PreparedStatement prepareStatement(final String sql, final int[] columnIndexes) throws SQLException {
@@ -598,6 +621,13 @@ public class PoolingConnection extends DelegatingConnection<Connection>
 
     @Override
     public synchronized String toString() {
+        if (pStmtPool instanceof GenericKeyedObjectPool) {
+            // DBCP-596 PoolingConnection.toString() causes StackOverflowError
+            final GenericKeyedObjectPool<?, ?> gkop = (GenericKeyedObjectPool<?, ?>) pStmtPool;
+            if (gkop.getFactory() == this) {
+                return "PoolingConnection: " + pStmtPool.getClass() + "@" + System.identityHashCode(pStmtPool);
+            }
+        }
         return "PoolingConnection: " + Objects.toString(pStmtPool);
     }
 

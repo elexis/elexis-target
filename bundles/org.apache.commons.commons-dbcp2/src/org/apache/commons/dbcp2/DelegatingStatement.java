@@ -23,6 +23,7 @@ import java.sql.SQLWarning;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A base delegating implementation of {@link Statement}.
@@ -94,7 +95,7 @@ public class DelegatingStatement extends AbandonedTrace implements Statement {
 
     protected void checkOpen() throws SQLException {
         if (isClosed()) {
-            throw new SQLException(this.getClass().getName() + " with address: \"" + this.toString() + "\" is closed.");
+            throw new SQLException(this.getClass().getName() + " with address: \"" + toString() + "\" is closed.");
         }
     }
 
@@ -450,20 +451,19 @@ public class DelegatingStatement extends AbandonedTrace implements Statement {
      * a "genuine" {@link Statement}.
      * </p>
      *
-     * @return The innermost delegate.
-     *
+     * @return The innermost delegate, may return null.
      * @see #getDelegate
      */
     @SuppressWarnings("resource")
     public Statement getInnermostDelegate() {
-        Statement s = statement;
-        while (s instanceof DelegatingStatement) {
-            s = ((DelegatingStatement) s).getDelegate();
-            if (this == s) {
+        Statement stmt = statement;
+        while (stmt instanceof DelegatingStatement) {
+            stmt = ((DelegatingStatement) stmt).getDelegate();
+            if (this == stmt) {
                 return null;
             }
         }
-        return s;
+        return stmt;
     }
 
     /**
@@ -800,7 +800,7 @@ public class DelegatingStatement extends AbandonedTrace implements Statement {
      */
     @Override
     public synchronized String toString() {
-        return statement == null ? "NULL" : statement.toString();
+        return Objects.toString(statement, "NULL");
     }
 
     @Override

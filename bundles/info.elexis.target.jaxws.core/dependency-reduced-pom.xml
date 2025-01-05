@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>info.elexis.target</groupId>
+  <artifactId>jaxws.core</artifactId>
+  <version>4.0.3</version>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>11</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <archive>
+            <index>false</index>
+            <manifest>
+              <addClasspath>false</addClasspath>
+            </manifest>
+            <manifestEntries>
+              <Built-By>MEDEVIT</Built-By>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>6.0.0</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>osgi-bundle</id>
+            <phase>package</phase>
+            <goals>
+              <goal>bundle</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+            <Bundle-Version>${project.version}.v${maven.build.timestamp}</Bundle-Version>
+            <Bundle-Vendor>MEDEVIT</Bundle-Vendor>
+            <_exportcontents>jakarta.jws,
+							jakarta.jws.*,
+							jakarta.xml.ws,
+							jakarta.xml.ws.*,
+							jakarta.xml.soap,
+							!*</_exportcontents>
+            <Import-Package>jakarta.activation,
+							jakarta.annotation,
+							jakarta.annotation.security,
+							jakarta.annotation.sql,
+							jakarta.xml.bind,
+							jakarta.xml.bind.annotation,
+							jakarta.xml.bind.annotation.adapters,
+							jakarta.xml.bind.util,
+							jakarta.xml.bind.attachment,
+							jakarta.xml.bind.helpers</Import-Package>
+            <Bundle-RequiredExecutionEnvironment>JavaSE-11</Bundle-RequiredExecutionEnvironment>
+            <Embed-Dependency>*;scope=compile|runtime;inline=true</Embed-Dependency>
+            <Embed-Directory>dependencies</Embed-Directory>
+            <Embed-StripGroup>true</Embed-StripGroup>
+            <Embed-Transitive>true</Embed-Transitive>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <finalName>shaded-DO-NOT-USE</finalName>
+          <createSourcesJar>true</createSourcesJar>
+          <transformers>
+            <transformer>
+              <manifestEntries>
+                <Bundle-SymbolicName>${project.groupId}.${project.artifactId}.source</Bundle-SymbolicName>
+                <Eclipse-SourceBundle>${project.groupId}.${project.artifactId};version="${project.version}"</Eclipse-SourceBundle>
+                <Export-Package />
+                <Import-Package />
+                <Bundle-ClassPath />
+                <Embedded-Artifacts />
+                <Embed-Directory />
+                <Ignore-Package />
+                <Embed-Dependency />
+              </manifestEntries>
+            </transformer>
+          </transformers>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+    <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+  </properties>
+</project>

@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.elexis.target</groupId>
 	<artifactId>docker-build</artifactId>
-	<version>2023-09-java21</version>
+	<version>2024-12-java21</version>
 
 	<properties>
-		<tycho.version>4.0.8</tycho.version>
+		<tycho.version>4.0.10</tycho.version>
 		<junit.version>4.13.1</junit.version>
 		<mockito.version>1.9.0</mockito.version>
 	</properties>

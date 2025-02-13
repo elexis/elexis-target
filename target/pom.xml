@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.elexis.target</groupId>
 	<artifactId>target</artifactId>
-	<version>24.12.0-SNAPSHOT</version>
+	<version>25.03.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
-		<target-name>2024-12-java21</target-name>
-		<platform-version-name>2024-12</platform-version-name>
+		<target-name>2025-03-java21</target-name>
+		<platform-version-name>2025-03</platform-version-name>
 		<tycho-version>4.0.10</tycho-version>
 		<tycho-extras-version>4.0.10</tycho-extras-version>
 		<p2-maven-plugin-version>2.1.0</p2-maven-plugin-version>

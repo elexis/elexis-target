@@ -1,6 +1,6 @@
-target "Elexis 2024-12-java21" with source allEnvironments
+target "Elexis 2025-03-java21" with source allEnvironments
 
-location "https://download.elexis.info/elexis/target/2024-12-java21/" {
+location "https://download.elexis.info/elexis/target/2025-03-java21/" {
 	
 	// justj.21
 	org.eclipse.justj.openjdk.hotspot.jre.full.feature.group
@@ -18,9 +18,7 @@ location "https://download.elexis.info/elexis/target/2024-12-java21/" {
 	org.eclipse.emf.common.ui.feature.group
 	org.eclipse.emf.edit.ui.feature.group
 	org.eclipse.ecf.core.feature.feature.group
-	org.eclipse.ecf.core.ssl.feature.feature.group
 	org.eclipse.ecf.filetransfer.feature.feature.group
-	org.eclipse.ecf.filetransfer.ssl.feature.feature.group
 	org.eclipse.ecf.filetransfer.httpclient5.feature.feature.group
 	org.eclipse.ecf.remoteservice.feature.feature.group
 	org.eclipse.mylyn.wikitext.feature.feature.group

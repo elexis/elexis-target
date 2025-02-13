@@ -1,12 +1,16 @@
-# Elexis Development and Production Target 2024-12-java21
+# Elexis Development and Production Target 2025-03-java21
 
-NOT USED, DUE TO SWT REGRESSION in 2024-12 https://github.com/eclipse-nattable/nattable/issues/141#issuecomment-2633432854
+https://github.com/eclipse-simrel/.github/blob/main/wiki/SimRel/2025-03.md
+
+https://ci.eclipse.org/simrel/
 
 ## Target Usage 
 
+NOT USED, DUE TO SWT REGRESSION in 2024-12 https://github.com/eclipse-nattable/nattable/issues/141#issuecomment-2633432854
 
 DO NOT use `org.eclipse.e4.emf.xpath-0.5.0.v20240923-2023` it has old dependencies,
-thus we added a drop-in replacement to this target. See https://github.com/eclipse-platform/eclipse.platform.ui/issues/423
+thus we added a drop-in replacement to this target. See 
+~https://github.com/eclipse-platform/eclipse.platform.ui/issues/423~ DONE Feb 12 25
 
 
 java.lang.RuntimeException: java.lang.ClassNotFoundException: Provider for jakarta.ws.rs.ext.RuntimeDelegate` cannot be found

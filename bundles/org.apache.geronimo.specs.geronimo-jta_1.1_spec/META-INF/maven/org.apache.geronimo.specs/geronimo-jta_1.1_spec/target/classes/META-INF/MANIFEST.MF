@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Built-By: mdescher
 Build-Jdk: 17.0.6
-Created-By: 21.0.3 (Eclipse Adoptium)
+Created-By: 21.0.6 (Eclipse Adoptium)
 Bundle-ManifestVersion: 2
 Tool: Bnd-0.0.227
-Bnd-LastModified: 1738569889142
+Bnd-LastModified: 1739348134723
 Bundle-Version: 1.1.1
 Bundle-SymbolicName: org.apache.geronimo.specs.geronimo-jta_1.1_spec
 Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt

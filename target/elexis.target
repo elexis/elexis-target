@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="Elexis" sequenceNumber="1718282465">
+<target name="Elexis" sequenceNumber="1740379215">
   <locations>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="a.jre.javase" version="17.0.0"/>
@@ -93,9 +93,9 @@
       <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20230531010532/repository/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
-      <unit id="com.equo.chromium.feature.feature.group" version="88.0.6.202205201430"/>
-      <unit id="com.equo.chromium.cef.feature.feature.group" version="88.0.6.202205201415"/>
-      <repository location="https://download.medelexis.ch/p2/chromium-swt-ee/"/>
+      <unit id="com.equo.chromium.feature.feature.group" version="124.0.10"/>
+      <unit id="com.equo.chromium.cef.feature.feature.group" version="124.0.10"/>
+      <repository location="https://download.medelexis.ch/p2/chromium-swt-ee-124/"/>
     </location>
     <location includeMode="slicer" includeAllPlatforms="true" includeSource="true" includeConfigurePhase="false" type="InstallableUnit">
       <unit id="org.eclipse.swtchart.feature.feature.group" version="0.14.0.202301260747"/>

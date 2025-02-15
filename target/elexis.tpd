@@ -122,7 +122,7 @@ location "https://download.eclipse.org/tools/orbit/downloads/drops/R202305310105
 }
 
 // Chromium Browser - is this allowed??
-location "https://download.medelexis.ch/p2/chromium-swt-ee/" {
+location "https://download.medelexis.ch/p2/chromium-swt-ee-124/" {
 	com.equo.chromium.feature.feature.group
 	com.equo.chromium.cef.feature.feature.group
 }

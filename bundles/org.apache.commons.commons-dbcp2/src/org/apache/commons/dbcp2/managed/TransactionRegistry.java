@@ -22,13 +22,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
 
-import javax.transaction.SystemException;
-import javax.transaction.Transaction;
-import javax.transaction.TransactionManager;
-import javax.transaction.TransactionSynchronizationRegistry;
 import javax.transaction.xa.XAResource;
 
 import org.apache.commons.dbcp2.DelegatingConnection;
+
+import jakarta.transaction.SystemException;
+import jakarta.transaction.Transaction;
+import jakarta.transaction.TransactionManager;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 /**
  * TransactionRegistry tracks Connections and XAResources in a transacted environment for a single XAConnectionFactory.

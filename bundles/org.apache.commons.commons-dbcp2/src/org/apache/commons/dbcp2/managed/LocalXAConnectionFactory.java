@@ -20,13 +20,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
 
-import javax.transaction.TransactionManager;
-import javax.transaction.TransactionSynchronizationRegistry;
 import javax.transaction.xa.XAException;
 import javax.transaction.xa.XAResource;
 import javax.transaction.xa.Xid;
 
 import org.apache.commons.dbcp2.ConnectionFactory;
+
+import jakarta.transaction.TransactionManager;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 /**
  * An implementation of XAConnectionFactory which manages non-XA connections in XA transactions. A non-XA connection

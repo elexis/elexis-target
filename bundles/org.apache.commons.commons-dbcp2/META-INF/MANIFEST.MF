@@ -19,16 +19,16 @@ Bundle-Name: Apache Commons DBCP
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-SymbolicName: org.apache.commons.commons-dbcp2
 Bundle-Vendor: The Apache Software Foundation
-Bundle-Version: 2.13.0
+Bundle-Version: 2.13.100
 Export-Package: org.apache.commons.dbcp2;version="2.13.0",org.apache.com
  mons.dbcp2.cpdsadapter;version="2.13.0",org.apache.commons.dbcp2.dataso
  urces;version="2.13.0",org.apache.commons.dbcp2.managed;version="2.13.0
  "
-Import-Package: javax.management,
+Import-Package: jakarta.transaction,
+ javax.management,
  javax.naming,
  javax.naming.spi,
  javax.sql,
- javax.transaction;version="1.1.0",
  org.apache.commons.logging,
  org.apache.commons.pool2,
  org.apache.commons.pool2.impl

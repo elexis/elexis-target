@@ -89,7 +89,32 @@ EclipseLink https://eclipse.dev/eclipselink/
 * `ch.elexis.core.jpa.entities`
 * `ch.elexis.core.jpa.logging.slf4j`
 * + DB JDBC drivers (mysql, ...)
+* `dbcp` -> jakarta.transaction
 
+## Jetty Server
+
+In addition to the **Combined Runlevel configuration** 
+
+| **Start Level** | **Auto Start** | **Bundle**                              |
+|-----------------|----------------|-----------------------------------------|
+| 3               | True           | org.eclipse.jetty.ee10.annotations      |		
+| 2               | True           | org.eclipse.jetty.ee10.osgi.boot        |
+| 2               | True           | org.eclipse.jetty.osgi                  |
+
+in order to enable a bundle to contribute, `META-INF/MANIFEST.MF` must contain the entries `Jetty-Environment: ee10` and `Web-ContextPath: /.`
+
+Remove `org.eclipse.equinox.http.service_api` and `org.eclipse.equinox.http.servlet`
+
+`org.eclipse.equinox.http.jetty` would also boot jetty
+
+#### Jetty Paramaters
+
+```
+-Dorg.osgi.service.http.port=8380
+-Djetty.http.port=8380
+-Djetty.home.bundle=org.eclipse.jetty.ee10.osgi.boot
+-Dorg.eclipse.jetty.LEVEL=DEBUG
+```
 
 ## Common problems
 

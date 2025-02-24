@@ -2,7 +2,7 @@
 <feature
       id="info.elexis.target.repo"
       label="Elexis Target Repo"
-      version="2024.12.0.qualifier"
+      version="2025.3.0.qualifier"
       provider-name="elexis.info">
 
    <description url="http://www.example.com/description">
@@ -22,10 +22,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.apache.geronimo.specs.geronimo-jta_1.1_spec"
-         version="0.0.0"/>
-
-   <plugin
          id="org.glassfish.jersey.core.jersey-client"
          version="0.0.0"/>
 
@@ -38,11 +34,15 @@
          version="0.0.0"/>
 
    <plugin
+         id="info.elexis.target.jaxws.core"
+         version="0.0.0"/>
+
+   <plugin
          id="info.elexis.target.liquibase"
          version="0.0.0"/>
 
    <plugin
-         id="info.elexis.target.jaxws.core"
+         id="info.elexis.target.hl7.fhir.r4"
          version="0.0.0"/>
 
    <plugin

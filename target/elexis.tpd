@@ -1,7 +1,13 @@
 target "Elexis" with source allEnvironments
 
-// Eclipse 4.34	- 2024-12
-location "https://download.eclipse.org/releases/2025-03/" {
+location "https://download.eclipse.org/releases/2023-12/" {
+	// org.eclipse.jdt.debug 3.22.0.v20250116-1056 requires Execution Environment that matches (&(osgi.ee=JavaSE)(version=21)) 
+	// but the current resolution context uses [a.jre.javase 17.0.0]
+//	a.jre.javase [21.0.0,22.0.0)
+}
+
+// Eclipse 4.35	- 2025-03
+location "https://download.eclipse.org/staging/2025-03/" {
 	// Specifies the expectation of the installation environment
 	// https://p2-dev.eclipse.narkive.com/SzdeAveT/p2-director-third-party-package-bombs-on-javax-crypto-package-dependency
 //	a.jre.javase [21.0.0,22.0.0)
@@ -81,7 +87,7 @@ location "https://download.eclipse.org/nebula/releases/latest/" {
 }
 
 // Chromium Browser
-location "https://download.medelexis.ch/p2/chromium-swt-ee/" {
+location "https://download.medelexis.ch/p2/chromium-swt-ee-128/" {
 	com.equo.chromium.feature.feature.group
 	com.equo.chromium.cef.feature.feature.group
 	com.equo.chromium.cef.arm.feature.feature.group

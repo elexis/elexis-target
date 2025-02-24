@@ -16,10 +16,16 @@ thus we added a drop-in replacement to this target. See
 java.lang.RuntimeException: java.lang.ClassNotFoundException: Provider for jakarta.ws.rs.ext.RuntimeDelegate` cannot be found
 if jersey-client and jersey-common not started in level 2
 
+## TODO
+
+Will need to get rid of keycloak - due to javax and is not maintenanced anymore
+
+client library https://github.com/googleapis/google-oauth-java-client/wiki/OAuth-2.0
+server filter fork of https://github.com/curityio/oauth-filter-for-java ?
 
 ## Tasks
 	
-* Update to Eclipse 4.34
+* Update to Eclipse 4.35
 * Remove all jars from `elexis-3-core, base, server...`
 * Fetch them via maven
 * populate p2 features via maven?

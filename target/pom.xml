@@ -4,19 +4,19 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.elexis.target</groupId>
 	<artifactId>target</artifactId>
-	<version>25.03.0-SNAPSHOT</version>
+	<version>25.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<target-name>2025-03-java21</target-name>
 		<platform-version-name>2025-03</platform-version-name>
-		<tycho-version>4.0.10</tycho-version>
-		<tycho-extras-version>4.0.10</tycho-extras-version>
+		<tycho-version>4.0.11</tycho-version>
+		<tycho-extras-version>4.0.11</tycho-extras-version>
 		<p2-maven-plugin-version>2.1.0</p2-maven-plugin-version>
 		<maven-resources-version>3.3.1</maven-resources-version>
 		<jetty.version>12.0.16</jetty.version>			<!-- Servlet container  / Jetty 11 jakarta.namespace -->
 		<http2.version>11.0.24</http2.version>
-		<jersey.version>3.1.9</jersey.version>			<!-- JAX/RS Implementation-->
+		<jersey.version>3.1.10</jersey.version>			<!-- JAX/RS Implementation-->
 		<keycloak.version>20.0.5</keycloak.version>	<!-- newer versions have keycloak filter deprecated -->
 		<eclipse.persistence>4.0.5</eclipse.persistence>
 		<!-- https://github.com/keycloak/keycloak/issues/25118 -->
@@ -31,6 +31,15 @@
 				<groupId>org.reficio</groupId>
 				<artifactId>p2-maven-plugin</artifactId>
 				<version>${p2-maven-plugin-version}</version>
+				<executions>
+					<execution>
+						<id>build-maven-p2-repository</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>site</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<destinationDirectory>${project.basedir}/target/${target-name}/maven-p2</destinationDirectory>
 					<additionalArgs>-artifactRepository file:${project.basedir}/target/${target-name}/maven-p2 -metadataRepository file:${project.basedir}/target/${target-name}/maven-p2</additionalArgs>
@@ -94,7 +103,7 @@
 							<id>org.liquibase:liquibase-core:4.30.0</id>
 						</artifact>
 						<artifact>
-							<id>com.google.code.gson:gson:2.11.0</id>
+							<id>com.google.code.gson:gson:2.12.1</id>
 							<source>true</source>
 						</artifact>
 						<artifact>
@@ -132,7 +141,11 @@
 							<id>com.google.guava:failureaccess:1.0.2</id>
 							<transitive>false</transitive>
 						</artifact>
-						<!-- TODO CONTINUE HERE -->
+						<artifact>
+							<id>org.apache.solr:solr-solrj:9.8.0</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
 						<artifact>
 							<!-- Xerces2 provides high performance, fully
 							compliant XML parsers -->
@@ -264,6 +277,7 @@
 							<generateSourceFeature>true</generateSourceFeature>
 							<artifacts>
 								<artifact>
+								<!-- remove ? -->
 									<id>org.apache.commons:commons-jexl:2.1.1</id>
 									<transitive>false</transitive>
 									<source>true</source>
@@ -377,6 +391,11 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
+									<id>org.eclipse.jetty:jetty-openid:${jetty.version}</id>
+									<transitive>false</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
 									<id>org.eclipse.jetty:jetty-server:${jetty.version}</id>
 									<transitive>false</transitive>
 									<source>true</source>
@@ -437,7 +456,17 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
+									<id>jakarta.websocket:jakarta.websocket-api:2.1.1</id>
+									<transitive>true</transitive>
+									<source>true</source>
+								</artifact>			
+								<artifact>
 									<id>org.eclipse.jetty.ee10.websocket:jetty-ee10-websocket-servlet:${jetty.version}</id>
+									<transitive>true</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.jetty.ee10.websocket:jetty-ee10-websocket-jakarta-server:${jetty.version}</id>
 									<transitive>true</transitive>
 									<source>true</source>
 								</artifact>
@@ -453,6 +482,11 @@
 								</artifact>
 								<artifact>
 									<id>org.eclipse.jetty.websocket:jetty-websocket-jetty-api:${jetty.version}</id>
+									<transitive>true</transitive>
+									<source>true</source>
+								</artifact>
+								<artifact>
+									<id>org.eclipse.jetty.websocket:jetty-websocket-jetty-client:${jetty.version}</id>
 									<transitive>true</transitive>
 									<source>true</source>
 								</artifact>
@@ -676,7 +710,7 @@
 									<id>org.apache.poi:poi-ooxml:5.3.0</id>
 									<source>true</source>
 									<transitive>true</transitive>
-								<excludes>
+									<excludes>
                                         <exclude>org.apache.commons:commons-lang3:jar:*</exclude>
                                     </excludes>
 								</artifact>
@@ -755,15 +789,7 @@
 						</feature>
 					</featureDefinitions>
 				</configuration>
-				<executions>
-					<execution>
-						<id>build-maven-p2-repository</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>site</goal>
-						</goals>
-					</execution>
-				</executions>
+				
 			</plugin>
 
 
@@ -779,7 +805,7 @@
 						<repository>
 							<id>${platform-version-name}</id>
 							<layout>p2</layout>
-							<url>https://download.eclipse.org/releases/${platform-version-name}</url>
+							<url>https://download.eclipse.org/staging/${platform-version-name}</url>
 						</repository>
 					</repositories>
 					<applicationsArgs>

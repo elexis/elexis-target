@@ -40,17 +40,17 @@
 				<repository location="https://download.eclipse.org/mylyn/updates/release/4.5.0" />
 				<repository location="https://download.eclipse.org/nattable/releases/2.5.0/repository/" />
 				<repository location="https://download.eclipse.org/nebula/releases/latest/" />
-				<repository location="https://download.medelexis.ch/p2/chromium-swt-ee-128/" />
+				<repository location="https://download.medelexis.ch/p2/chromium-swt-ee-124/" />
 				<repository location="https://download.eclipse.org/swtchart/releases/1.0.0/repository" />
 				<repository location="https://ftp.fau.de/eclipse/technology/babel/update-site/R0.20.0/2022-12/" />
 			</source>
-			<iu id="org.eclipse.platform.feature.group" version="4.35.0.v20250213-1800"/>
-			<iu id="org.eclipse.platform.source.feature.group" version="4.35.0.v20250213-1800"/>
-			<iu id="org.eclipse.equinox.executable.feature.group" version="3.8.2800.v20250212-0927"/>
-			<iu id="org.eclipse.rcp.feature.group" version="4.35.0.v20250213-1800"/>
-			<iu id="org.eclipse.rcp.source.feature.group" version="4.35.0.v20250213-1800"/>
-			<iu id="org.eclipse.e4.rcp.feature.group" version="4.35.0.v20250213-1644"/>
-			<iu id="org.eclipse.e4.rcp.source.feature.group" version="4.35.0.v20250213-1644"/>
+			<iu id="org.eclipse.platform.feature.group" version="4.35.0.v20250228-0640"/>
+			<iu id="org.eclipse.platform.source.feature.group" version="4.35.0.v20250228-0640"/>
+			<iu id="org.eclipse.equinox.executable.feature.group" version="3.8.2800.v20250227-1734"/>
+			<iu id="org.eclipse.rcp.feature.group" version="4.35.0.v20250228-0640"/>
+			<iu id="org.eclipse.rcp.source.feature.group" version="4.35.0.v20250228-0640"/>
+			<iu id="org.eclipse.e4.rcp.feature.group" version="4.35.0.v20250228-0640"/>
+			<iu id="org.eclipse.e4.rcp.source.feature.group" version="4.35.0.v20250228-0640"/>
 			<iu id="org.eclipse.emf.common.feature.group" version="2.34.0.v20241204-1554"/>
 			<iu id="org.eclipse.emf.common.source.feature.group" version="2.34.0.v20241204-1554"/>
 			<iu id="org.eclipse.emf.ecore.feature.group" version="2.39.0.v20241018-1213" />
@@ -71,10 +71,10 @@
 			<iu id="org.eclipse.ecf.filetransfer.httpclient5.feature.source.feature.group" version="1.2.0.v20250122-1953"/>
 			<iu id="org.eclipse.ecf.remoteservice.feature.feature.group" version="2.7.0.v20241230-2245"/>
 			<iu id="org.eclipse.ecf.remoteservice.feature.source.feature.group" version="2.7.0.v20241230-2245"/>
-			<iu id="com.equo.chromium.feature.feature.group" version="128.0.7" />
-			<iu id="com.equo.chromium.feature.source.feature.group" version="128.0.7" />
-			<iu id="com.equo.chromium.cef.feature.feature.group" version="128.0.7" />
-			<iu id="com.equo.chromium.cef.arm.feature.feature.group" version="128.0.7" />
+			<iu id="com.equo.chromium.feature.feature.group" version="124.0.10" />
+			<iu id="com.equo.chromium.feature.source.feature.group" version="124.0.10" />
+			<iu id="com.equo.chromium.cef.feature.feature.group" version="124.0.10" />
+			<iu id="com.equo.chromium.cef.arm.feature.feature.group" version="124.0.10" />
 			<iu id="org.apache.felix.scr" version="2.2.12" />
 			<iu id="com.sun.jna" version="5.16.0.v20241222-1200"/>
 			<iu id="com.sun.jna.platform" version="5.16.0"/>

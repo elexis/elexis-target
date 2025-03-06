@@ -3,12 +3,22 @@
 <target name="repo">
 	<locations>
 		<location path="${project_loc}/jaxws-core/" type="Directory"/>
-		<location path="${project_loc:/elexis-target}/target/2024-12-java21/maven-p2" type="Directory"/>
-		<location path="${project_loc:/elexis-target}/target/2024-12-java21/eclipse-p2" type="Directory"/>
-		<location path="${project_loc}/liquibase/" type="Directory"/>
 		<location path="${project_loc}/jersey/" type="Directory"/>
 		<location path="${project_loc}/jaxrs/" type="Directory"/>
-		<location path="${project_loc}/fhir-r4/" type="Directory"/>
 		<location path="${project_loc}/hapi-fhir/" type="Directory"/>
+		<location path="${project_loc}/websocket/" type="Directory"/>
+		<location path="${project_loc:/elexis-target}/target/2025-03-java21/maven-p2" type="Directory"/>
+		<location path="${project_loc:/elexis-target}/target/2025-03-java21/eclipse-p2" type="Directory"/>
+		<location path="${project_loc}/oauth-filter/" type="Directory"/>
+		<location includeDependencyDepth="none" includeDependencyScopes="compile" includeSource="true" missingManifest="generate" type="Maven">
+			<dependencies>
+				<dependency>
+					<groupId>org.eclipse.jdt</groupId>
+					<artifactId>org.eclipse.jdt.annotation</artifactId>
+					<version>2.0.0</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
 	</locations>
 </target>

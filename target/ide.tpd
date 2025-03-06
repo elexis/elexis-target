@@ -92,10 +92,11 @@ location "https://download.elexis.info/elexis/target/2025-03-java21/" {
 	bcprov
 	bcpg
 	bcutil
+	com.nimbusds.nimbus-jose-jwt
 	
-	// hapi
-	// info.elexis.target.hapi.fhir lazy
-	info.elexis.target.hl7.fhir.r4 lazy
+	// fhir
+	info.elexis.target.hapi.fhir lazy
+//	info.elexis.target.hl7.fhir.r4 lazy
 	// jaxws
 	info.elexis.target.jaxws.core lazy
 	// ehealth connector
@@ -110,6 +111,8 @@ location "https://download.elexis.info/elexis/target/2025-03-java21/" {
 	info.elexis.target.jaxwsrs.core.feature.group lazy
 	// keycloak
 	info.elexis.target.keycloak.feature.group lazy
+	io.curity.oauth-filter
+	jakarta.websocket-api [2.1.100.SNAPSHOT,2.1.100.SNAPSHOT]
 	// poi
 	info.elexis.target.apache.poi.feature.group lazy
 	// Require-Capability: osgi.extender; filter:="(osgi.extender=osgi.serviceloader.processor)"

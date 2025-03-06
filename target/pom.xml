@@ -87,20 +87,15 @@
 							<source>true</source>
 						</artifact>
 						<artifact>
-							<id>org.postgresql:postgresql:42.7.4</id>
+							<id>org.postgresql:postgresql:42.7.5</id>
 						</artifact>
 						<artifact>
-							<!-- updating to a newer version -->
-							<!-- fails as liquibase is not compatible then -->
+							<!-- significant changes with h2 v2 -->
+							<!-- https://www.h2database.com/html/migration-to-v2.html-->
 							<id>com.h2database:h2:1.4.200</id>
 						</artifact>
 						<artifact>
-							<id>com.mysql:mysql-connector-j:9.1.0</id>
-							<!-- Liquibase problem with >= 8.0.23
-							https://github.com/liquibase/liquibase/issues/1639 -->
-						</artifact>
-						<artifact>
-							<id>org.liquibase:liquibase-core:4.30.0</id>
+							<id>com.mysql:mysql-connector-j:9.2.0</id>
 						</artifact>
 						<artifact>
 							<id>com.google.code.gson:gson:2.12.1</id>
@@ -197,6 +192,11 @@
 						</artifact>
 						<artifact>
 							<id>jakarta.servlet:jakarta.servlet-api:6.1.0</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>com.nimbusds:nimbus-jose-jwt:10.0.2</id>
 							<transitive>false</transitive>
 							<source>true</source>
 						</artifact>

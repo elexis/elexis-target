@@ -13,8 +13,8 @@ Default run levels https://github.com/eclipse-pde/eclipse.pde/blob/5c22faed563dc
 | 1               | True           | org.apache.felix.scr                    |
 | 1               | True           | org.apache.aries.spifly.dynamic.bundle  |
 | 2               | True           | ch.qos.logback.classic                  |
-| 2               | True           | org.glassfish.jersey.core.jersey-common |
-| 2               | True           | org.glassfish.jersey.core.jersey-client |
+| 2               | True           | org.glassfish.jersey.core.jersey-common | (!)
+| 2               | True           | org.glassfish.jersey.core.jersey-client | 
 | 3               | True           | ch.elexis.core.jpa.datasource           |
 
 ## Basics
@@ -59,7 +59,16 @@ See demo project https://github.com/col-panic/os-development-spifly-demo to demo
 * patched `jersey-client`
 * patched `jersey-common`
 
+## JAXRS Websocket
+
+| **Start Level** | **Auto Start** | **Bundle**                              |
+|-----------------|----------------|-----------------------------------------|
+| 2               | True           | jakarta.websocket-api      (?)              |		
+| 2               | True           | org.eclipse.jetty.ee10.websocket.jakarta.server               |
+
 ## JAXWS JAX-WS(Java API for XML Web Services) (https://github.com/jakartaee/jax-ws-api)
+
+
 
 
 
@@ -68,7 +77,7 @@ See demo project https://github.com/col-panic/os-development-spifly-demo to demo
 --> spifly not required?
 
 * `jakarta.activation-api` requires `jakarta.activation.spi.MailcapRegistryProvider`
-* `angus-activation` provides `jakarta.activation.spi.MailcapRegistryProvider` via 
+* `angus-activation` provides `jakarta.activation.spi.MailcapRegistryProvider` via ...  1, true
 * `org.eclipse.angus.jakarta.mail` repackages `jakarta.mail-api` and provides mail implementation
 * `jakarta.mail-api` NOT NEEDED - TRUE
 * `com.sun.mail.jakarta.mail` REMOVE
@@ -115,6 +124,10 @@ Remove `org.eclipse.equinox.http.service_api` and `org.eclipse.equinox.http.serv
 -Djetty.home.bundle=org.eclipse.jetty.ee10.osgi.boot
 -Dorg.eclipse.jetty.LEVEL=DEBUG
 ```
+
+#### Notes
+
+* `org.eclipse.jetty.osgi.OSGiWebappConstants` contains MANIFEST.MF
 
 ## Common problems
 

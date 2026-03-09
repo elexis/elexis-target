@@ -19,6 +19,7 @@
 		<jersey.version>3.1.10</jersey.version>			<!-- JAX/RS Implementation-->
 		<keycloak.version>20.0.5</keycloak.version>	<!-- newer versions have keycloak filter deprecated -->
 		<eclipse.persistence>4.0.5</eclipse.persistence>
+		<hapi-structures.version>2.6.0</hapi-structures.version>
 		<!-- https://github.com/keycloak/keycloak/issues/25118 -->
 	</properties>
 
@@ -72,7 +73,7 @@
 							<source>true</source>
 						</artifact>
 						<artifact>
-							<id>org.eclipse.angus:jakarta.mail:2.0.3</id>
+							<id>org.eclipse.angus:jakarta.mail:2.0.5</id>
 							<transitive>false</transitive>
 							<source>true</source>
 						</artifact>
@@ -169,6 +170,9 @@
 							<transitive>false</transitive>
 						</artifact>
 						<artifact>
+							<id>org.freemarker:freemarker:2.3.34</id>
+						</artifact>
+						<artifact>
 							<!-- required by gemini.jpa -->
 							<id>org.osgi:org.osgi.service.jdbc:1.0.1</id>
 							<transitive>false</transitive>
@@ -200,6 +204,57 @@
 							<transitive>false</transitive>
 							<source>true</source>
 						</artifact>
+						<!-- ch.elexis.core.hl7.v2x
+						<artifact>
+							<id>ca.uhn.hapi:hapi-base:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>ca.uhn.hapi:hapi-structures-v21:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>ca.uhn.hapi:hapi-structures-v22:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>ca.uhn.hapi:hapi-structures-v23:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>ca.uhn.hapi:hapi-structures-v231:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>ca.uhn.hapi:hapi-structures-v24:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>ca.uhn.hapi:hapi-structures-v25:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>ca.uhn.hapi:hapi-structures-v251:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>ca.uhn.hapi:hapi-structures-v26:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>
+						<artifact>
+							<id>ca.uhn.hapi:hapi-structures-v281:${hapi-structures.version}</id>
+							<transitive>false</transitive>
+							<source>true</source>
+						</artifact>  -->
 					</artifacts>
 					<featureDefinitions>
 						<!--  =============================================  -->
@@ -233,11 +288,11 @@
 									<transitive>false</transitive>
 									<source>true</source>
 								</artifact>
-<!--								<artifact>-->
-<!--									<id>org.eclipse.persistence:org.eclipse.persistence.antlr:${eclipse.persistence}</id>-->
-<!--									<transitive>false</transitive>-->
-<!--									<source>true</source>-->
-<!--								</artifact>-->
+								<!--								<artifact>-->
+								<!--									<id>org.eclipse.persistence:org.eclipse.persistence.antlr:${eclipse.persistence}</id>-->
+								<!--									<transitive>false</transitive>-->
+								<!--									<source>true</source>-->
+								<!--								</artifact>-->
 								<artifact>
 									<id>org.eclipse.persistence:org.eclipse.persistence.asm:9.7.1</id>
 									<transitive>false</transitive>
@@ -277,7 +332,7 @@
 							<generateSourceFeature>true</generateSourceFeature>
 							<artifacts>
 								<artifact>
-								<!-- remove ? -->
+									<!-- remove ? -->
 									<id>org.apache.commons:commons-jexl:2.1.1</id>
 									<transitive>false</transitive>
 									<source>true</source>
@@ -556,7 +611,7 @@
 									<source>true</source>
 								</artifact>
 								<artifact>
-								<!-- contains java.servlet for jetty/osgi connector see https://github.com/osgi/osgi/issues/551 -->
+									<!-- contains java.servlet for jetty/osgi connector see https://github.com/osgi/osgi/issues/551 -->
 									<id>
 										org.eclipse.jetty.toolchain:jetty-servlet-api:4.0.6</id>
 									<transitive>false</transitive>
@@ -689,6 +744,16 @@
 									<source>true</source>
 									<transitive>false</transitive>
 								</artifact>
+								<artifact>
+									<id>org.jboss.logging:jboss-logging:3.6.1.Final</id>
+									<source>true</source>
+									<transitive>false</transitive>
+								</artifact>
+								<artifact>
+									<id>org.apache.logging.log4j:log4j-core:2.23.1</id>
+									<source>true</source>
+									<transitive>false</transitive>
+								</artifact>
 							</artifacts>
 						</feature>
 						<!--  =============================================  -->
@@ -716,80 +781,8 @@
 								</artifact>
 							</artifacts>
 						</feature>
-						<!--  ============================================  -->
-						<!-- KEYCLOAK -->
-						<!--  =============================================  -->
-						<feature>
-							<id>info.elexis.target.keycloak</id>
-							<version>${project.version}</version>
-							<label>Bundled Keycloak Java Libraries</label>
-							<providerName>${project.groupId}</providerName>
-							<generateSourceFeature>true</generateSourceFeature>
-							<artifacts>
-								<artifact>
-									<id>
-										org.keycloak:keycloak-servlet-filter-adapter:${keycloak.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>
-										org.keycloak:keycloak-core:${keycloak.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>
-										org.keycloak:keycloak-adapter-spi:${keycloak.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.keycloak:keycloak-servlet-adapter-spi:${keycloak.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.keycloak:keycloak-adapter-core:${keycloak.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.keycloak:keycloak-common:${keycloak.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>
-										org.keycloak:keycloak-authz-client:${keycloak.version}</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>org.jboss.logging:jboss-logging:3.6.1.Final</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>com.fasterxml.jackson.core:jackson-core:2.18.2</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>com.fasterxml.jackson.core:jackson-annotations:2.18.2</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-								<artifact>
-									<id>com.fasterxml.jackson.core:jackson-databind:2.18.2</id>
-									<transitive>false</transitive>
-									<source>true</source>
-								</artifact>
-							</artifacts>
-						</feature>
 					</featureDefinitions>
 				</configuration>
-				
 			</plugin>
 
 

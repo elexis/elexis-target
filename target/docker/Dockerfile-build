@@ -1,6 +1,6 @@
 FROM maven:3.9-eclipse-temurin-21-jammy
 ENV LANG=de_CH.UTF-8 LANGUAGE=de_CH:de LC_ALL=de_CH.UTF-8
-LABEL org.opencontainers.image.description Elexis build image for elexis-target 2024-12-java21
+LABEL org.opencontainers.image.description Elexis build image for elexis-target 2025-03-java21
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends libswt-gtk-4-jni dbus-x11 xvfb at-spi2-core netcat && \
     echo "de_CH.UTF-8 UTF-8" >> /etc/locale.gen && \

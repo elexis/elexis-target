@@ -6,15 +6,10 @@ https://ci.eclipse.org/simrel/
 
 ## Target Usage 
 
-NOT USED, DUE TO SWT REGRESSION in 2024-12 https://github.com/eclipse-nattable/nattable/issues/141#issuecomment-2633432854
-
-DO NOT use `org.eclipse.e4.emf.xpath-0.5.0.v20240923-2023` it has old dependencies,
-thus we added a drop-in replacement to this target. See 
-~https://github.com/eclipse-platform/eclipse.platform.ui/issues/423~ DONE Feb 12 25
-
-
 java.lang.RuntimeException: java.lang.ClassNotFoundException: Provider for jakarta.ws.rs.ext.RuntimeDelegate` cannot be found
 if jersey-client and jersey-common not started in level 2
+
+Provider for jakarta.activation.spi.MailcapRegistryProvider cannot be found
 
 ## TODO
 

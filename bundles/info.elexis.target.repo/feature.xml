@@ -34,19 +34,19 @@
          version="0.0.0"/>
 
    <plugin
-         id="info.elexis.target.jaxws.core"
-         version="0.0.0"/>
-
-   <plugin
-         id="info.elexis.target.liquibase"
-         version="0.0.0"/>
-
-   <plugin
-         id="info.elexis.target.hl7.fhir.r4"
+         id="jakarta.websocket-api"
          version="0.0.0"/>
 
    <plugin
          id="info.elexis.target.hapi.fhir"
+         version="0.0.0"/>
+
+   <plugin
+         id="info.elexis.target.jaxws.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="io.curity.oauth-filter"
          version="0.0.0"/>
 
 </feature>

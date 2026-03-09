@@ -87,7 +87,7 @@ location "https://download.eclipse.org/nebula/releases/latest/" {
 }
 
 // Chromium Browser
-location "https://download.medelexis.ch/p2/chromium-swt-ee-124/" {
+location "https://download.medelexis.ch/p2/chromium-swt-ee-128/" {
 	com.equo.chromium.feature.feature.group
 	com.equo.chromium.cef.feature.feature.group
 	com.equo.chromium.cef.arm.feature.feature.group

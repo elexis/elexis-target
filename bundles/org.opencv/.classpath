@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="lib/javacpp-1.5.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/javacpp-platform-1.5.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/javacv-1.5.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/javacv-platform-1.5.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/openblas-0.3.31-1.5.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/openblas-platform-0.3.31-1.5.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/opencv-4.13.0-1.5.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/opencv-platform-4.13.0-1.5.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/videoinput-0.200-1.5.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/videoinput-platform-0.200-1.5.9.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

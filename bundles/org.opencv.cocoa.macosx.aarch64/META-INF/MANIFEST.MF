@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OpenCV Native Libraries aarch64
+Bundle-SymbolicName: org.opencv.cocoa.macosx.aarch64;singleton:=true
+Bundle-Version: 4.13.0.qualifier
+Fragment-Host: org.opencv;bundle-version="4.13.0"
+Automatic-Module-Name: org.opencv.cocoa.macosx.aarch64
+Bundle-ClassPath: lib/javacpp-1.5.13-macosx-arm64.jar,
+ lib/openblas-0.3.31-1.5.13-macosx-arm64.jar,
+ lib/opencv-4.13.0-1.5.13-macosx-arm64.jar
+Bundle-RequiredExecutionEnvironment: JavaSE-21
